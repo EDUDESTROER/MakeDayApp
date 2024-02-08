@@ -5,11 +5,13 @@ $center: center;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 body{
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 110vh;
     background-image: url("../img/Background.jpg");
+    background-color: rgb(226, 16, 16);
     background-position: $center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -20,6 +22,7 @@ body{
 header{
     width: themeDefault.$max-filling;
     height: 10%;
+    position: fixed;
     background-color: themeDefault.$base-color;
     >.wrapper-header{
         width: themeDefault.$max-filling;
@@ -30,13 +33,16 @@ header{
         justify-content: space-between;
         padding: 0 .6% 0 .6%;
         .wrapper-menu{
-            background-color: aquamarine;
+            //background-color: aquamarine;
             height: 95%;
             width: 4%;
             display: flex;
             align-items: $center;
             justify-content: $center;
             button{
+                background-color: transparent;
+                border-color: transparent;
+                outline: transparent;
                 width: 98%;
                 height: 98%;
                 display: flex;
@@ -44,7 +50,32 @@ header{
                 justify-content: $center;
                 i{
                     font-size: 4.5em;
+                    color: themeDefault.$icon-color;
+                    transform-origin: center;
+                    transition-duration: 300ms;
+                    &:hover{
+                        transform: scale(1.02);
+                        cursor: pointer;
+                    }
+                    &:active{
+                        transform: scale(0.95);
+                    }
                 }
+            }
+        }
+        .wrapper-header-logo{
+            width: 30%;
+            height: 98%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img{
+                width: 12.5%;
+                height: 90%;
+            }
+            span{
+                font-size: 2.5em;
+                color: themeDefault.$icon-color;
             }
         }
     }
