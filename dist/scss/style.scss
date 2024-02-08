@@ -1,5 +1,51 @@
+$center: center;
+
 @use "themeDefault";
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body{
     width: 100vw;
     height: 100vh;
+    background-image: url("../img/Background.jpg");
+    background-position: $center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: $center;
+}
+header{
+    width: themeDefault.$max-filling;
+    height: 10%;
+    background-color: themeDefault.$base-color;
+    >.wrapper-header{
+        width: themeDefault.$max-filling;
+        height: themeDefault.$max-filling;
+        //background-color: aliceblue;
+        display: flex;
+        align-items: $center;
+        justify-content: space-between;
+        padding: 0 .6% 0 .6%;
+        .wrapper-menu{
+            background-color: aquamarine;
+            height: 95%;
+            width: 4%;
+            display: flex;
+            align-items: $center;
+            justify-content: $center;
+            button{
+                width: 98%;
+                height: 98%;
+                display: flex;
+                align-items: $center;
+                justify-content: $center;
+                i{
+                    font-size: 4.5em;
+                }
+            }
+        }
+    }
 }
