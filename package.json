@@ -1,0 +1,14 @@
+{
+  "name": "makedayapp",
+  "version": "1.0.0",
+  "description": "A fantastic to-do list application that lests you edit almost anything",
+  "main": "index.js",
+  "scripts": {
+    "sassCompresed": "sass --watch --style compressed dist/scss/style.scss:dist/css/style.min.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+
+  },
+  "keywords": [],
+  "author": "EDUDESTROER",
+  "license": "Mit"
+}

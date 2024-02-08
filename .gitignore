@@ -1,0 +1,11 @@
+*.xcf
+*.jpg
+dist/img/imageIdeas
+dist/img/Editing
+dist/fontwesome/js
+dist/fontwesome/less
+dist/fontwesome/metadata
+dist/fontwesome/scss
+dist/fontwesome/sprites
+dist/fontwesome/svgs
+dist/fontwesome/webfonts
