@@ -18,7 +18,7 @@
                 <button type="menu" id="button-menu-bar"><i class="fa-solid fa-bars"></i></button>
             </div>
             <div class="wrapper-header-logo">
-                <img src="dist/img/MakeDay_Icon.png" alt="Site logo">
+                <img src="dist/img/MakeDay_Icon.png" draggable="false" alt="Site logo">
                 <span>Make Day</span>
             </div>
             <div class="wrapper-menu">
@@ -26,6 +26,58 @@
             </div>
         </div>
     </header>
+    <main>
+        <div class="wrapper-main">
+            <aside class="wrapper-categories">
+                <div class="wrapper-categories-new-group">
+                    <div class="wrapper-categories-image"><i class="fa-solid fa-layer-group"></i><span>Tasks</span></div>
+                    <button type="button" id="button-new-task-group"><i class="fa-solid fa-circle-plus"></i></button>
+                </div>
+                <div class="wrapper-created-categories">
+                    <div class="categories" id="categories-all">
+                        <input checked type="checkbox" name="checkbox-all" id="categories-all-checkbox">
+                        <label for="categories-all-checkbox">
+                            <i class="fa-solid fa-folder-open" name="checkbox-all"></i>
+                            <span>All</span>
+                        </label>
+                    </div>
+                    <div class="categories" id="categories-today">
+                        <input type="checkbox" name="checkbox-today" id="categories-today-checkbox">
+                        <label for="categories-today-checkbox">
+                            <i class="fa-solid fa-sun"></i>
+                            <span>Today</span>
+                        </label>
+                    </div>
+                    <div class="categories" id="categories-after">
+                        <input type="checkbox" name="checkbox-today" id="categories-after-checkbox">
+                        <label for="categories-after-checkbox">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>After</span>
+                        </label>
+                    </div>
+                    <div class="categories" id="categories-complete">
+                        <input type="checkbox" name="checkbox-today" id="categories-complete-checkbox">
+                        <label for="categories-complete-checkbox">
+                            <i class="fa-solid fa-check-double"></i>
+                            <span>Complete</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="wrapper-bulletinboard">
+                    <div class="wrapper-bulletinboard-image">
+                        <i class="fa-solid fa-bell"></i>
+                        <span>Bulletin board</span>
+                    </div>
+                    <div class="bulletin-board-categories" id="task-12" class="one-day-left">
+                        <button type="button"><i class="fa-solid fa-stopwatch"></i><span>Make the homework</span></button>
+                    </div>
+                    <div class="bulletin-board-categories" id="task-10" class="one-day-left">
+                        <button type="button"><i class="fa-solid fa-stopwatch"></i><span>Cooking for the kids</span></button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
 
 </body>
 </html>
