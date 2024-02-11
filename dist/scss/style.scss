@@ -22,8 +22,9 @@ body{
 header{
     width: themeDefault.$max-filling;
     height: 10%;
-    position: fixed;
+    position:fixed;
     background-color: themeDefault.$base-color;
+    border-bottom: .2rem solid themeDefault.$base-color;
     >.wrapper-header{
         width: themeDefault.$max-filling;
         height: themeDefault.$max-filling;
@@ -43,13 +44,14 @@ header{
                 background-color: transparent;
                 border-color: transparent;
                 outline: transparent;
-                width: 98%;
-                height: 98%;
+                width: 85%;
+                height: 85%;
+                border-radius: 50%;
                 display: flex;
                 align-items: $center;
                 justify-content: $center;
                 i{
-                    font-size: 4.5em;
+                    font-size: 3.5em;
                     color: themeDefault.$icon-color;
                     transform-origin: center;
                     transition-duration: 300ms;
@@ -76,6 +78,189 @@ header{
             span{
                 font-size: 2.5em;
                 color: themeDefault.$icon-color;
+            }
+        }
+    }
+}
+main{
+    margin-top: 4.5%;
+    //background-color: aqua;
+    width: themeDefault.$max-filling;
+    height: 81.9%;
+}
+.wrapper-main{
+    width: themeDefault.$max-filling;
+    height: themeDefault.$max-filling;
+    display: flex;
+    padding: .3rem;
+    .wrapper-categories{
+        width: 25%;
+        height: themeDefault.$max-filling;
+        display: flex;
+        flex-direction: column;
+        .wrapper-categories-new-group{
+            background-color: themeDefault.$base-color;
+            width: themeDefault.$max-filling;
+            height: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            .wrapper-categories-image{
+                font-size: 3em;
+                //background-color: blueviolet;
+                display: flex;
+                align-items: center;
+                justify-content:center;
+                height: themeDefault.$max-filling;
+                width: 60%;
+                i{
+                    color: #6000D8;
+                    margin-right: .2rem;
+                }
+                span{
+                    color: themeDefault.$icon-color;
+                }
+            }
+            button{
+                width: 13%;
+                height: 81%;
+                border-radius: 50%;
+                background-color: transparent;
+                border: transparent;
+                outline: transparent;
+                i{
+                    font-size: 2.5rem;
+                    color: themeDefault.$icon-color;
+                    transition-duration: 300ms;
+                    &:hover{
+                        transform: scale(1.02);
+                        cursor: pointer;
+                    }
+                    &:active{
+                        transform: scale(0.95);
+                    }
+                }
+            }
+        }
+        .wrapper-created-categories{
+            padding: .5rem;
+            background-color: themeDefault.$base-color;
+            width: themeDefault.$max-filling;
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            .categories{
+                //background-color: blue;
+                margin-top: 1px;
+                width: themeDefault.$max-filling;
+                height: 13%;
+                display: flex;
+                align-items: center;
+                transition-duration: 400ms;
+                input{
+                    display: none;
+                }
+                input:checked~label{
+                    transform: scale(1.01);
+                    background-color: #0000004a;
+                    i{
+                        color: #770bfa;
+                    }
+                }
+                label{
+                    //background-color: brown;
+                    display: flex;
+                    width: themeDefault.$max-filling;
+                    height: 98%;
+                    align-items: center;
+                    i{
+                        font-size: 2.5em;
+                        color: #6000D8;
+                    }
+                    span{
+                        font-size: 1.5em;
+                        color: themeDefault.$icon-color;
+                    }
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+                &:hover{
+                    background-color: #ffffff21;
+                    transform: scale(1.005);
+                    label{
+                        i{
+                            color: #770bfa;
+                        }
+                    }
+                }
+            }
+        }
+        .wrapper-bulletinboard{
+            background-color: themeDefault.$base-color;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .wrapper-bulletinboard-image{
+                //background-color: darkkhaki;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 99%;
+                height: 25%;
+                i{
+                    color: #6000D8;
+                    font-size: 2.2em;
+                }
+                span{
+                    color: themeDefault.$icon-color;
+                    padding-left: .2em;
+                    font-size: 1.6em;
+                }
+            }
+            .bulletin-board-categories{
+                //background-color: cadetblue;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: themeDefault.$max-filling;
+                height: 20%;
+                margin-top: 1px;
+                button{
+                    transition-duration: 400ms;
+                    background: none;
+                    //background-color: brown;
+                    border-color: transparent;
+                    outline: transparent;
+                    width: 99%;
+                    height: 99%;
+                    display: flex;
+                    align-items: center;
+                    i{
+                        color: #6000D8;
+                        font-size: 2.2em;
+                    }
+                    span{
+                        color: themeDefault.$icon-color;
+                        padding-left: .4em;
+                        font-size: 1.2em;
+                        &::before{
+                            contain: '...';
+                        }
+                    }
+                    &:hover{
+                        background-color: #ffffff21;
+                        cursor: pointer;
+                        transform: scale(1.005);
+                        i{
+                            color: #770bfa;
+                        }
+                    }
+                    &:active{
+                        transform: scale(0.99);
+                    }
+                }
             }
         }
     }
