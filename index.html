@@ -15,14 +15,14 @@
     <header>
         <div class="wrapper-header">
             <div class="wrapper-menu">
-                <button type="menu" id="button-menu-bar"><i class="fa-solid fa-bars"></i></button>
+                <button title="See the menu" type="menu" id="button-menu-bar"><i class="fa-solid fa-bars"></i></button>
             </div>
             <div class="wrapper-header-logo">
                 <img src="dist/img/MakeDay_Icon.png" draggable="false" alt="Site logo">
-                <span>Make Day</span>
+                <span>MakeDay</span>
             </div>
             <div class="wrapper-menu">
-                <button type="menu" id="button-menu-users"><i class="fa-4x fa-solid fa-circle-user"></i></button>
+                <button title="Users options" type="menu" id="button-menu-users"><i class="fa-4x fa-solid fa-circle-user"></i></button>
             </div>
         </div>
     </header>
@@ -31,7 +31,7 @@
             <aside class="wrapper-categories">
                 <div class="wrapper-categories-new-group">
                     <div class="wrapper-categories-image"><i class="fa-solid fa-layer-group"></i><span>Tasks</span></div>
-                    <button type="button" id="button-new-task-group"><i class="fa-solid fa-circle-plus"></i></button>
+                    <button title="Create a new notes categories" type="button" id="button-new-task-group"><i class="fa-solid fa-circle-plus"></i></button>
                 </div>
                 <div class="wrapper-created-categories">
                     <div class="categories" id="categories-all">
@@ -76,8 +76,71 @@
                     </div>
                 </div>
             </aside>
+            <section class="wrapper-notes">
+                <div class="wrapper-functions">
+                    <span id="categorie-name">ALL</span>
+                    <div class="wrapper-caledar-new-note-form">
+                        <form autocomplete="on" id="search-notes">
+                            <input type="search" placeholder="Find you notes!">
+                            <button title="Filter the notes" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                        <button title="View celendar" id="button-celendar" type="button"><i class="fa-solid fa-calendar"></i></button>
+                        <button title="Create a new note" id="button-new-note" type="button"><i class="fa-solid fa-square-plus"></i></button>
+                    </div>
+                </div>
+                <div class="notes-list">
+                    <div class="note" id="note-1">
+                        <input type="checkbox" id="checkbox-note-1">
+                        <label for="checkbox-note-1">
+                            <div class="note-img">
+                                <i class="fa-solid fa-image"></i>
+                            </div>
+                            <div class="note-information">
+                                <span class="note-name">Main tasks</span>
+                                <time class="note-time">3 weeks ago</time>
+                            </div>
+                            <div class="wrapper-trash">
+                                <i title="Send to trash" class="fa-solid fa-trash-can-arrow-up"></i>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="note" id="note-2">
+                        <input type="checkbox" id="checkbox-note-2">
+                        <label for="checkbox-note-2">
+                            <div class="note-img">
+                                <i class="fa-solid fa-image"></i>
+                            </div>
+                            <div class="note-information">
+                                <span class="note-name">Make the homework</span>
+                                <time class="note-time">1 day ago</time>
+                            </div>
+                            <div class="wrapper-trash">
+                                <i title="Send to trash" class="fa-solid fa-trash-can-arrow-up"></i>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="note" id="note-3">
+                        <input type="checkbox" id="checkbox-note-3">
+                        <label for="checkbox-note-3">
+                            <div class="note-img">
+                                <i class="fa-solid fa-image"></i>
+                            </div>
+                            <div class="note-information">
+                                <span class="note-name">Cooking for the kids</span>
+                                <time class="note-time">1 minute ago</time>
+                            </div>
+                            <div class="wrapper-trash">
+                                <i title="Send to trash" class="fa-solid fa-trash-can-arrow-up"></i>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <aside>
+                <!--Stop here-->
+            </aside>
         </div>
     </main>
-
+    <script src="/dist/js/index.js"></script>
 </body>
 </html>
