@@ -348,13 +348,14 @@ main{
                         width: 15%;
                         height: 51.2%;
                         border-radius: 50%;
-                        transition-duration: 200ms;
+                        transition: all 400ms ease;
                         &:hover{
                             transform: scale(1.09);
                             cursor: pointer;
                         }
                         &:active{
                             transform: scale(1);
+                            background-color: #770bfa;
                         }
                         i{
                             font-size: .9rem;
@@ -374,6 +375,12 @@ main{
                     &:hover{
                         transform: scale(1.1);
                         cursor: pointer;
+                    }
+                    &:active{
+                        transform: scale(0.99);
+                        i{
+                            color: #770bfa;
+                        }
                     }
                 }
             }
@@ -396,7 +403,7 @@ main{
                 align-items: $center;
                 justify-content: space-around;
                 margin-bottom: .1rem;
-                transition-duration: 200ms;
+                transition: all 400ms ease-in-out;
                 &:hover{
                     background-color: #ffffff21;
                     transform: scale(1.005);
@@ -469,11 +476,41 @@ main{
                             transition-duration: 500ms;
                             &:hover{
                                 cursor: pointer;
-                                transform: scale(1.05);
+                                transform: scale(1.1);
+                            }
+                            &:active{
+                                transform: scale(0.99);
+                                color: #DB3500;
                             }
                         }
                     }
                 }
+            }
+        }
+    }
+    .wrapper-note-content{
+        background-image: url("../img/note-background-wall-type2.jpg");
+        opacity: 95%;
+        background-position: $center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 50%;
+        height: themeDefault.$max-filling;
+        display: flex;
+        flex-direction: column;
+        .note-content{
+            position: relative;
+            width: themeDefault.$max-filling;
+            height: themeDefault.$max-filling;
+            display: inherit;
+            flex-direction: inherit;
+            padding: 1em 2em 0 2em;
+            .note-content-icon{
+                z-index: 1;
+                width: 64px;
+                position: absolute;
+                top: -7%;
+                align-self: $center;
             }
         }
     }
