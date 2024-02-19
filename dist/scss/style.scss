@@ -31,7 +31,7 @@ body{
     width: 100%;
     height: 110vh;
     background-image: url("../img/Background.jpg");
-    background-color: rgb(226, 16, 16);
+    //background-color: rgb(226, 16, 16);
     background-position: $center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -506,11 +506,46 @@ main{
             flex-direction: inherit;
             padding: 1em 2em 0 2em;
             .note-content-icon{
-                z-index: 1;
+                z-index: 2;
                 width: 64px;
-                position: absolute;
-                top: -7%;
+                position: relative;
+                height: 10%;
+                top: -3%;
                 align-self: $center;
+            }
+        }
+    }
+}
+footer{
+    background-color: themeDefault.$base-color;
+    width: 100%;
+    flex-grow: 1;
+    border-top: .2rem solid themeDefault.$base-color;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    .wrapper-footer-span{
+        //background-color:cyan;
+        height: 90%;
+        width: 25%;
+        display: inherit;
+        align-items: inherit;
+        justify-content: center;
+        span{
+            color: themeDefault.$icon-color;
+            font-size: 1em;
+            font-weight: bolder;
+            a{
+                transition-duration: 500ms;
+                color: #6000D8;
+                text-decoration: none;
+                &:hover{
+                    color: #770bfa;
+                    font-size: 1.05em;
+                }
+                &:active{
+                    font-size: 1em;
+                }
             }
         }
     }
