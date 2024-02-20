@@ -22,7 +22,22 @@
                 <span>MakeDay</span>
             </div>
             <div class="wrapper-menu">
-                <button title="Users options" type="menu" id="button-menu-users"><i class="fa-4x fa-solid fa-circle-user"></i></button>
+                <button title="Users options" type="menu" id="button-menu-users">
+                    <i class="fa-4x fa-solid fa-circle-user"></i>
+                </button>
+                <div id="user-menu-wrapper">
+                    <div id="user-menu-info">
+                        <button id="button-menu-users-close" type="button"><i class="fa-solid fa-xmark"></i></button>
+                        <img draggable="false" src="https://i.pravatar.cc/64?img=1" alt="User avatar">
+                        <span>UserName</span>
+                    </div>
+                    <div id="user-menu-opt">
+                        <button id="button-user-settings"><i class="fa-solid fa-gear"></i><span>Settings</span></button>
+                        <button id="button-user-trash"><i class="fa-solid fa-trash-can"></i><span>Trash</span></button>
+                        <button id="button-user-help"><i class="fa-regular fa-circle-question"></i><span>Help</span></button>
+                        <button id="button-user-logout"><i class="fa-solid fa-person-running"></i><span>Logout</span></button>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -69,10 +84,10 @@
                         <span>Bulletin board</span>
                     </div>
                     <div class="bulletin-board-categories" id="task-12" class="one-day-left">
-                        <button type="button"><i class="fa-solid fa-stopwatch"></i><span>Make the homework</span></button>
+                        <button class="button-buttletin-board" type="button"><i class="fa-solid fa-stopwatch"></i><span>Make the homework</span></button>
                     </div>
                     <div class="bulletin-board-categories" id="task-10" class="one-day-left">
-                        <button type="button"><i class="fa-solid fa-stopwatch"></i><span>Cooking for the kids</span></button>
+                        <button class="button-buttletin-board" type="button"><i class="fa-solid fa-stopwatch"></i><span>Cooking for the kids</span></button>
                     </div>
                 </div>
             </aside>
@@ -82,7 +97,7 @@
                     <div class="wrapper-caledar-new-note-form">
                         <form autocomplete="on" id="search-notes">
                             <input type="search" placeholder="Find you notes!">
-                            <button title="Filter the notes" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button id="button-search" title="Filter the notes" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                         <button title="View celendar" id="button-celendar" type="button"><i class="fa-solid fa-calendar"></i></button>
                         <button title="Create a new note" id="button-new-note" type="button"><i class="fa-solid fa-square-plus"></i></button>
@@ -100,7 +115,7 @@
                                 <time class="note-time">3 weeks ago</time>
                             </div>
                             <div class="wrapper-trash">
-                                <i title="Send to trash" class="fa-solid fa-trash-can-arrow-up"></i>
+                                <button class="button-note-trash" title="Send to trash"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
                             </div>
                         </label>
                     </div>
@@ -115,7 +130,7 @@
                                 <time class="note-time">1 day ago</time>
                             </div>
                             <div class="wrapper-trash">
-                                <i title="Send to trash" class="fa-solid fa-trash-can-arrow-up"></i>
+                                <button class="button-note-trash" title="Send to trash"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
                             </div>
                         </label>
                     </div>
@@ -130,15 +145,15 @@
                                 <time class="note-time">1 minute ago</time>
                             </div>
                             <div class="wrapper-trash">
-                                <i title="Send to trash" class="fa-solid fa-trash-can-arrow-up"></i>
+                                <button class="button-note-trash" title="Send to trash"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
                             </div>
                         </label>
                     </div>
                 </div>
             </section>
-            <aside class="wrapper-note-content" id="note-1">
+            <aside contenteditable spellcheck="false" class="wrapper-note-content" id="note-1">
                 <div class="note-content">
-                    <img draggable="false" class="note-content-icon" src="/dist/img/alfinete.png" alt="A pin image">
+                    <img contenteditable="false" draggable="false" class="note-content-icon" src="/dist/img/alfinete.png" alt="A pin image">
                     <div class="note-h1">
                         Main Tasks
                     </div>
@@ -166,6 +181,7 @@
             <span>Background photo by:<a target="_blank" href="https://unsplash.com/pt-br/@tobsef?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Tobse Fritz</a> on <a target="_blank" href="https://unsplash.com/pt-br/fotografias/fotografia-aerea-de-estrada-de-terra-em-montanhas-sob-ceu-nublado-durante-o-dia-rpvhOzyv2jM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></span>
         </div>
     </footer>
+    <script src="/dist/js/view.js"></script>
     <script src="/dist/js/index.js"></script>
 </body>
 </html>
