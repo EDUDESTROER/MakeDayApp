@@ -1,0 +1,1 @@
+window.viewControler = new ViewControler();
