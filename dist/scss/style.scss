@@ -226,6 +226,7 @@ main{
         height: themeDefault.$max-filling;
         display: flex;
         flex-direction: column;
+        animation: appear 1 ease-in-out 200ms;
         .wrapper-categories-new-group{
             background-color: themeDefault.$base-color;
             width: themeDefault.$max-filling;
@@ -607,7 +608,8 @@ main{
         outline: transparent;
         background-size: cover;
         background-repeat: no-repeat;
-        width: 50%;
+        min-width: 50%;
+        flex-grow: 1;
         height: themeDefault.$max-filling;
         display: flex;
         flex-direction: column;
@@ -681,6 +683,26 @@ footer{
     75%{
         color: #00000000;
         transform: translateX(-40%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+@keyframes appear {
+    0%{
+        display: none;
+    }
+    1%{
+        transform: translateX(-110%);
+    }
+    25%{
+        transform: translateX(-70%);
+    }
+    50%{
+        transform: translateX(-50%);
+    }
+    75%{
+        transform: translateX(-10%);
     }
     100%{
         transform: translateX(0%);
