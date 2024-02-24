@@ -2,6 +2,9 @@ class ViewControler {
 
     constructor(){
         this._usersMenu = document.querySelector('#user-menu-wrapper');
+        this._wrapperCategories = document.querySelector('.wrapper-categories');
+        this._calendarElement = document.querySelector('#calendar');
+        this._searchBarElement = document.querySelector('#search-bar');
         this.initButtonEvents();
 
     }
@@ -10,35 +13,45 @@ class ViewControler {
 
     functionsBtn(value){
 
-        switch (value){
+        switch(value){
 
             case 'menu-users':
-                this.showElement(value);
+                this.showElement(this._usersMenu);
+                break;
+            case 'menu-bar':
+                if(!this._wrapperCategories.style.display){
+                    this._wrapperCategories.style.display = "flex";
+                }
+                this.showElement(this._wrapperCategories);
                 break;
             case 'menu-users-close':
-                this.showElement(value);
+                this.showElement(this._usersMenu);
+                break;
+            case 'calendar':
+                this.showElement(this._calendarElement);
+                break;
+            case 'search':
+                this.showElement(this._searchBarElement);
                 break;
             default:
                 console.error(value, ' Is not a valid button')
-
+                break;
         }
 
     }
 
-    showElement(value){
+    showElement(element){
 
-        let element;
+        if (element.style.display ==  "none" || !element.style.display){
 
-        if(value === 'menu-users' || 'menu-users-close'){
-            element = this._usersMenu;
+            element.style.display = "flex";
+
+        }else if (element.style.display ==  "flex"){
+
+            element.style.display = "none";
+
         }
 
-        if(!element.style.display || element.style.display == 'none'){
-            element.style.display = 'flex'
-            console.dir(element);
-        }else if(element.style.display){
-            element.style.display = 'none'
-        }
     }
 
     initButtonEvents(){
