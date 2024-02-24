@@ -3,6 +3,8 @@ class ViewControler {
     constructor(){
         this._usersMenu = document.querySelector('#user-menu-wrapper');
         this._wrapperCategories = document.querySelector('.wrapper-categories');
+        this._calendarElement = document.querySelector('#calendar');
+        this._searchBarElement = document.querySelector('#search-bar');
         this.initButtonEvents();
 
     }
@@ -25,9 +27,15 @@ class ViewControler {
             case 'menu-users-close':
                 this.showElement(this._usersMenu);
                 break;
+            case 'calendar':
+                this.showElement(this._calendarElement);
+                break;
+            case 'search':
+                this.showElement(this._searchBarElement);
+                break;
             default:
                 console.error(value, ' Is not a valid button')
-
+                break;
         }
 
     }
