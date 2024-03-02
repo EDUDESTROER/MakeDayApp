@@ -608,7 +608,7 @@ main{
     #calendar{
         z-index: 2;
         top: 2.9em;
-        left: 38%;
+        left: 15%;
         background-color: #1d1f21f7;
         border: .2em solid themeDefault.$base-color;
         position: absolute;
@@ -616,6 +616,7 @@ main{
         height: 45vh;
         display: none;
         flex-direction: column;
+        overflow: hidden;
         .wrapper-calendar-header{
             //background-color: chartreuse;
             display: flex;
@@ -705,6 +706,12 @@ main{
             }
             div.calendar-div-select{
                 background-color: crimson;
+                box-shadow: 3px 5px 5px #000;
+                transform: scale(1.05);
+            }
+            div.calendar-div-select-no{
+                color: crimson;
+                border:1px solid crimson;
                 box-shadow: 3px 5px 5px #000;
                 transform: scale(1.05);
             }
