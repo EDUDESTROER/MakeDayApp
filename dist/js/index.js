@@ -7,7 +7,8 @@ this._wrapperCategories = document.querySelector('.wrapper-categories');
 this._calendarElement = document.querySelector('#calendar');
 this._searchBarElement = document.querySelector('#search-bar');
 this.initButtonEvents();
-
+noteControler.oneChecked(noteControler._allNotesGroup.childNodes, noteControler._allCheckboxEl, noteControler._trueCheckbox);
+noteControler.oneChecked(noteControler._allNotes.childNodes, noteControler._allNotesCheckboxEl, noteControler._trueNoteCheckbox);
 
 
 function functionsBtn(value){
@@ -39,13 +40,19 @@ function functionsBtn(value){
         case 'search':
             viewControler.showElement(this._searchBarElement);
             break;
+        case 'new-note-group':
+            noteControler.createNewNotesGroup(noteControler._allNotesGroup, true);
+            break;
+        case 'temp-cancel-categorie':
+            noteControler.removeElement(noteControler._allNotesGroup, document.getElementById('temp-categorie'));
+            break;
         default:
             console.error(value, ' Is not a valid button')
             break;
     }
 
 }
- function initButtonEvents(){
+function initButtonEvents(){
     let buttons = document.querySelectorAll('button');
 
     buttons.forEach(btn=>{

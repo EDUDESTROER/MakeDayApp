@@ -27,7 +27,7 @@ class View {
         calendarEl.children[2].innerHTML = dates;
 
     }
-    addCalendarDivsClickEvents(){
+    addCalendarDivsClickEvents(month){
 
         this._calendarDivs.childNodes.forEach(dat=>{
 
@@ -43,10 +43,16 @@ class View {
                 }else if(dat.className == 'calendar-div-select-no'){
                     dat.className = 'no-this-month';
                 }
-
             });
 
         })
+        let one;
+        this._calendarDivs.childNodes.forEach(dat=>{
+            if(one !== true && dat.innerText == new Date().getDate() && month == new Date().getMonth()){
+                one = true;
+                dat.id = 'calendar-today';
+            }
+        });
 
     }
 
