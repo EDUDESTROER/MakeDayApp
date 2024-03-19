@@ -49,34 +49,7 @@
                     <button title="Create a new notes categories" type="button" id="button-new-note-group"><i class="fa-solid fa-circle-plus"></i></button>
                 </div>
                 <div class="wrapper-created-categories">
-                    <div class="categories" id="categories-all">
-                        <input checked type="checkbox" name="checkbox-all" id="categories-all-checkbox">
-                        <label for="categories-all-checkbox">
-                            <i class="fa-solid fa-folder-open" name="checkbox-all"></i>
-                            <span>All</span>
-                        </label>
-                    </div>
-                    <div class="categories" id="categories-today">
-                        <input type="checkbox" name="checkbox-today" id="categories-today-checkbox">
-                        <label for="categories-today-checkbox">
-                            <i class="fa-solid fa-sun"></i>
-                            <span>Today</span>
-                        </label>
-                    </div>
-                    <div class="categories" id="categories-after">
-                        <input type="checkbox" name="checkbox-today" id="categories-after-checkbox">
-                        <label for="categories-after-checkbox">
-                            <i class="fa-regular fa-calendar"></i>
-                            <span>After</span>
-                        </label>
-                    </div>
-                    <div class="categories" id="categories-complete">
-                        <input type="checkbox" name="checkbox-today" id="categories-complete-checkbox">
-                        <label for="categories-complete-checkbox">
-                            <i class="fa-solid fa-check-double"></i>
-                            <span>Complete</span>
-                        </label>
-                    </div>
+                    <!--You need to add by button-->
                 </div>
                 <div class="wrapper-bulletinboard">
                     <div class="wrapper-bulletinboard-image">
@@ -93,7 +66,7 @@
             </aside>
             <section class="wrapper-notes">
                 <div class="wrapper-functions">
-                    <span id="categorie-name">ALL</span>
+                    <span id="categorie-name"></span>
                     <div class="wrapper-caledar-new-note-form">
                         <form autocomplete="on" id="search-notes">
                             <input action="send()" id="search-bar" type="search" placeholder="Find you notes!">
@@ -125,69 +98,11 @@
                     </div>
                 </div>
                 <div class="notes-list">
-                    <div class="note" id="note-1">
-                        <input type="checkbox" id="checkbox-note-1" checked>
-                        <label for="checkbox-note-1">
-                            <div class="note-img">
-                                <i class="fa-solid fa-image"></i>
-                            </div>
-                            <div class="note-information">
-                                <span class="note-name">Main tasks</span>
-                                <time class="note-time">3 weeks ago</time>
-                            </div>
-                            <div class="wrapper-trash">
-                                <button class="button-note-trash" title="Send to trash"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="note" id="note-2">
-                        <input type="checkbox" id="checkbox-note-2">
-                        <label for="checkbox-note-2">
-                            <div class="note-img">
-                                <i class="fa-solid fa-image"></i>
-                            </div>
-                            <div class="note-information">
-                                <span class="note-name">Make the homework</span>
-                                <time class="note-time">1 day ago</time>
-                            </div>
-                            <div class="wrapper-trash">
-                                <button class="button-note-trash" title="Send to trash"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="note" id="note-3">
-                        <input type="checkbox" id="checkbox-note-3">
-                        <label for="checkbox-note-3">
-                            <div class="note-img">
-                                <i class="fa-solid fa-image"></i>
-                            </div>
-                            <div class="note-information">
-                                <span class="note-name">Cooking for the kids</span>
-                                <time class="note-time">1 minute ago</time>
-                            </div>
-                            <div class="wrapper-trash">
-                                <button class="button-note-trash" title="Send to trash"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
-                            </div>
-                        </label>
-                    </div>
+                    <!--You need to add by button-->
                 </div>
             </section>
-            <aside contenteditable spellcheck="false" class="wrapper-note-content" id="note-1">
-                <div class="note-content">
-                    <img contenteditable="false" draggable="false" class="note-content-icon" src="/dist/img/alfinete.png" alt="A pin image">
-                    <div class="note-h1">
-                        Main Tasks
-                    </div>
-                    <div class="numeric-list">
-                        <span>Read the book clean code.</span>
-                        <span>Read the book JavaScript Patterns.</span>
-                        <span>Improve my english.</span>
-                        <span>Expand my portfolio.</span>
-                        <span>Learning more about JavaScript, css, html and React.</span>
-                        <span>Learning Python.</span>
-                        <span>Learning C#.</span>
-                    </div>
-                </div>
+            <aside class="wrapper-note-content">
+                <!--Auto Add by selecting a note-->
             </aside>
         </div>
     </main>

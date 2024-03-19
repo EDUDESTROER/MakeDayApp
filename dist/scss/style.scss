@@ -554,6 +554,7 @@ main{
                 width: 96%;
                 //height: 10%;
                 min-height: 10%;
+                position: relative;
                 display: flex;
                 align-items: $center;
                 justify-content: space-around;
@@ -573,6 +574,18 @@ main{
                 input{
                     display: none;
                 }
+                input[type=text]{
+                    display: unset;
+                    margin-left: .5em;
+                    width: 70%;
+                    height: 50%;
+                    outline: transparent;
+                    background: none;
+                    border: none;
+                    border-bottom: .2rem solid #e2e5e887;
+                    color: #770bfa;
+                    font-size: 1.5em;
+                }
                 input:checked~label{
                     transform: scale(1.01);
                     background-color: #0000004a;
@@ -582,11 +595,35 @@ main{
                         }
                     }
                 }
+                #button-temp-cancel-categorie{
+                    position: absolute;
+                    right: 0;
+                    width: 7%;
+                    height: 40%;
+                    border-radius: 50%;
+                    border: none;
+                    background-color: #E0210C;
+                    i{
+                        color: themeDefault.$icon-color;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                        transition-duration: 300ms;
+                    }
+                    &:hover{
+                        i{
+                            transform: scale(1.1);
+                        }
+                    }
+                }
                 label{
                     width: 100%;
                     height: 100%;
                     display: flex;
                     align-items: center;
+                    &>i{
+                        font-size: 2.5rem;
+                        color: #6000D8;
+                    }
                     .note-img{
                         background-color: themeDefault.$icon-color;
                         width: 15%;
@@ -788,6 +825,7 @@ main{
         padding: 1em 1em;
         .note-content{
             position: relative;
+            outline: inherit;
             width: themeDefault.$max-filling;
             height: themeDefault.$max-filling;
             display: inherit;
@@ -800,6 +838,19 @@ main{
                 height: 10%;
                 top: -3%;
                 align-self: $center;
+            }
+            .note-header{
+                width: themeDefault.$max-filling;
+                font-size: 2.5rem;
+                text-align: center;
+                font-weight: bolder;
+                color: #DC7707;
+            }
+            .content{
+                outline: transparent;
+                font-size: 1.2rem;
+                width: themeDefault.$max-filling;
+                flex-grow: 1;
             }
         }
     }

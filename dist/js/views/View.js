@@ -17,7 +17,7 @@ class View {
             element.style.display = "none";
 
         }
-
+        
     }
     CreateCalendarEl(calendarEl, summary, dates){
 
