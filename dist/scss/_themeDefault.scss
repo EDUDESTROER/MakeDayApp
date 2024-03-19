@@ -3,23 +3,3 @@ $base-color: #1d1f21ce!default;
 $icon-color: #E2E5E8!default;
 $user-select-color-1: #DC7707 !default;
 $user-select-color-2: #87000E !default;
-
-.note-h1{
-    display: inline;
-    align-self: center;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: $user-select-color-1;
-}
-.numeric-list{
-    padding: .5rem 0 .5rem .5rem;
-    display: flex;
-    flex-direction: column;
-    span{
-        display: list-item;
-        list-style: decimal;
-        list-style-position: inside;
-        color: $user-select-color-2;
-        font-weight: bold;
-    }
-}
