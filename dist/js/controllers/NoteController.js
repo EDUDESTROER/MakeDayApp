@@ -214,6 +214,9 @@ class NoteController {
                                 this.showObjectChilds(element.parentNode.id);
                         
                             }else if(element.parentElement.className.split(' ')[0] == 'note'){
+
+                                this._noteContentEl.style.display = 'flex';
+
                                 this._trueNoteCheckbox = checkedElement;
 
                                 this.makeNoteContent(element.parentNode);
@@ -225,14 +228,19 @@ class NoteController {
                                 element.checked = false;
                                 checkedElement.checked = true;
                             });
-                        }else if (!element.checked) {
+                        }else if(!element.checked) {
                             if(element.parentElement.className == 'categories'){
                                 document.getElementById('categorie-name').textContent = '';
                                 this._allNotesEl.childNodes.forEach(element =>{
                                     this._allNotesEl.removeChild(element);
-                                })
-                            }else if(element.parentElement.className == 'note'){
-                                //none
+                                });
+
+                                this._noteContentEl.style.display = 'none';
+
+                            }else if(element.parentElement.className.split(' ')[0] == 'note'){
+
+                                this._noteContentEl.style.display = 'none';
+
                             }
                         }
 
@@ -249,9 +257,10 @@ class NoteController {
         let refNoteObject = refCategorieObject.childerElement.find((noteObject) => noteObject.cod == noteDiv.id.replace('note-', ''));
 
         console.log(refNoteObject.childerElement);
-        if(refNoteObject.childerElement && refNoteObject.childerElement.length > 0){
+        if(refNoteObject.childerElement && refNoteObject.childerElement.nodeName){
 
-            console.log('B')
+            this._noteContentEl.innerHTML = '';
+            this._noteContentEl.appendChild(refNoteObject.childerElement);
 
         }else if(refNoteObject.childerElement.length <= 0){
             let div = document.createElement('div');
@@ -269,6 +278,8 @@ class NoteController {
 
             this._noteContentEl.innerHTML = '';
             this._noteContentEl.appendChild(div);
+
+            refNoteObject.childerElement = div;
         }
 
     }

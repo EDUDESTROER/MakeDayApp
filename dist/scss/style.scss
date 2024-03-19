@@ -223,6 +223,7 @@ main{
     padding: .3rem;
     .wrapper-categories{
         width: 25%;
+        min-width: 21rem;
         height: themeDefault.$max-filling;
         display: flex;
         flex-direction: column;
@@ -445,6 +446,7 @@ main{
         height: themeDefault.$max-filling;
         position: relative;
         width: 25%;
+        min-width: 22rem;
         display: flex;
         flex-direction: column;
         align-items: $center;
@@ -552,7 +554,6 @@ main{
             .note{
                 //background-color: cornflowerblue;
                 width: 96%;
-                //height: 10%;
                 min-height: 10%;
                 position: relative;
                 display: flex;
@@ -817,9 +818,8 @@ main{
         background-size: cover;
         background-repeat: no-repeat;
         min-width: 50%;
-        flex-grow: 1;
         height: themeDefault.$max-filling;
-        display: flex;
+        display: none;
         flex-direction: column;
         overflow-y: auto;
         padding: 1em 1em;
