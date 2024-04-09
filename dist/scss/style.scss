@@ -823,6 +823,7 @@ main{
         flex-direction: column;
         overflow-y: auto;
         padding: 1em 1em;
+        flex-grow: 1;
         .note-content{
             position: relative;
             outline: inherit;
@@ -841,7 +842,7 @@ main{
             }
             .note-header{
                 width: themeDefault.$max-filling;
-                font-size: 2.5rem;
+                font-size: 3rem;
                 text-align: center;
                 font-weight: bolder;
                 color: #DC7707;

@@ -3,3 +3,40 @@ $base-color: #1d1f21ce!default;
 $icon-color: #E2E5E8!default;
 $user-select-color-1: #DC7707 !default;
 $user-select-color-2: #87000E !default;
+
+.dotted-list{
+    list-style: disc outside none;
+    margin: 0.3em 0;
+    margin-left: 2rem;   
+    li{
+        padding: 0.2em 0;
+    }
+}
+.numbered-list{
+    list-style: decimal outside none;
+    margin: 0.3em 0;
+    margin-left: 2rem;
+    li{
+        padding: 0.2em 0;
+    }
+}
+.h1{
+    font-weight: bolder;
+    font-size: 2.3rem;
+    margin: .7rem 0;
+}
+.h2{
+    font-weight: bolder;
+    font-size: 2rem;
+    margin: .6rem 0;
+}
+.h3{
+    font-weight: bolder;
+    font-size: 1.7rem;
+    margin: .5rem 0;
+}
+.h4{
+    font-weight: bolder;
+    font-size: 1.4rem;
+    margin: .5rem 0;
+}

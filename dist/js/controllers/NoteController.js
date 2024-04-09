@@ -256,7 +256,7 @@ class NoteController {
         let refCategorieObject = this._allCategories.find((parentObject) => parentObject.cod == refCategorieCod[1]);
         let refNoteObject = refCategorieObject.childerElement.find((noteObject) => noteObject.cod == noteDiv.id.replace('note-', ''));
 
-        console.log(refNoteObject.childerElement);
+        //console.log(refNoteObject.childerElement);
         if(refNoteObject.childerElement && refNoteObject.childerElement.nodeName){
 
             this._noteContentEl.innerHTML = '';
@@ -271,7 +271,7 @@ class NoteController {
                                 ${refNoteObject.name}
                             </div>
                             <div class="content" spellcheck="false" contenteditable>
-                                
+                            
                             </div>
             `;
             div.className = 'note-content';
@@ -280,6 +280,14 @@ class NoteController {
             this._noteContentEl.appendChild(div);
 
             refNoteObject.childerElement = div;
+
+            let noteDivContent = div.querySelector('.content');
+
+            noteDivContent.addEventListener('keyup', e =>{
+
+                viewControler.formatNoteContent(e, noteDivContent);
+
+            });
         }
 
     }
