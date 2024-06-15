@@ -13,8 +13,15 @@ class NoteController {
         this._trueNoteCheckbox;
         this._allCategories = [];
         this._noteContentEl = document.querySelector('.wrapper-note-content');
+        this.loadUserName();
 
     }
+
+    loadUserName(){
+
+        document.querySelector('#user-name').innerHTML = this.userName;
+
+    };
 
     changeMonth(calendarup, languageup, sum) {
 
@@ -65,7 +72,7 @@ class NoteController {
 
         //console.dir(calendarDivs);
 
-        viewControler.addCalendarDivsClickEvents(currentMonth);
+        viewControler.addCalendarDivsClickEvents(currentMonth, currentYear);
     }
 
     removeElement(group, element) {
@@ -283,11 +290,12 @@ class NoteController {
 
             let noteDivContent = div.querySelector('.content');
 
-            noteDivContent.addEventListener('keyup', e =>{
+            noteDivContent.addEventListener('keydown', e =>{
 
                 viewControler.formatNoteContent(e, noteDivContent);
 
             });
+            
         }
 
     }

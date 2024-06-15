@@ -3,8 +3,9 @@ class View {
     constructor(){
 
         this._calendarDivs = document.querySelector('.wrapper-calendar-month-days');
-        this._allNoteTextContent;
-        this.lastLine;
+        this.lastLine = [];
+        this.firstTextEntry = true;
+        this.lastAddElement = ""
 
     }
 
@@ -29,7 +30,7 @@ class View {
         calendarEl.children[2].innerHTML = dates;
 
     }
-    addCalendarDivsClickEvents(month){
+    addCalendarDivsClickEvents(month, year){
 
         this._calendarDivs.childNodes.forEach(dat=>{
 
@@ -50,7 +51,7 @@ class View {
         })
         let one;
         this._calendarDivs.childNodes.forEach(dat=>{
-            if(one !== true && dat.innerText == new Date().getDate() && month == new Date().getMonth()){
+            if(one !== true && dat.innerText == new Date().getDate() && month == new Date().getMonth() && year == new Date().getFullYear()){
                 one = true;
                 dat.id = 'calendar-today';
             }
@@ -58,70 +59,111 @@ class View {
 
     }
 
-    filterText(sentText){
+    filterText(userDigits, originElement){
 
-        let tempText;
+        let pressBackSpace;
 
-        tempText = sentText.split('\n');
+        if(userDigits.key === "Backspace"){
 
-        console.log(sentText);
-        console.log(tempText);
+            pressBackSpace = true;
 
-        this._allNoteTextContent = tempText; //Keep here
+        }
+        if(userDigits.key === "Enter"){
 
-        tempText.forEach(line=>{
+            if(this.lastAddElement == 'header'){
 
-            if(line !== ''){
+                userDigits.preventDefault();
 
-                this.lastLine = line;
+                this.lastLine = '';
+
+                let div = this.createDiv();
+
+                div.classList.add('mainTextFormat')
+
+                originElement.appendChild(div);
+
+                setTimeout(function() {
+                    div.focus();
+                }, 1000);
+
+            }
+            if(this.lastAddElement == 'alternate-list'){
+
+                userDigits.preventDefault();
+
+                this.lastLine = '';
+
+                let div = this.createDiv();
+
+                div.classList.add('mainTextFormat')
+
+                originElement.appendChild(div);
+
+                setTimeout(function() {
+                    div.focus();
+                }, 1000);
 
             }
 
-        });
-    }
+        }
+        if(userDigits.key !== "Backspace" && (userDigits.key.length > 1 || userDigits.key === " ")){
 
-    formatNoteContent(event, element){ 
+            this.lastLine = ''
 
-        this.filterText(element.innerText);
+        }else{
 
-        let lastLine = '';
+            if(!pressBackSpace){
 
-        try {
+                this.lastLine = this.lastLine + userDigits.key
 
-            lastLine = this.lastLine.split(" ");
+            }else{
 
-            lastLine = lastLine[lastLine.length -1];
+                this.lastLine = this.lastLine.substring(0, this.lastLine.length - 1);
 
-        } catch (error) {
-            
-            lastLine = this.lastLine;
+            }
 
         }
 
+        //console.log(this.lastLine, userDigits);
+    }
+
+    formatNoteContent(event, element){ 
+        
+        console.log(event);
+
+        this.filterText(event, element);
+
+        let lastLine = this.lastLine;
         console.log(lastLine);
         
         switch(lastLine){
-
+            
             case '/dotted-list':
-                this.newMark(element, lastLine);
+                this.createDottedList(element, lastLine);
                 break;
             case '/h1':
-                this.newHeader(element, lastLine);
+                this.createHeader(element, lastLine);
                 break;
             case '/h2':
-                this.newHeader(element, lastLine);
+                this.createHeader(element, lastLine);
                 break;
             case '/h3':
-                this.newHeader(element, lastLine);
+                this.createHeader(element, lastLine);
                 break;
             case '/h4':
-                this.newHeader(element, lastLine);
+                this.createHeader(element, lastLine);
                 break;
             case '/numbered-list':
-                this.newOl(element, lastLine);
+                this.createNumberedList(element, lastLine);
+                break;
+            case '/roman-list':
+                this.createNumberedList(element, lastLine);
+                break;
+            case '/alternate-list':
+                this.createAlternateList(element, lastLine);
                 break;
             default:
-                //console.log(noteContentText);
+                this.textEntry(element);
                 break;
                 
         }
@@ -129,136 +171,172 @@ class View {
         //console.log(event, noteContentText.length);
     }
 
-    whaitPressEnter(refElement){
-            return new Promise((resolve, reject) => {
-                refElement.addEventListener('keyup', e=>{ 
-                    if(e.keyCode == 13){
-                        e.preventDefault();
-                        resolve(true);
-                    } else {
-                        reject(false);
+    textEntry(mainElement){
+
+        if(this.firstTextEntry){
+
+            mainElement.textContent = '';
+
+            this.firstTextEntry = false;
+
+            let div = this.createDiv();
+
+            div.classList.add('mainTextFormat')
+
+            mainElement.appendChild(div);
+
+            this.lastAddElement = 'text';
+
+        }
+    }
+
+    createDiv(){
+
+        let div = document.createElement('div');
+        div.innerHTML = "<br>";
+
+        return div;
+
+    }
+    createLi(){
+
+        let li = document.createElement('li');
+        li.innerHTML = "<br>";
+
+        return li;
+
+    }
+    removeComand(element, command){
+
+        setTimeout(()=>{ //This is use because if be more fast the last caracter don't will be put in the element
+
+            element.childNodes.forEach(child=>{
+
+                console.log(child);
+    
+                if(child.nodeName === '#text' || child.nodeName === 'DIV'){
+    
+                    child.textContent = this.removeText(child.textContent, command);
+    
+                    console.log(child.textContent);
+                    
+                    if(!child.textContent){
+                        element.removeChild(child);
                     }
-                });
-            });
-    }
 
-    newMark(oldElement, comandTxt){
+                }else if(child.nodeName === 'UL'){
 
-        this.whaitPressEnter(oldElement).then(pressEnter =>{
+                    child.childNodes.forEach(liElement=>{
+    
+                        console.log(command);
+    
+                        liElement.textContent = this.removeText(liElement.textContent, command);
+    
+                        console.log(child.textContent);
 
-            //console.dir(oldElement.childNodes);
+                    });
 
-            this.removeComandText(comandTxt, oldElement);
-            this.removeEmptyLastDiv(oldElement);
-
-            let ul = document.createElement('ul');
-            let li = document.createElement('li');
-
-            ul.appendChild(li);
-
-            let emptyDiv = document.createElement('div');
-
-            li.innerHTML = `<br>`
-            emptyDiv.innerHTML = `<br>`
-
-            ul.classList.add('dotted-list');
-
-            oldElement.appendChild(ul);
-            oldElement.appendChild(emptyDiv);
-
-        }).catch(pressEnter =>{
-
-            return;
-
-        });
-    }
-
-    newOl(oldElement, comandTxt){
-
-        this.whaitPressEnter(oldElement).then(pressEnter =>{
-
-            //console.dir(oldElement.childNodes);
-
-            this.removeComandText(comandTxt, oldElement);
-            this.removeEmptyLastDiv(oldElement);
-
-            let ol = document.createElement('ol');
-            let li = document.createElement('li');
-
-            ol.appendChild(li);
-
-            let emptyDiv = document.createElement('div');
-
-            li.innerHTML = `<br>`
-            emptyDiv.innerHTML = `<br>`
-
-            ol.classList.add('numbered-list');
-
-            oldElement.appendChild(ol);
-            oldElement.appendChild(emptyDiv);
-
-        }).catch(pressEnter =>{
-
-            return;
-
-        });
-    }
-
-    newHeader(oldElement, comandTxt){
-
-        this.whaitPressEnter(oldElement).then(pressEnter =>{
-
-            console.dir(oldElement.childNodes);
-
-            this.removeComandText(comandTxt, oldElement);
-            this.removeEmptyLastDiv(oldElement);
-
-            let div = document.createElement('div');
-
-            let emptyDiv = document.createElement('div');
-
-            div.innerHTML = `<br>`
-            emptyDiv.innerHTML = `<br>`
-
-            div.classList.add(comandTxt.replace('/', ''));
-
-            oldElement.appendChild(div);
-            oldElement.appendChild(emptyDiv);
-
-        }).catch(pressEnter =>{
-
-            return;
-
-        });
-    }
-
-    removeComandText(comandTxt, oldElement){
-
-        console.log(comandTxt);
-        console.dir(oldElement.innerHTML);
-
-        oldElement.childNodes.forEach(child=>{
-            if(child.nodeName == '#text' || child.nodeName == 'DIV'){
-
-                child.textContent = child.textContent.replace(comandTxt , '')
-                
-                if(!child.textContent){
-                    oldElement.removeChild(child);
                 }
+    
+            });
 
-            }
-        });
+        }, 1);
+
+    }
+
+    removeText(text, textToRemove){
+
+        text = text.replace(textToRemove, '');
+
+        return text;
+    }
+
+    createNumberedList(refElement, tagName){
+
+        this.removeComand(refElement, tagName);
+
+        let ol = document.createElement('ol');
+        let emptyDiv = this.createDiv();
+        let li = this.createLi();
+        
+        ol.appendChild(li);
+
+        ol.classList.add(tagName.replace('/', ''));
+
+        refElement.appendChild(ol);
+        refElement.appendChild(emptyDiv);
+
+        this.lastLine = ''
+
+        this.lastAddElement = 'numbered-list';
+
+    }
+
+    createAlternateList(refElement, tagName){
+
+        this.removeComand(refElement, tagName);
+
+        let details = document.createElement('details');
+        let summary = document.createElement('summary');
+        let emptyDiv = this.createDiv();
+        let div = this.createDiv();
+
+        summary.innerHTML = '<br>';
+
+        details.appendChild(summary);
+        details.appendChild(div);
+
+        details.classList.add(tagName.replace('/', ''));
+
+        refElement.appendChild(details);
+        refElement.appendChild(emptyDiv);
+
+        this.lastLine = ''
+
+        this.lastAddElement = 'alternate-list';
+
+    }
+
+    createDottedList(refElement, tagName){
+
+        this.removeComand(refElement, tagName);
+
+        let ul = document.createElement('ul');
+        let emptyDiv = this.createDiv();
+        let li = this.createLi();
+
+        ul.appendChild(li);
+
+        
+        ul.classList.add(tagName.replace('/', ''));
+
+        
+        refElement.appendChild(ul);
+        refElement.appendChild(emptyDiv);
+
+        this.lastLine = ''
+
+        this.lastAddElement = 'dotted-list';
+
+    }
+    createHeader(refElement, tagName){
+
+        this.removeComand(refElement, tagName);
+
+        let div = this.createDiv();
+
+        /*div.addEventListener('keydown', e=>{
+            if(e.key === 'Enter') e.preventDefault(); //STOP HERE!!
+        });*/
+
+        div.classList.add(tagName.replace('/', ''))
+
+        refElement.appendChild(div);
 
         this.lastLine = '';
 
-    }
-    removeEmptyLastDiv(element){
-
-        element.childNodes.forEach(div =>{
-            if(div.textContent == ''){
-                element.removeChild(div);
-            }
-        });
+        this.lastAddElement = 'header';
 
     }
+
 }
