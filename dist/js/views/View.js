@@ -5,7 +5,7 @@ class View {
         this._calendarDivs = document.querySelector('.wrapper-calendar-month-days');
         this.lastLine = [];
         this.firstTextEntry = true;
-        this.lastAddElement = ""
+        this.usersSelectedElement = "";
 
     }
 
@@ -70,45 +70,35 @@ class View {
         }
         if(userDigits.key === "Enter"){
 
-            if(this.lastAddElement == 'header'){
+            userDigits.preventDefault();
 
-                userDigits.preventDefault();
+            if(this.usersSelectedElement.classList[0] === 'mainText' || this.usersSelectedElement.classList[0] === 'h1' || this.usersSelectedElement.classList[0] === 'h2' || this.usersSelectedElement.classList[0] === 'h3'|| this.usersSelectedElement.classList[0] === 'h4'){
 
-                this.lastLine = '';
-
-                let div = this.createDiv();
-
-                div.classList.add('mainTextFormat')
-
-                originElement.appendChild(div);
-
-                setTimeout(function() {
-                    div.focus();
-                }, 1000);
+                this.createParagraph(this.usersSelectedElement, '/text', true);
 
             }
-            if(this.lastAddElement == 'alternate-list'){
+            if(this.usersSelectedElement.classList[0] === 'numbered-list' || this.usersSelectedElement.parentNode.classList[0] === 'numbered-list' || this.usersSelectedElement.classList[0] === 'dotted-list' || this.usersSelectedElement.parentNode.classList[0] === 'dotted-list'){
 
-                userDigits.preventDefault();
-
-                this.lastLine = '';
-
-                let div = this.createDiv();
-
-                div.classList.add('mainTextFormat')
-
-                originElement.appendChild(div);
-
-                setTimeout(function() {
-                    div.focus();
-                }, 1000);
+                this.addNewSubElement(this.usersSelectedElement, 'li');
 
             }
+            if(this.usersSelectedElement.classList[0] === 'details-div'){
+
+                this.addNewSubElement(this.usersSelectedElement, 'alternate-div');
+
+            }
+
+            this.lastLine = '';
 
         }
         if(userDigits.key !== "Backspace" && (userDigits.key.length > 1 || userDigits.key === " ")){
 
-            this.lastLine = ''
+            if(userDigits.key === "Shift"){
+
+                this.lastLine = this.lastLine;
+
+            }
+            this.lastLine = '';
 
         }else{
 
@@ -127,73 +117,100 @@ class View {
         //console.log(this.lastLine, userDigits);
     }
 
-    formatNoteContent(event, element){ 
-        
-        console.log(event);
+    watchTheSelectElement(element){
 
-        this.filterText(event, element);
+        element.addEventListener('click', e=>{
+
+            this.usersSelectedElement = e.target;
+
+        });
+
+    }
+    captureUserDigitEntry(element){
+
+        element.addEventListener('keydown', e=>{
+
+            this.formatNoteContent(e, element)
+
+        });
+
+    }
+
+    editNoteContent(event, element){ 
+        
+        //console.log(event);
+        
+        if(this.firstTextEntry && event.isTrusted){
+
+            let div = this.createDiv();
+
+            div.focus();
+
+            div.classList.add('mainText');
+
+            this.watchTheSelectElement(div);
+            this.captureUserDigitEntry(div);
+
+            element.appendChild(div);
+
+            this.firstTextEntry = false;
+
+        }
+
+
+        //console.log(event, noteContentText.length);
+    }
+
+    formatNoteContent(event, elementToFilter){
+
+        this.filterText(event, elementToFilter);
 
         let lastLine = this.lastLine;
         console.log(lastLine);
         
         switch(lastLine){
             
+            case '/text':
+                this.createParagraph(this.usersSelectedElement, lastLine);
+                break;
             case '/dotted-list':
-                this.createDottedList(element, lastLine);
+                this.createDottedList(this.usersSelectedElement, lastLine);
                 break;
             case '/h1':
-                this.createHeader(element, lastLine);
+                this.createHeader(this.usersSelectedElement, lastLine);
                 break;
             case '/h2':
-                this.createHeader(element, lastLine);
+                this.createHeader(this.usersSelectedElement, lastLine);
                 break;
             case '/h3':
-                this.createHeader(element, lastLine);
+                this.createHeader(this.usersSelectedElement, lastLine);
                 break;
             case '/h4':
-                this.createHeader(element, lastLine);
+                this.createHeader(this.usersSelectedElement, lastLine);
                 break;
             case '/numbered-list':
-                this.createNumberedList(element, lastLine);
+                this.createNumberedList(this.usersSelectedElement, lastLine);
                 break;
             case '/roman-list':
-                this.createNumberedList(element, lastLine);
+                this.createNumberedList(this.usersSelectedElement, lastLine);
                 break;
             case '/alternate-list':
-                this.createAlternateList(element, lastLine);
+                this.createAlternateList(this.usersSelectedElement, lastLine);
                 break;
             default:
-                this.textEntry(element);
+                //this.textEntry(element);
                 break;
-                
+      
         }
 
-        //console.log(event, noteContentText.length);
-    }
-
-    textEntry(mainElement){
-
-        if(this.firstTextEntry){
-
-            mainElement.textContent = '';
-
-            this.firstTextEntry = false;
-
-            let div = this.createDiv();
-
-            div.classList.add('mainTextFormat')
-
-            mainElement.appendChild(div);
-
-            this.lastAddElement = 'text';
-
-        }
     }
 
     createDiv(){
 
         let div = document.createElement('div');
         div.innerHTML = "<br>";
+
+        div.contentEditable = true;
 
         return div;
 
@@ -206,22 +223,53 @@ class View {
         return li;
 
     }
+
+    addNewSubElement(refElement, elementType){
+        
+        if(elementType == 'li'){
+
+            let li = this.createLi();
+
+            refElement.parentNode.insertBefore(li, refElement.nextSibling);
+            this.watchTheSelectElement(li);
+            this.captureUserDigitEntry(li);
+
+        }
+        if(elementType == 'alternate-div'){
+
+            let div = this.createDiv();
+
+            div.classList.add('details-div');
+
+            refElement.parentNode.insertBefore(div, refElement.nextSibling);
+
+            this.watchTheSelectElement(div);
+            this.captureUserDigitEntry(div);
+
+        }
+
+    }
+
     removeComand(element, command){
 
         setTimeout(()=>{ //This is use because if be more fast the last caracter don't will be put in the element
 
-            element.childNodes.forEach(child=>{
+            element.parentNode.childNodes.forEach(child=>{
 
                 console.log(child);
     
-                if(child.nodeName === '#text' || child.nodeName === 'DIV'){
+                if(child.nodeName === '#text' || child.nodeName === 'DIV' || child.nodeName === 'LI'){
     
                     child.textContent = this.removeText(child.textContent, command);
     
                     console.log(child.textContent);
                     
                     if(!child.textContent){
-                        element.removeChild(child);
+                        if(child.classList[0] === 'h1' || child.classList[0] === 'h2' || child.classList[0] === 'h3' || child.classList[0] === 'h4'){
+                            return;
+                        }else{
+                            element.parentNode.removeChild(child);
+                        }
                     }
 
                 }else if(child.nodeName === 'UL'){
@@ -251,24 +299,54 @@ class View {
         return text;
     }
 
+    createParagraph(refElement, tagName, enter=false){
+
+        if(!enter){
+
+            //console.log(refElement);
+            this.removeComand(refElement, tagName);
+
+        }
+
+        let div = this.createDiv();
+        this.watchTheSelectElement(div);
+        this.captureUserDigitEntry(div);
+
+        div.classList.add('mainText');
+
+        console.log(refElement.nodeName);
+
+        if(refElement.nodeName === "LI" || (refElement.nodeName === 'DIV' && refElement.classList[0] === 'details-div')){
+
+            refElement.parentNode.parentNode.insertBefore(div, refElement.nextSibling);
+
+        }else{
+
+            refElement.parentNode.insertBefore(div, refElement.nextSibling);
+
+        }
+
+        this.lastLine = '';
+
+    }
+
     createNumberedList(refElement, tagName){
 
         this.removeComand(refElement, tagName);
 
         let ol = document.createElement('ol');
-        let emptyDiv = this.createDiv();
         let li = this.createLi();
         
         ol.appendChild(li);
+        ol.contentEditable = true;
+        this.watchTheSelectElement(ol);
+        this.captureUserDigitEntry(ol);
 
         ol.classList.add(tagName.replace('/', ''));
 
-        refElement.appendChild(ol);
-        refElement.appendChild(emptyDiv);
+        refElement.parentNode.insertBefore(ol, refElement.nextSibling);
 
-        this.lastLine = ''
-
-        this.lastAddElement = 'numbered-list';
+        this.lastLine = '';
 
     }
 
@@ -278,22 +356,26 @@ class View {
 
         let details = document.createElement('details');
         let summary = document.createElement('summary');
-        let emptyDiv = this.createDiv();
         let div = this.createDiv();
 
         summary.innerHTML = '<br>';
+        div.innerHTML = '<br>';
+
+        details.contentEditable = true;
+        summary.contentEditable = true;
+        div.contentEditable = true;
 
         details.appendChild(summary);
         details.appendChild(div);
+        this.watchTheSelectElement(details);
+        this.captureUserDigitEntry(details);
 
         details.classList.add(tagName.replace('/', ''));
+        div.classList.add('details-div');
 
-        refElement.appendChild(details);
-        refElement.appendChild(emptyDiv);
+        refElement.parentNode.insertBefore(details, refElement.nextSibling);
 
-        this.lastLine = ''
-
-        this.lastAddElement = 'alternate-list';
+        this.lastLine = '';
 
     }
 
@@ -302,21 +384,20 @@ class View {
         this.removeComand(refElement, tagName);
 
         let ul = document.createElement('ul');
-        let emptyDiv = this.createDiv();
         let li = this.createLi();
 
         ul.appendChild(li);
+        ul.contentEditable = true;
+        this.watchTheSelectElement(ul);
+        this.captureUserDigitEntry(ul);
 
         
         ul.classList.add(tagName.replace('/', ''));
 
         
-        refElement.appendChild(ul);
-        refElement.appendChild(emptyDiv);
+        refElement.parentNode.insertBefore(ul, refElement.nextSibling);
 
-        this.lastLine = ''
-
-        this.lastAddElement = 'dotted-list';
+        this.lastLine = '';
 
     }
     createHeader(refElement, tagName){
@@ -325,17 +406,14 @@ class View {
 
         let div = this.createDiv();
 
-        /*div.addEventListener('keydown', e=>{
-            if(e.key === 'Enter') e.preventDefault(); //STOP HERE!!
-        });*/
+        this.watchTheSelectElement(div);
+        this.captureUserDigitEntry(div);
 
         div.classList.add(tagName.replace('/', ''))
 
-        refElement.appendChild(div);
+        refElement.parentNode.insertBefore(div, refElement.nextSibling);
 
         this.lastLine = '';
-
-        this.lastAddElement = 'header';
 
     }
 

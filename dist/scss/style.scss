@@ -852,6 +852,12 @@ main{
                 font-size: 1.2rem;
                 width: themeDefault.$max-filling;
                 flex-grow: 1;
+                div{
+                    outline: none;
+                }
+                *:hover{
+                    background-color: #8585810e;
+                }
             }
         }
     }

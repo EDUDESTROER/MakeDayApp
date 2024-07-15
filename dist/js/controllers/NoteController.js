@@ -277,7 +277,7 @@ class NoteController {
                             <div class="note-header">
                                 ${refNoteObject.name}
                             </div>
-                            <div class="content" spellcheck="false" contenteditable>
+                            <div class="content" spellcheck="false">
                             
                             </div>
             `;
@@ -290,9 +290,9 @@ class NoteController {
 
             let noteDivContent = div.querySelector('.content');
 
-            noteDivContent.addEventListener('keydown', e =>{
+            noteDivContent.addEventListener('click', e =>{
 
-                viewControler.formatNoteContent(e, noteDivContent);
+                viewControler.editNoteContent(e, noteDivContent);
 
             });
             
