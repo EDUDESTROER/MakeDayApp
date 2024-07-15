@@ -4,11 +4,12 @@ $icon-color: #E2E5E8!default;
 $user-select-color-1: #DC7707 !default;
 $user-select-color-2: #87000E !default;
 
-.mainTextFormat{
+.mainText{
     font-size: 1.2rem;
 }
 .dotted-list{
     list-style: disc outside none;
+    outline: none;
     margin: 0.3em 0;
     margin-left: 2rem;   
     li{
@@ -17,6 +18,7 @@ $user-select-color-2: #87000E !default;
 }
 .numbered-list{
     list-style: decimal outside none;
+    outline: none;
     margin: 0.3em 0;
     margin-left: 2rem;
     li{
