@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An unexpected error occurred.">
+    <meta name="author" content="EDUDESTROER">
+    <title>MakeDay - Workspace</title>
+    <link rel="stylesheet" href="css/workspace-styles.min.css">
+    <link rel="shortcut icon" href="icons/MakeDay_Icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="fontwesome/css/all.min.css">
+    
+</head>
+<body>
+    <header class="wrapper-header">
+        <div class="wrapper-mobile-header">
+            <div class="wrapper-avatar">
+                <button class="buttons-basic-efects" title="User Menu" id="btn-user-menu">
+                    <img id="user-avatar" src="/img/user-default-avatar.png" alt="user avatar">
+                </button>
+                <div class="wrapper-username">
+                    <span id="username"><%= username %></span>
+                </div>
+            </div>
+            <div class="wrapper-configuration">
+                <button id="btn-configs">
+                    <i title="Configurations" class="fa-solid fa-toolbox"></i>
+                </button>
+            </div>
+        </div>
+        <div class="wrapper-pc-header">
+            <div class="wrapper-makeday-icon">
+                <img src="/icons/MakeDay_Icon.png" alt="">
+                <span class="basic-shadow-size1">MakeDay</span>
+            </div>
+            <div class="wrapper-configuration">
+                <button id="btn-configs-pc">
+                    <i title="Configurations" class="fa-solid fa-toolbox"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="left-side-bar">
+            <div class="wrapper-favorites side-wrappers">
+                <h2>Favorites <button class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
+                <div class="favorites-content-wrapper">
+                    <div class="favorites-square list-style">
+                        <div class="favorites-icon"><i class="fa-regular fa-bookmark"></i></div>
+                        <img class="favorites-background" src="/img/Afazeres-test.jpg" alt="Afazeres Background">
+                        <h3 class="favorites-text">Afazeres</h3>
+                    </div>
+                    <div class="favorites-square list-style">
+                        <div class="favorites-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                        <img class="favorites-background" src="/img/ListaDeCompras-test.jpg" alt="Lista de compras Background">
+                        <h3 class="favorites-text">lista de compras</h3>
+                    </div>
+                    <div class="favorites-square list-style">
+                        <div class="favorites-icon"><i class="fa-solid fa-laptop-code"></i></i></div>
+                        <img class="favorites-background" src="/img/computação-test.jpg" alt="Teoria da Computação Background">
+                        <h3 class="favorites-text">Teoria Da computação</h3>
+                    </div>
+                    <div class="favorites-square list-style">
+                        <div class="favorites-icon"><i class="fa-solid fa-star"></i></div>
+                        <img class="favorites-background" src="/img/Important-test.jpg" alt="Eventos importantes da empresa Background">
+                        <h3 class="favorites-text">Eventos importantes da empresa</h3>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="wrapper-history side-wrappers">
+                <h2>History <button class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
+                <div class="history-content-wrapper basic-content">
+                    <div class="history-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-star"></i></i></div>
+                        <h3 class="list-text">Eventos importantes da empresa</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="history-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
+                        <h3 class="list-text">lista de compras</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="history-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
+                        <h3 class="list-text">Afazeres</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="history-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-laptop-code"></i></div>
+                        <h3 class="list-text">Teoria Da computação</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="history-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-thumbtack"></i></div>
+                        <h3 class="list-text">Terefas</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper-all-tasks side-wrappers">
+                <h2>All Tasks <button class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
+                <div class="all-tasks-content-wrapper basic-content">
+                    <div class="all-tasks-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-star"></i></i></div>
+                        <h3 class="list-text">Eventos importantes da empresa</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="all-tasks-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
+                        <h3 class="list-text">lista de compras</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="all-tasks-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
+                        <h3 class="list-text">Afazeres</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="all-tasks-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-laptop-code"></i></div>
+                        <h3 class="list-text">Teoria Da computação</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="all-tasks-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-thumbtack"></i></div>
+                        <h3 class="list-text">Terefas</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="all-tasks-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-ellipsis"></i></div>
+                        <h3 class="list-text">See all</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="note-wrapper" style="display: none;">
+            <div class="content-wrapper">
+                <div class="wrapper-note-btn">
+                    <button class="buttons-icon-efect note-menu-btn" id="btn-return-page"><i class="fa-solid fa-angles-left"></i></button>
+                    <button class="buttons-icon-efect note-menu-btn" id="btn-note-option"><i class="fa-solid fa-ellipsis"></i></button>
+                </div>
+                <div class="wrapper-info">
+                    <div class="wrapper-img">
+                        <img draggable="false" src="/img/Tarefas-capa.jpg" alt="">
+                    </div>
+                    <div class="wrapper-icon">
+                        <i class="fa-solid fa-thumbtack"></i>
+                    </div>
+                    <div class="wrapper-title">
+                        <span>Tarefas</span>
+                    </div>
+                </div>
+                <div class="note-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
+                </div>
+            </div>
+        </section>
+        <section id="new-categorie" class="new-section" style="display: none;">
+            <div class="wrapper-new-categorie-title">
+                <span>Create a new categorie</span>
+            </div>
+            <div class="new-categorie-options-wrapper">
+                <input type="text" class="input-new-type-name" id="input-new-categorie-name" placeholder="Categorie Name">
+                <div class="wrapper-categorie-styles">
+                    <span>Choose a style:</span>
+                    <div class="new-categorie-styles">
+                        <button class="buttuns-purple-style select-style" type="button">Standard</button>
+                        <button class="buttuns-purple-style" type="button">Card</button>
+                    </div>
+                </div>
+                <div class="wrapper-categorie-result">
+                    <span>Result:</span>
+                   <div class="wrapper-favorites side-wrappers">
+                        <h2>Categorie Name <button class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
+                        <div class="favorites-content-wrapper">
+                            <div class="favorites-square list-style">
+                                <div class="favorites-icon"><i class="fa-solid fa-1"></i></div>
+                                <img class="favorites-background" src="/img/Afazeres-test.jpg" alt="Afazeres Background">
+                                <h3 class="favorites-text">Item</h3>
+                            </div>
+                            <div class="favorites-square list-style">
+                                <div class="favorites-icon"><i class="fa-solid fa-2"></i></div>
+                                <img class="favorites-background" src="/img/ListaDeCompras-test.jpg" alt="Lista de compras Background">
+                                <h3 class="favorites-text">Item</h3>
+                            </div>
+                            <div class="favorites-square list-style">
+                                <div class="favorites-icon"><i class="fa-solid fa-3"></i></div>
+                                <img class="favorites-background" src="/img/computação-test.jpg" alt="Teoria da Computação Background">
+                                <h3 class="favorites-text">Item</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrapper-history side-wrappers" style="display: none;">
+                        <h2>Categorie Name <button class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
+                        <div class="history-content-wrapper basic-content">
+                            <div class="history-list list-style basic-list">
+                                <div class="basic-icon-list"><i class="fa-solid fa-1"></i></div>
+                                <h3 class="list-text">Item</h3>
+                                <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                            </div>
+                            <div class="history-list list-style basic-list">
+                                <div class="basic-icon-list"><i class="fa-solid fa-2"></i></div>
+                                <h3 class="list-text">Item</h3>
+                                <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                            </div>
+                            <div class="history-list list-style basic-list">
+                                <div class="basic-icon-list"><i class="fa-solid fa-3"></i></div>
+                                <h3 class="list-text">Item</h3>
+                                <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="new-note" class="new-section" style="display: none;">
+            <div class="wrapper-new-categorie-title">
+                <span>Create a new note</span>
+            </div>
+            <div class="new-categorie-options-wrapper">
+                <input class="input-new-type-name" type="text" id="input-new-note-name" placeholder="Note Name">
+                <div class="wrapper-categorie-styles">
+                    <span>Choose a icon:</span>
+                    <div class="new-categorie-styles">
+                        <button class="buttuns-purple-style select-style" type="button"><i class="fa-solid fa-anchor"></i></button>
+                        <button class="buttuns-purple-style" type="button"><i class="fa-solid fa-anchor-circle-exclamation"></i></button>
+                        <button class="buttuns-purple-style" type="button"><i class="fa-brands fa-android"></i></button>
+                        <button class="buttuns-purple-style" type="button"><i class="fa-brands fa-angellist"></i></button>
+                        <button class="buttuns-purple-style" type="button"><i class="fa-solid fa-ankh"></i></button>
+                        <button class="buttuns-purple-style" type="button"><i class="fa-solid fa-apple-whole"></i></button>
+                    </div>
+                </div>
+                <div class="wrapper-categorie-styles">
+                    <span>Choose a image:</span>
+                    <div class="new-categorie-styles">
+                        <button class="note-btn buttuns-purple-style" type="button"><i class="fa-solid fa-folder-open"></i> Select a file</button>
+                    </div>
+                </div>
+                <div class="wrapper-categorie-result">
+                    <span>Result:</span>
+                   <div class="wrapper-favorites side-wrappers categorie-note-center">
+                        <div class="favorites-content-wrapper">
+                            <div class="favorites-square list-style">
+                                <div class="favorites-icon"><i class="fa-solid fa-anchor"></i></div>
+                                <img class="favorites-background" src="/img/Afazeres-test.jpg" alt="Afazeres Background">
+                                <h3 class="favorites-text">Note Name</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrapper-history side-wrappers" style="display: none;">
+                        <div class="history-content-wrapper basic-content">
+                            <div class="history-list list-style basic-list">
+                                <div class="basic-icon-list"><i class="fa-solid fa-anchor"></i></div>
+                                <h3 class="list-text">Note Name</h3>
+                                <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="search-wrapper" class="new-section" style="display: none;">
+            <div class="wrapper-search-title">
+                <i class="fa-brands fa-searchengin"></i>
+            </div>
+            <div class="wrapper-search-bar">
+                <input type="text" id="input-search" placeholder="Search Anything...">
+            </div>
+            <div class="wrapper-search-content">
+                <div class="search-title-notes search-notes">
+                    <span class="search-title-style">All notes</span>
+                    <div class="history-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
+                        <h3 class="list-text">lista de compras</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="history-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
+                        <h3 class="list-text">Afazeres</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="history-list list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-laptop-code"></i></div>
+                        <h3 class="list-text">Teoria Da computação</h3>
+                        <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                </div>
+                <div class="search-title-settings search-notes">
+                    <span class="search-title-style">All settings</span>
+                    <div class="search-wrapper-settings list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-gears"></i></div>
+                        <span class="list-text">Font Style</span>
+                    </div>
+                    <div class="search-wrapper-settings list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-gears"></i></div>
+                        <span class="list-text">Language</span>
+                    </div>
+                    <div class="search-wrapper-settings list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-gears"></i></div>
+                        <span class="list-text">Change profile picture</span>
+                    </div>
+                </div>
+                <div class="search-title-note-content search-notes">
+                    <span class="search-title-style">All Note Content</span>
+                    <div class="search-wrapper-note-content list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
+                        <span class="list-text">lista de compras</span>
+                        <p class="search-text-content">Voluptates <span class="selected-search-content">culpa</span> quos amet earum!</p>
+                    </div>
+                    <div class="search-wrapper-note-content list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
+                        <span class="list-text">Afazeres</span>
+                        <p class="search-text-content">Voluptates, <span class="selected-search-content">quos rerum</span>. Beatae minima porro illum. Reiciendis, quod nobis. Officiis explicabo omnis voluptates reprehenderit voluptatibus optio saepe consequuntur soluta cum perspiciatis.</p>
+                    </div>
+                    <div class="search-wrapper-note-content list-style basic-list">
+                        <div class="basic-icon-list"><i class="fa-solid fa-laptop-code"></i></div>
+                        <span class="list-text">Teoria Da computação</span>
+                        <p class="search-text-content">Lorem ipsum <span class="selected-search-content">dolor sit amet consectetur</span> adipisicing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="important-wrapper" class="new-section">
+            <div class="important-header">
+                <div class="wrapper-important-title">
+                    <div class="wrapper-header-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <span>Important</span>
+                </div>
+                <div class="wrapper-function-btn">
+                    <button class="buttons-icon-efect" type="button" id="btn-new-important-reminder"><i class="fa-solid fa-calendar-plus"></i></button>
+                    <button class="buttons-icon-efect" type="button" id="btn-chege-organization"><i class="fa-regular fa-window-restore"></i></button>
+                </div>
+            </div>
+            <section id="important-Hours-over" class="wrapper-important-over">
+                <div class="wrapper-header-important-section buttons-icon-efect">
+                    <button class="" id="btn-close-hours-to"><i class="fa-solid fa-caret-up"></i></button>
+                    <h2>Hours to finish</h2>
+                </div>
+                <div class="hours-to-content">
+                    <div class="important-list list-style">
+                        <div class="important-list-note-content">
+                            <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
+                            <h3 class="list-text">Afazeres</h3>
+                            <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="important-content">
+                            <div class="wrapper-steps">
+                                <span>Steps 1/3</span>
+                            </div>
+                            <div class="wrapper-remaining-time">
+                                <div class="wrapper-icon-remaining-time">
+                                    <i class="fa-solid fa-hourglass-start"></i>
+                                </div>
+                                <span>1 hour</span>
+                            </div>
+                            <div class="wrapper-performance">
+                                <div class="wrapper-icon-performance">
+                                    <i class="fa-solid fa-arrow-trend-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="important-list list-style">
+                        <div class="important-list-note-content">
+                             <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <h3 class="list-text">lista de compras</h3>
+                            <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="important-content">
+                            <div class="wrapper-steps">
+                                <span>No steps</span>
+                            </div>
+                            <div class="wrapper-remaining-time">
+                                <div class="wrapper-icon-remaining-time">
+                                    <i class="fa-solid fa-hourglass-start"></i>
+                                </div>
+                                <span>6 hours</span>
+                            </div>
+                            <div class="wrapper-performance">
+                                <div class="wrapper-icon-performance">
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="important-days-over" class="wrapper-important-over">
+                <div class="wrapper-header-important-section buttons-icon-efect">
+                    <button id="btn-close-days-to"><i class="fa-solid fa-caret-up"></i></button>
+                    <h2>Days to finish</h2>
+                </div>
+                <div class="Days-to-content">
+                    <div class="important-list list-style">
+                        <div class="important-list-note-content">
+                            <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
+                            <h3 class="list-text">Afazeres</h3>
+                            <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="important-content">
+                            <div class="wrapper-steps">
+                                <span>Steps 0/10</span>
+                            </div>
+                            <div class="wrapper-remaining-time">
+                                <div class="wrapper-icon-remaining-time">
+                                    <i class="fa-solid fa-hourglass-start"></i>
+                                </div>
+                                <span>1 day</span>
+                            </div>
+                            <div class="wrapper-performance">
+                                <div class="wrapper-icon-performance">
+                                    <i class="fa-solid fa-arrow-trend-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="important-list list-style">
+                        <div class="important-list-note-content">
+                             <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <h3 class="list-text">lista de compras</h3>
+                            <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="important-content">
+                            <div class="wrapper-steps">
+                                <span>No steps</span>
+                            </div>
+                            <div class="wrapper-remaining-time">
+                                <div class="wrapper-icon-remaining-time">
+                                    <i class="fa-solid fa-hourglass-start"></i>
+                                </div>
+                                <span>6 days</span>
+                            </div>
+                            <div class="wrapper-performance">
+                                <div class="wrapper-icon-performance">
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="important-weeks-over" class="wrapper-important-over">
+                <div class="wrapper-header-important-section buttons-icon-efect">
+                    <button id="btn-close-weeks-to"><i class="fa-solid fa-caret-up"></i></button>
+                    <h2>Weeks to finish</h2>
+                </div>
+                <div class="weeks-to-content">
+                    <div class="important-list list-style">
+                        <div class="important-list-note-content">
+                            <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
+                            <h3 class="list-text">Afazeres</h3>
+                            <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="important-content">
+                            <div class="wrapper-steps">
+                                <span>Steps 0/10</span>
+                            </div>
+                            <div class="wrapper-remaining-time">
+                                <div class="wrapper-icon-remaining-time">
+                                    <i class="fa-solid fa-hourglass-start"></i>
+                                </div>
+                                <span>1 week</span>
+                            </div>
+                            <div class="wrapper-performance">
+                                <div class="wrapper-icon-performance">
+                                    <i class="fa-solid fa-arrow-trend-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="important-list list-style">
+                        <div class="important-list-note-content">
+                             <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <h3 class="list-text">lista de compras</h3>
+                            <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="important-content">
+                            <div class="wrapper-steps">
+                                <span>No steps</span>
+                            </div>
+                            <div class="wrapper-remaining-time">
+                                <div class="wrapper-icon-remaining-time">
+                                    <i class="fa-solid fa-hourglass-start"></i>
+                                </div>
+                                <span>6 weeks</span>
+                            </div>
+                            <div class="wrapper-performance">
+                                <div class="wrapper-icon-performance">
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="important-months-over" class="wrapper-important-over">
+                <div class="wrapper-header-important-section buttons-icon-efect">
+                    <button id="btn-close-months-to"><i class="fa-solid fa-caret-up"></i></button>
+                    <h2>Months to finish</h2>
+                </div>
+                <div class="months-to-content">
+                    <div class="important-list list-style">
+                        <div class="important-list-note-content">
+                            <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
+                            <h3 class="list-text">Afazeres</h3>
+                            <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="important-content">
+                            <div class="wrapper-steps">
+                                <span>Steps 0/10</span>
+                            </div>
+                            <div class="wrapper-remaining-time">
+                                <div class="wrapper-icon-remaining-time">
+                                    <i class="fa-solid fa-hourglass-start"></i>
+                                </div>
+                                <span>1 month</span>
+                            </div>
+                            <div class="wrapper-performance">
+                                <div class="wrapper-icon-performance">
+                                    <i class="fa-solid fa-arrow-trend-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="important-list list-style">
+                        <div class="important-list-note-content">
+                             <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <h3 class="list-text">lista de compras</h3>
+                            <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="important-content">
+                            <div class="wrapper-steps">
+                                <span>No steps</span>
+                            </div>
+                            <div class="wrapper-remaining-time">
+                                <div class="wrapper-icon-remaining-time">
+                                    <i class="fa-solid fa-hourglass-start"></i>
+                                </div>
+                                <span>6 months</span>
+                            </div>
+                            <div class="wrapper-performance">
+                                <div class="wrapper-icon-performance">
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="important-years-over" class="wrapper-important-over">
+                <div class="wrapper-header-important-section buttons-icon-efect">
+                    <button id="btn-close-years-to"><i class="fa-solid fa-caret-up"></i></button>
+                    <h2>Years to finish</h2>
+                </div>
+                <div class="years-to-content">
+                    <div class="important-list list-style">
+                        <div class="important-list-note-content">
+                            <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
+                            <h3 class="list-text">Afazeres</h3>
+                            <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="important-content">
+                            <div class="wrapper-steps">
+                                <span>Steps 0/10</span>
+                            </div>
+                            <div class="wrapper-remaining-time">
+                                <div class="wrapper-icon-remaining-time">
+                                    <i class="fa-solid fa-hourglass-start"></i>
+                                </div>
+                                <span>1 year</span>
+                            </div>
+                            <div class="wrapper-performance">
+                                <div class="wrapper-icon-performance">
+                                    <i class="fa-solid fa-arrow-trend-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="important-list list-style">
+                        <div class="important-list-note-content">
+                             <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <h3 class="list-text">lista de compras</h3>
+                            <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="important-content">
+                            <div class="wrapper-steps">
+                                <span>No steps</span>
+                            </div>
+                            <div class="wrapper-remaining-time">
+                                <div class="wrapper-icon-remaining-time">
+                                    <i class="fa-solid fa-hourglass-start"></i>
+                                </div>
+                                <span>6 years</span>
+                            </div>
+                            <div class="wrapper-performance">
+                                <div class="wrapper-icon-performance">
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+    <footer>
+        <div class="wrapper-mobile-footer">
+            <div class="wrapper-our-assistent">
+                <div class="wrapper-ai-msg">
+                    <div class="balloon">...</div>
+                    <div class="balloon">all rigth. for now!</div>
+                    <div class="balloon">Ask anything!</div>
+                </div>
+                <div class="wrapper-ai-btn">
+
+                    <button class="buttons-basic-efects" id="btn-chat-ai" type="button"><img width="32px" src="/img/user-default-avatar.png" alt="Avatar animation"></button>
+
+                </div>
+            </div>
+            <div class="bottom-bar-wrapper">
+                <button class="buttuns-purple-style" title="Search Anything"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="buttuns-purple-style" title="Main"><i class="fa-solid fa-house"></i></button>
+                <button id="btn-new-categorie" class="buttuns-purple-style" title="Create a new note"><i class="fa-solid fa-square-plus"></i></button>
+                <button class="buttuns-purple-style" title="Important"><i class="fa-solid fa-triangle-exclamation"></i></button>
+                <button class="buttuns-purple-style" title="Create a new categorie"><i class="fa-solid fa-layer-group"></i></button>
+            </div>
+        </div>
+        <div class="wrapper-pc-footer">
+
+            <span>Copyright © 2026, MakeDay. All rights reserved</span>
+
+        </div>
+    </footer>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script type="module" src="js/noteSystem.js"></script>
+</html>

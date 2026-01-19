@@ -1,0 +1,33 @@
+{
+  "name": "makedayplatform",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "A fantastic workspace application that lests you edit almost anything.",
+  "main": "app.js",
+  "scripts": {
+    "sassIndex": "sass --watch --style compressed public/scss/indexStyles.scss:public/css/index-styles.min.css",
+    "sassLogin": "sass --watch --style compressed public/scss/loginStyles.scss:public/css/login-styles.min.css",
+    "sassWorkspace": "sass --watch --style compressed public/scss/workspaceStyles.scss:public/css/workspace-styles.min.css",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "EDUDESTROER",
+  "license": "MIT",
+  "dependencies": {
+    "connect-redis": "^3.3.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.14.1",
+    "redis": "^2.8.0",
+    "sass": "^1.89.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

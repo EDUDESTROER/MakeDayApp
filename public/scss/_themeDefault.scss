@@ -1,0 +1,127 @@
+.buttuns-purple-style {
+
+    border-radius: .5rem;
+    border: none;
+    background: #470094;
+    background: linear-gradient(0deg, #470094 10%, #6b00e0 100%);
+    background: -webkit-linear-gradient(0deg, #470094 10%, #6b00e0 100%);
+    background: -moz-linear-gradient(0deg, #470094 10%, #6b00e0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    &:hover {
+
+        cursor: pointer;
+        transform: scale(1.02);
+        transition: all ease-in-out 500ms;
+        outline: .1rem solid white;
+
+    }
+
+    &:active {
+
+        transform: scale(0.98);
+        transition: all ease-in-out 100ms;
+
+    }
+
+}
+.buttons-icon-efect{
+
+    transition: all ease-in-out 500ms;
+    background: none;
+    border: none;
+
+    &:hover {
+
+        cursor: pointer;
+        transform: scale(1.05);
+        
+    }
+
+    &:active {
+
+        transition: all ease-in-out 100ms;
+        transform: scale(0.97);
+
+    }
+
+}
+.buttons-basic-efects{
+
+    transition: all ease-in-out 500ms;
+
+    &:hover {
+
+        cursor: pointer;
+        transform: scale(1.02);
+        outline: .1rem solid white;
+
+    }
+
+    &:active {
+
+        transition: all ease-in-out 100ms;
+        transform: scale(0.97);
+
+    }
+
+}
+
+.list-style{
+
+    transition: ease-in all 500ms;
+
+    &:hover{
+
+        background-color: #00000018;
+        cursor: pointer;
+
+    }
+    &:active{
+
+        transition: ease-in all 100ms;
+        transform: scale(0.98);
+
+    }
+
+}
+
+.basic-shadow-size1{
+
+    text-shadow: 1px 1px 1px #000;
+
+}
+
+@keyframes typing {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+
+}
+@keyframes appearRight {
+
+    from {
+        right: -77%;
+    }
+
+    to {
+        right: 0;
+    }
+
+}
+
+@keyframes blink {
+
+  50% {
+    border-color: transparent;
+  }
+
+}
