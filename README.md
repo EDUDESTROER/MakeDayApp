@@ -1,8 +1,11 @@
 # MakeDayApp
-- A fantastic workspace application that lests you edit almost anything.
+
+- [ ] A productivity workspace application that centralizes notes, tasks, and project organization.
 
 ## ⚠️ In developing
 
-Tasks List:
 
-- [ ] Create a front end
+
+## Login page
+
+## Home page
