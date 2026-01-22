@@ -23,7 +23,7 @@ export class LoginController{
 
                 try{
 
-                    const res = await fetch('/', {
+                    const res = await fetch('/login', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

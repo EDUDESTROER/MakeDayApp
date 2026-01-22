@@ -4,7 +4,6 @@ import { fileURLToPath } from 'url';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import users from './inc/users.js';
 import 'dotenv/config';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
@@ -12,6 +11,7 @@ import redis from 'redis';
 
 import errorRouter from './routes/error.js';
 import loginRouter from './routes/login.js';
+import registerRouter from './routes/register.js'
 import workspaceRouter from './routes/workspace.js';
 import notFoundRouter from './routes/not-found.js';
 
@@ -56,6 +56,7 @@ app.use(morgan('dev'));
 app.use('/error', errorRouter);
 app.use('/not-found', notFoundRouter);
 app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 app.use('/workspace', workspaceRouter);
 
 app.set('view engine', 'ejs');
@@ -63,77 +64,6 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res)=>{
 
   res.status(200).render('index');
-
-});
-
-app.post('/', async(req, res)=>{
-
-  const {email, password} = req.body;
-
-  console.log('Email:', email);
-  console.log('Senha:', password);
-
-  if(email){
-
-    if(password){
-
-      if(email.indexOf('@') > -1){
-
-        users.loginEmail(email, password).then(user=>{
-
-          req.session.user = user;
-
-          res.json({
-            redirectUrl: '/workspace'
-          });
-
-        }).catch(err=>{
-
-          return res.status(401).json({
-            gravity: 0,
-            error: err || err.message
-          });
-
-        });
-
-      }else if(email.indexOf('@') <= -1){
-
-        users.loginUsername(email, password).then(user=>{
-
-          req.session.user = user;
-
-          res.json({
-            redirectUrl: '/workspace'
-          });
-
-        }).catch(err=>{
-
-          return res.status(401).json({
-            gravity: 0,
-            error: err || err.message
-          });
-
-        });
-
-      }
-
-    }else{
-
-      return res.status(400).json({
-        gravity: 0,
-        error: 'The password field is required...'
-      });
-
-    }
-
-  }else{
-
-    return res.status(400).json({
-      gravity: 0,
-      error: 'The email field is required...'
-    });
-
-  }
 
 });
 

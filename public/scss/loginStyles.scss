@@ -333,6 +333,16 @@ body{
 
 }
 
+.register-wrapper{
+
+    background-color: bisque;
+    padding: .3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
 .wrapper-error{
 
     position: absolute;

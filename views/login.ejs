@@ -1,76 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome back. Log in to your account to stay ahead with MakeDay.">
-    <meta name="author" content="EDUDESTROER">
-    <title>MakeDay - Welcome Back!</title>
-    <link rel="stylesheet" href="css/login-styles.min.css">
-    <link rel="stylesheet" href="fontwesome/css/all.min.css">
-    <link rel="shortcut icon" href="icons/MakeDay_Icon.png" type="image/x-icon">
-    
-</head>
-<body>
-    
-    <aside class="photo-wrapper">
+<%- include("inc/sing-in-up-head") -%>
 
-        <div class="photo-header">
-
-            <h2 class="basic-shadow-size1">Let's Make your Day Better!</h2>
-
-            <div class="photo-buttons-wrapper">
-                <button id="btn-redirect-login" class="btn-login-page select list-style" type="button">Sign In</button>
-                <button id="btn-redirect-register" class="btn-login-page list-style" type="button">Sign Up</button>
-            </div>
-
-        </div>
-
-        <div class="massages-wrapper">
-            <div class="massages-content massage-active basic-shadow-size1" id="msg-1"><span class="typewrite-config typewrite-animation-msg-1">Organize your tasks your way!</span></div>
-            <div class="massages-content basic-shadow-size1" id="msg-2"><span class="typewrite-config">Boost your productivity with AI!</span></div>
-            <div class="massages-content basic-shadow-size1" id="msg-3"><span class="typewrite-config">Set reminders so you never forget what matters most!</span></div>
-            <div class="massages-content basic-shadow-size1" id="msg-4"><span class="typewrite-config">Achieve your best with the help of your AI assistant!</span></div>
-        </div>
-
-        <div class="slide-bar-wrapper">
-            <button disabled type="button" class="slide-bars slide-active buttons-basic-efects" id="slide-1"></button>
-            <button type="button" class="slide-bars buttons-basic-efects" id="slide-2"></button>
-            <button type="button" class="slide-bars buttons-basic-efects" id="slide-3"></button>
-            <button type="button" class="slide-bars buttons-basic-efects" id="slide-4"></button>
-        </div>
-
-    </aside>
-
-    <main class="wrapper-main">
-
-        <div class="wrapper-error" id="error-card">
-
-            <img src="icons/error.png" alt="error signal">
-            <span id="error-msg">Unknown error</span>
-
-            <div class="error-bar">
-                <div class="grow-error-bar"></div>
-            </div>
-
-        </div>
-
-        <div class="form-header-wrapper">
-
-            <h1>MakeDay</h1>
-
-            <div class="dropdown">
-                <div class="select dropdown-btn list-style">
-                    <span class="selected"><img src="icons/EN-flag.png" alt="U.S.A flag">EN</span>
-                    <div class="caret"></div>
-                </div>
-                <ul class="menu-drop" style="display: none;">
-                    <li class="list-style"><img src="icons/PT-BR-flag.png" alt="Brazil flag">PT-BR</li>
-                    <li class="active"><img src="icons/EN-flag.png" alt="U.S.A flag">EN</li>
-                </ul>
-            </div>
-
-        </div>
         <div class="login-wrapper">
 
             <div class="text-wrapper">
@@ -82,14 +11,12 @@
 
             <div class="login-with-wrapper">
 
-                <button id="btn-login-with-google" class="btn-login-page buttuns-purple-style" type="button" id="btn-google"><img src="icons/google-icon.png" alt="google icon"> <span>Login with Google</span></button>
-                <button id="btn-login-with-apple" class="btn-login-page buttuns-purple-style" type="button" id="btn-apple"><img src="icons/apple-icon.png" alt="apple icon"> <span>Login with Apple</span></button>
+                <button id="btn-login-with-google" class="btn-login-page buttuns-purple-style" type="button"><img src="icons/google-icon.png" alt="google icon"> <span>Login with Google</span></button>
+                <button id="btn-login-with-apple" class="btn-login-page buttuns-purple-style" type="button"><img src="icons/apple-icon.png" alt="apple icon"> <span>Login with Apple</span></button>
 
             </div>
 
-            <div class="or-wrapper">
-                <span class="or">or</span>
-            </div>
+            <%- include("inc/or") -%>
 
             <div class="login-us-wrapper">
 
@@ -137,10 +64,4 @@
 
         </div>
 
-    </main>
-
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script type="module" src="js/loginApp.js"></script>
-</html>
+<%- include("inc/footer-in-up") -%>
