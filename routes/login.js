@@ -6,7 +6,12 @@ var router = express.Router();
 router.get("/", function(req, res, next){
 
     res.status(200).render('login',{
-      title: "MakeDay - Welcome Back!"
+      title: "MakeDay - Welcome Back!",
+      aling: '0',
+      skewySide: 'skewX(-1deg)',
+      background: "/img/Login.jpg",
+      selectIn: 'select',
+      selectUp: ''
     });
 
 });

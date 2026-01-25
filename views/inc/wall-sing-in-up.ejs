@@ -1,12 +1,12 @@
-<aside class="photo-wrapper" style="order: 2;">
+<aside class="photo-wrapper" style="order: <%= aling %>; transform: <%=  skewySide %>; background-image: url(<%= background %>); ">
 
     <div class="photo-header">
 
         <h2 class="basic-shadow-size1">Let's Make your Day Better!</h2>
 
         <div class="photo-buttons-wrapper">
-            <button id="btn-redirect-login" class="btn-login-page list-style" type="button">Sign In</button>
-            <button id="btn-redirect-register" class="btn-login-page select list-style" type="button">Sign Up</button>
+            <button id="btn-redirect-login" class="btn-login-page <%= selectIn %> list-style" type="button">Sign In</button>
+            <button id="btn-redirect-register" class="btn-login-page <%= selectUp %> list-style" type="button">Sign Up</button>
         </div>
 
     </div>
