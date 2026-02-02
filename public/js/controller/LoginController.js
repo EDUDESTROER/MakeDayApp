@@ -65,19 +65,93 @@ export class LoginController{
 
     }
 
-    registerWithUs(){
+    async registerWithUs(){
 
         let allFields = document.querySelectorAll('.input-register');
 
-        if(this.isValidUsername(allFields[0].value)){
+       if(this.isValidUsername(allFields[0].value)){
 
-            if(allFields[1].value.length > 4 && allFields[2].value.length > 4){
+            if(allFields[1].value.length > 2 && allFields[2].value.length > 2){
+    
+                if(!this.isEmptyfield(allFields[3].value) && allFields[3].value.indexOf('@') > -1){
 
+                    if(!this.isEmptyfield(allFields[4].value) && !this.isEmptyfield(allFields[5].value)){
 
+                        if(allFields[4].value === allFields[5].value){
+
+                            if(allFields[6].checked){
+
+                                let nickName = allFields[0].value;
+                                let firstName = allFields[1].value;
+                                let lastName = allFields[2].value;
+                                let email = allFields[3].value;
+                                let password = allFields[4].value;
+                                let confirmPassword = allFields[5].value;
+                                let terms = allFields[6].checked;
+
+                                try{
+
+                                    const res = await fetch('/register', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                            nickName,
+                                            firstName,
+                                            lastName,
+                                            email,
+                                            password,
+                                            confirmPassword,
+                                            terms
+                                        })
+                                    });
+
+                                    const data = await res.json();
+
+                                    if(res.ok){
+
+                                        window.location.href = data.redirectUrl;
+
+                                    }else{
+
+                                        this.error(data.gravity, data.error, '#registerErr');
+
+                                    }
+
+                                }catch{
+
+                                    this.error(10, 'Unexpected error while register!', '#registerErr');
+
+                                }
+
+                            }else{
+
+                                this.error(0, 'You must accept the terms.', allFields[5].id);
+
+                            }
+
+                        }else{
+
+                            this.error(0, 'The passwords do not match.', allFields[5].id);
+
+                        }
+
+                    }else{
+
+                        this.error(0, 'The password fields must not be empty.', allFields[4].id);
+
+                    }
+
+                }else{
+
+                    this.error(0, 'Entry a valid Email.', allFields[3].id);
+
+                }
 
             }else{
 
-
+                this.error(0, 'The First and Last Name must contain more than Two characters.', allFields[1].id);
                 
             }
 
@@ -93,13 +167,26 @@ export class LoginController{
 
         //console.log(field.length > 8);
 
-        if(field.length >= 8){
+        if(field.length >= 6){
 
             return true;
 
         }else{
 
             return false;
+
+        }
+
+    }
+    isEmptyfield(field){
+
+        if(field.length >= 1){
+
+            return false;
+
+        }else{
+
+            return true;
 
         }
 
@@ -199,7 +286,7 @@ export class LoginController{
 
     execBtnFuctionRegister(btnName, id){
 
-        console.log(btnName);
+        //console.log(btnName);
 
         switch(btnName){
 

@@ -19,8 +19,8 @@ router.post('/', async(req, res)=>{
 
   const {email, password} = req.body;
 
-  console.log('Email:', email);
-  console.log('Senha:', password);
+  //console.log('Email:', email);
+  //console.log('Senha:', password);
 
   if(email){
 

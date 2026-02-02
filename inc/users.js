@@ -94,6 +94,37 @@ let users = {
 
         });
 
+    },
+    register(nickName, firstName, lastName, email, password){
+
+        let fullName = `${firstName} ${lastName}`;
+        let admin = 0;
+
+        return new Promise((resolve, reject)=>{
+            conn.query(`
+                INSERT INTO tb_users (name, email, admin, password, fullName)
+                VALUES(?, ?, ?, ?, ?)
+            `, [
+                nickName,
+                email,
+                admin,
+                password,
+                firstName
+            ], (err, results)=>{
+
+                if(err){
+
+                    reject(err);
+
+                }else{
+
+                    resolve(results);
+
+                }
+
+            });
+        });
+
     }
 
 }
