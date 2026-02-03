@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { response } from 'express';
 import users from '../inc/users.js';
 
 var router = express.Router();
@@ -47,15 +47,30 @@ router.post('/', async(req, res)=>{
 
                 if(nickName && firstName && lastName){
 
-                    users.register(nickName, firstName, lastName, email, password).then(user=>{
+                    users.register(nickName, firstName, lastName, email, password).then(response=>{
 
-                        console.log('RESULTADO? ', user);
+                        users.loginEmail(email, password).then(user=>{
 
-                    }).catch(err=>{
+                            req.session.user = user;
+
+                            res.json({
+                                redirectUrl: '/workspace'
+                            });
+
+                        }).catch(err=>{ // Create a list of error
+
+                            return res.status(401).json({
+                                gravity: 0,
+                                error: 'Internal Server Error!'
+                            });
+
+                        });
+
+                    }).catch(err=>{ // Create a list of error
 
                         return res.status(401).json({
                             gravity: 0,
-                            error: err || err.message
+                            error: 'Internal Server Error!'
                         });
 
                     });

@@ -6,62 +6,72 @@ export class LoginController{
 
         this.startBtnEventsLogin();
         this.startBtnEventsRegister();
-        this._elementsInError = [];
+        this._elementsInError = []; // Send to /error!!!
         this.effects = new LoginEffects();
         this.inputUsername = document.querySelector('#input-username');
         this.inputPassword = document.querySelector('#input-password');
         this._type = document.querySelector('.wrapper-main').lastElementChild.id;
+        this._isSubmitting = false;
 
     }
 
     async loginWithUs(){
 
-        if(this.isValidUsername(this.inputUsername.value)){
+        if(!this._isSubmitting){
 
-            if(this.inputPassword.value.length > 0){
+            this._isSubmitting = true;
+            this.stopSpam();
 
-                let email = this.inputUsername.value;
-                let password = this.inputPassword.value;
+            if(this.isValidUsername(this.inputUsername.value)){
 
-                try{
+                if(this.inputPassword.value.length > 0){
 
-                    const res = await fetch('/login', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({email, password})
-                    });
+                    let email = this.inputUsername.value;
+                    let password = this.inputPassword.value;
 
-                    const data = await res.json();
+                    try{
 
-                    if(res.ok){
+                        const res = await fetch('/login', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({email, password})
+                        });
 
-                        window.location.href = data.redirectUrl;
+                        const data = await res.json();
 
-                    }else{
+                        if(res.ok){
 
-                        this.error(data.gravity, data.error, '#loginErr');
+                            window.location.href = data.redirectUrl;
+
+                        }else{
+
+                            this.error(data.gravity, data.error, '#loginErr');
+
+                        }
+
+                    }catch{
+
+                        this.error(10, 'Unexpected error while logging in!', '#loginErr');
 
                     }
 
-                }catch{
+                }else{
 
-                    this.error(10, 'Unexpected error while logging in!', '#loginErr');
+                    this.error(0, 'Enter a password!', this.inputPassword.id);
 
                 }
 
             }else{
 
-                this.error(0, 'Enter a password!', this.inputPassword.id);
+                this.error(0, 'Enter a username!', this.inputUsername.id);
 
             }
 
-        }else{
-
-            this.error(0, 'Enter a valid email address or username!', this.inputUsername.id);
-
         }
+
+        
 
     }
 
@@ -217,6 +227,12 @@ export class LoginController{
 
         }
         
+    }
+
+    stopSpam(){
+
+        setTimeout(()=> this._isSubmitting = false, 2000);
+
     }
 
     startBtnEventsLogin(){

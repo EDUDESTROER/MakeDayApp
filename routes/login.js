@@ -36,11 +36,11 @@ router.post('/', async(req, res)=>{
             redirectUrl: '/workspace'
           });
 
-        }).catch(err=>{
+        }).catch(err=>{ // Create a list of error
 
           return res.status(401).json({
             gravity: 0,
-            error: err || err.message
+            error: 'Internal Server Error!'
           });
 
         });
@@ -55,11 +55,11 @@ router.post('/', async(req, res)=>{
             redirectUrl: '/workspace'
           });
 
-        }).catch(err=>{
+        }).catch(err=>{ // Create a list of error
 
           return res.status(401).json({
             gravity: 0,
-            error: err || err.message
+            error: 'Internal Server Error!'
           });
 
         });

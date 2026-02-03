@@ -109,7 +109,7 @@ let users = {
                 email,
                 admin,
                 password,
-                firstName
+                fullName
             ], (err, results)=>{
 
                 if(err){
