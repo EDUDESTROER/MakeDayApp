@@ -22,9 +22,9 @@ export class LoginController{
             this._isSubmitting = true;
             this.stopSpam();
 
-            if(this.isValidUsername(this.inputUsername.value)){
+            if(this.isValidUsername(this.inputUsername.value) || this.isValidEmail(this.inputUsername.value)){
 
-                if(this.inputPassword.value.length > 0){
+                if(!this.isEmptyfield(this.inputPassword.value)){
 
                     let email = this.inputUsername.value;
                     let password = this.inputPassword.value;
@@ -65,7 +65,7 @@ export class LoginController{
 
             }else{
 
-                this.error(0, 'Enter a username!', this.inputUsername.id);
+                this.error(0, 'Enter a valid email address or username!', this.inputUsername.id);
 
             }
 
@@ -79,25 +79,27 @@ export class LoginController{
 
         let allFields = document.querySelectorAll('.input-register');
 
-       if(this.isValidUsername(allFields[0].value)){
+        const newUser = {
+            nickName: allFields[0].value,
+            firstName: allFields[1].value,
+            lastName: allFields[2].value,
+            email: allFields[3].value,
+            password: allFields[4].value,
+            confirmPassword: allFields[5].value,
+            terms: allFields[6].checked
+        }
 
-            if(allFields[1].value.length > 2 && allFields[2].value.length > 2){
+       if(this.isValidUsername(newUser.nickName)){
+
+            if(this.isValidUsername(newUser.firstName) && this.isValidUsername(newUser.lastName)){
     
-                if(!this.isEmptyfield(allFields[3].value) && allFields[3].value.indexOf('@') > -1){
+                if(this.isValidEmail(newUser.email)){
 
-                    if(!this.isEmptyfield(allFields[4].value) && !this.isEmptyfield(allFields[5].value)){
+                    if(!this.isEmptyfield(newUser.password) && !this.isEmptyfield(newUser.password)){
 
-                        if(allFields[4].value === allFields[5].value){
+                        if(newUser.password === newUser.confirmPassword){
 
-                            if(allFields[6].checked){
-
-                                let nickName = allFields[0].value;
-                                let firstName = allFields[1].value;
-                                let lastName = allFields[2].value;
-                                let email = allFields[3].value;
-                                let password = allFields[4].value;
-                                let confirmPassword = allFields[5].value;
-                                let terms = allFields[6].checked;
+                            if(newUser.terms){
 
                                 try{
 
@@ -106,15 +108,7 @@ export class LoginController{
                                         headers: {
                                             'Content-Type': 'application/json'
                                         },
-                                        body: JSON.stringify({
-                                            nickName,
-                                            firstName,
-                                            lastName,
-                                            email,
-                                            password,
-                                            confirmPassword,
-                                            terms
-                                        })
+                                        body: JSON.stringify(newUser)
                                     });
 
                                     const data = await res.json();
@@ -137,37 +131,37 @@ export class LoginController{
 
                             }else{
 
-                                this.error(0, 'You must accept the terms.', allFields[5].id);
+                                this.error(0, 'You must accept the terms.', '#registerTerms');
 
                             }
 
                         }else{
 
-                            this.error(0, 'The passwords do not match.', allFields[5].id);
+                            this.error(0, 'The passwords do not match.', '#registerNmatch');
 
                         }
 
                     }else{
 
-                        this.error(0, 'The password fields must not be empty.', allFields[4].id);
+                        this.error(0, 'The password fields must not be empty.', '#registerPassword');
 
                     }
 
                 }else{
 
-                    this.error(0, 'Entry a valid Email.', allFields[3].id);
+                    this.error(0, 'Entry a valid Email.', '#registerFname');
 
                 }
 
             }else{
 
-                this.error(0, 'The First and Last Name must contain more than Two characters.', allFields[1].id);
+                this.error(0, 'The First and Last Name must contain more than Two characters.','#registerLname');
                 
             }
 
         }else{
 
-            this.error(0, 'The nickname must contain more than eight characters.', allFields[0].id);
+            this.error(0, 'The nickname must contain more than eight characters.', '#registerNick');
 
         }
 
@@ -176,8 +170,11 @@ export class LoginController{
     isValidUsername(field){
 
         //console.log(field.length > 8);
+        const regexName = /^[\w]{4,15}$/;
 
-        if(field.length >= 6){
+        //console.log(regexName.test(field));
+
+        if(regexName.test(field)){
 
             return true;
 
@@ -188,6 +185,23 @@ export class LoginController{
         }
 
     }
+    
+    isValidEmail(field){
+
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if(regexEmail.test(field)){
+
+            return true;
+
+        }else{
+
+            return false;
+
+        }
+
+    }
+
     isEmptyfield(field){
 
         if(field.length >= 1){
@@ -201,6 +215,7 @@ export class LoginController{
         }
 
     }
+
     checkRedirect(recirectTo, btnId){
 
         //console.log(this._type);
@@ -325,6 +340,12 @@ export class LoginController{
     error(gravity, msg, elId){
 
         if(gravity === 0){
+
+            this.effects.showErrMsg(msg, 'warn');
+            this._elementsInError.push(elId);
+
+        }
+        if(gravity === 5){
 
             this.effects.showErrMsg(msg, 'warn');
             this._elementsInError.push(elId);

@@ -36,7 +36,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   cookie: {
-    secure: false,   // true se HTTPS
+    secure: false,   // true if HTTPS
     httpOnly: true
   }
 }));
@@ -47,9 +47,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
-//app.use(helmet());
+//app.use(helmet()); // Use this if it's not a development environment.
 app.use(helmet({
-    contentSecurityPolicy: false  // útil para ambientes de desenvolvimento
+    contentSecurityPolicy: false  // useful for development environments
 }));
 app.use(morgan('dev'));
 

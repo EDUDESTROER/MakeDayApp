@@ -1,5 +1,21 @@
 import express from 'express';
 import users from '../inc/users.js';
+import rateLimit from "express-rate-limit";
+
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 10, // 10 try for IP
+    handler: (req, res)=>{
+
+      return res.status(429).json({
+        gravity: 5,
+        error: "Too many login attempts. Please try again later."
+      });
+
+    },
+    standardHeaders: true,
+    legacyHeaders: false
+});
 
 var router = express.Router();
 
@@ -15,7 +31,7 @@ router.get("/", function(req, res, next){
     });
 
 });
-router.post('/', async(req, res)=>{
+router.post('/', loginLimiter, async(req, res)=>{
 
   const {email, password} = req.body;
 
@@ -40,7 +56,7 @@ router.post('/', async(req, res)=>{
 
           return res.status(401).json({
             gravity: 0,
-            error: 'Internal Server Error!'
+            error: 'Invalid Email or Password!'
           });
 
         });
@@ -59,7 +75,7 @@ router.post('/', async(req, res)=>{
 
           return res.status(401).json({
             gravity: 0,
-            error: 'Internal Server Error!'
+            error: 'Invalid Username or Password!'
           });
 
         });

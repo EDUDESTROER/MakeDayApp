@@ -31,13 +31,13 @@ router.post('/', async(req, res)=>{
 
     let validEmail = emailRegex.test(email);
 
-    console.log('Nickname ', nickName);
+    /*console.log('Nickname ', nickName);
     console.log('Firstname ', firstName);
     console.log('Lastname ', lastName);
     console.log('Email ', email);
     console.log('Password ', password);
     console.log('Confirm Password ', confirmPassword);
-    console.log('Terms ', terms);
+    console.log('Terms ', terms);*/
 
     if(terms){
 
@@ -60,8 +60,8 @@ router.post('/', async(req, res)=>{
                         }).catch(err=>{ // Create a list of error
 
                             return res.status(401).json({
-                                gravity: 0,
-                                error: 'Internal Server Error!'
+                                gravity: 10,
+                                error: 'Invalid Email or Password!'
                             });
 
                         });
