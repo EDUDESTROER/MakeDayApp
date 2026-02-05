@@ -4,6 +4,9 @@
 
 ## ⚠️ In developing
 
+- A validação no front-end é feita manualmente para demonstrar domínio de lógica e melhorar a experiência do usuário.
+- No back-end é utilizada uma biblioteca de validação para garantir segurança, integridade dos dados e escalabilidade.
+
 
 ## Home page
 
