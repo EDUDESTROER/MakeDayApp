@@ -26,8 +26,8 @@ export class LoginController{
 
                 if(!this.isEmptyfield(this.inputPassword.value)){
 
-                    let email = this.inputUsername.value;
-                    let password = this.inputPassword.value;
+                    const email = this.inputUsername.value;
+                    const password = this.inputPassword.value;
 
                     try{
 
@@ -110,6 +110,8 @@ export class LoginController{
                                         },
                                         body: JSON.stringify(newUser)
                                     });
+
+                                    console.log(data);
 
                                     const data = await res.json();
 

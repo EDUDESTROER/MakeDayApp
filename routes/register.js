@@ -1,5 +1,5 @@
 import express, { response } from 'express';
-import users from '../inc/users.js';
+import {register} from '../inc/users.js';
 
 var router = express.Router();
 
@@ -47,7 +47,7 @@ router.post('/', async(req, res)=>{
 
                 if(nickName && firstName && lastName){
 
-                    users.register(nickName, firstName, lastName, email, password).then(response=>{
+                    register(nickName, firstName, lastName, email, password).then(response=>{
 
                         users.loginEmail(email, password).then(user=>{
 

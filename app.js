@@ -59,6 +59,7 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/workspace', workspaceRouter);
 
+app.set("trust proxy", 1)
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res)=>{

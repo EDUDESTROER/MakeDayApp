@@ -7,3 +7,8 @@
 - [ ] Implement customisation features.
 - [ ] Google OAuth 2.0 authentication (testing mode)
 - [ ] AI-powered features using JavaScript and external APIs
+
+# Other Tasks List:
+
+- [ ] Update redis to ^4.0
+- [ ] Update register secure.
