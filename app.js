@@ -5,9 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import 'dotenv/config';
-import session from 'express-session';
-import connectRedis from 'connect-redis';
-import redis from 'redis';
+import { sessionMiddleware } from './configs/session.js';
 
 import errorRouter from './routes/error.js';
 import loginRouter from './routes/login.js';
@@ -20,26 +18,7 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const redisClient = redis.createClient({
-  host: 'localhost',
-  port: 6379,
-});
-
-const RedisStore = connectRedis(session);
-
-app.use(session({
-  store: new RedisStore({
-    client: redisClient,
-    prefix: "sess:"
-  }),
-  secret: 'BobaFettTop1Bjs',
-  resave: true,
-  saveUninitialized: false,
-  cookie: {
-    secure: false,   // true if HTTPS
-    httpOnly: true
-  }
-}));
+app.use(sessionMiddleware);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({
