@@ -31,10 +31,15 @@ export class LoginController{
 
                     try{
 
+                        const csrfToken = document
+                            .querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content');
+
                         const res = await fetch('/login', {
                             method: 'POST',
                             headers: {
-                                'Content-Type': 'application/json'
+                                'Content-Type': 'application/json',
+                                "CSRF-Token": csrfToken
                             },
                             body: JSON.stringify({email, password})
                         });
@@ -103,10 +108,15 @@ export class LoginController{
 
                                 try{
 
+                                    const csrfToken = document
+                                        .querySelector('meta[name="csrf-token"]')
+                                        .getAttribute('content');
+
                                     const res = await fetch('/register', {
                                         method: 'POST',
                                         headers: {
-                                            'Content-Type': 'application/json'
+                                            'Content-Type': 'application/json',
+                                            "CSRF-Token": csrfToken
                                         },
                                         body: JSON.stringify(newUser)
                                     });

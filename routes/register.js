@@ -2,13 +2,15 @@ import express, { response } from 'express';
 import { register } from '../controllers/registerController.js';
 import { registerLimiter } from '../middlewares/security/registerLimiter.js';
 import { registerSlowDown } from '../middlewares/security/registerSlowDown.js';
+import { csrfProtection } from '../configs/csrf.js';
 
 var router = express.Router();
 
-router.get("/", function(req, res, next){
+router.get("/", csrfProtection, function(req, res, next){
 
     res.status(200).render('register',{
         title: "MakeDay - Start your journey!",
+        csrfToken: req.csrfToken(),
         aling: '2',
         skewySide: 'skewY(-1deg)',
         background: "/img/Login-up.jpg",
@@ -18,6 +20,8 @@ router.get("/", function(req, res, next){
 
 });
 
-router.post('/', registerSlowDown, registerLimiter, register);
+
+
+router.post('/', csrfProtection, registerSlowDown, registerLimiter, register);
 
 export default router;

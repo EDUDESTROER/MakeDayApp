@@ -55,8 +55,17 @@ app.use((req, res)=>{
 
 app.use((err, req, res, next)=>{
 
+  if(err.code === 'EBADCSRFTOKEN'){
+
+    return res.status(422).json({
+      gravity: 0,
+      error: 'Invalid or expired request.'
+    });
+
+  }
+
   console.error(err.stack);
-  //res.status(500).redirect('/error');
+  res.status(500).redirect('/error');
 
 });
 
