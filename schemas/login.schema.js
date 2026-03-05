@@ -2,12 +2,28 @@ import * as z from 'zod'
 
 const loginSchema = z.union([
     z.strictObject({
-        email: z.email().max(255),
-        password: z.string().min(8).max(128)
+        email: z
+        .email()
+        .trim()
+        .toLowerCase()
+        .max(255),
+        password: z
+        .string()
+        .trim()
+        .min(8)
+        .max(128)
     }),
     z.strictObject({
-        email: z.string().min(3).max(255),
-        password: z.string().min(8).max(128)
+        email: z
+        .string()
+        .trim()
+        .min(3)
+        .max(255),
+        password: z
+        .string()
+        .trim()
+        .min(8)
+        .max(128)
     })
 ]);
 

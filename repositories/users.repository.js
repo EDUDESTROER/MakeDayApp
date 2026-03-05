@@ -1,4 +1,4 @@
-import conn from './db.js';
+import conn from './db.repository.js';
 
 
 export async function findAuthByEmail(email){
@@ -22,34 +22,25 @@ export async function findAuthByUsername(username){
 
 
 }
-export async function register(nickName, firstName, lastName, email, password){
+export async function registerUser(nickName, firstName, lastName, email, password){
 
     let fullName = `${firstName} ${lastName}`;
-    let admin = 0;
+    const admin = 0;
 
-    return new Promise((resolve, reject)=>{
-        conn.query(`
-            INSERT INTO tb_users (name, email, admin, password, fullName)
-            VALUES(?, ?, ?, ?, ?)
-        `, [
+    const [result] = await conn.execute(
+        `
+            INSERT INTO tb_users (username, email, admin, password_hash, fullName)
+            VALUES (?, ?, ?, ?, ?)
+        `,
+        [
             nickName,
             email,
             admin,
             password,
             fullName
-        ], (err, results)=>{
+        ]
+    );
 
-            if(err){
-
-                reject(err);
-
-            }else{
-
-                resolve(results);
-
-            }
-
-        });
-    });
+    return result;
 
 }

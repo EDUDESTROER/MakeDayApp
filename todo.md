@@ -10,5 +10,6 @@
 
 # Other Tasks List:
 
-- [ ] Update redis to ^4.0
 - [ ] Update register secure.
+- [ ] Create an error log.
+- [ ] Token in register and login.

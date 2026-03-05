@@ -89,13 +89,13 @@ export class LoginController{
             terms: allFields[6].checked
         }
 
-       if(this.isValidUsername(newUser.nickName)){
+       if(this.isValidUsername(newUser.nickName) || true){
 
-            if(this.isValidUsername(newUser.firstName) && this.isValidUsername(newUser.lastName)){
+            if(this.isValidName(newUser.firstName) && this.isValidName(newUser.lastName)){
     
                 if(this.isValidEmail(newUser.email)){
 
-                    if(!this.isEmptyfield(newUser.password) && !this.isEmptyfield(newUser.password)){
+                    if(this.isValidPassword(newUser.password) && this.isValidPassword(newUser.password)){
 
                         if(newUser.password === newUser.confirmPassword){
 
@@ -111,8 +111,6 @@ export class LoginController{
                                         body: JSON.stringify(newUser)
                                     });
 
-                                    console.log(data);
-
                                     const data = await res.json();
 
                                     if(res.ok){
@@ -121,13 +119,15 @@ export class LoginController{
 
                                     }else{
 
+                                        
+
                                         this.error(data.gravity, data.error, '#registerErr');
 
                                     }
 
-                                }catch{
+                                }catch(err){
 
-                                    this.error(10, 'Unexpected error while register!', '#registerErr');
+                                    this.error(10,  'Unexpected Error', '#registerErr');
 
                                 }
 
@@ -172,49 +172,51 @@ export class LoginController{
     isValidUsername(field){
 
         //console.log(field.length > 8);
-        const regexName = /^[\w]{4,15}$/;
+        const nickRegex = /^[a-zA-Z](?:[a-zA-Z0-9_]{2,14}[a-zA-Z0-9])$/;
 
         //console.log(regexName.test(field));
 
-        if(regexName.test(field)){
+        if(nickRegex.test(field)) return true;
 
-            return true;
+        return false;
 
-        }else{
+    }
 
-            return false;
+    isValidPassword(field){
 
-        }
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+
+        if(passwordRegex.test(field)) return true;
+
+        return false;
+
+    }
+
+    isValidName(field){
+
+        const nameRegex = /^[A-Za-zÀ-ÿ]+(?:[ '-][A-Za-zÀ-ÿ]+)*$/;
+
+        if(nameRegex.test(field)) return true;
+
+        return false;
 
     }
     
     isValidEmail(field){
 
-        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
 
-        if(regexEmail.test(field)){
+        if(emailRegex.test(field)) return true;
 
-            return true;
-
-        }else{
-
-            return false;
-
-        }
+        return false;
 
     }
 
     isEmptyfield(field){
 
-        if(field.length >= 1){
+        if(field.length >= 1) return false;
 
-            return false;
-
-        }else{
-
-            return true;
-
-        }
+        return true;
 
     }
 

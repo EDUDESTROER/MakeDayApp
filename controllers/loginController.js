@@ -8,8 +8,8 @@ export async function login(req, res) {
     if(!validation.success){
 
         return res.status(422).json({
-        gravity: 0,
-        error: 'invalid email or password'
+            gravity: 0,
+            error: 'invalid email or password'
         });
 
     }
