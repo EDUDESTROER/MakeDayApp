@@ -4,7 +4,7 @@ import conn from './db.repository.js';
 export async function findAuthByEmail(email){
 
     const [rows] = await conn.execute(
-        "SELECT id, password_hash FROM tb_users WHERE email = ?",
+        "SELECT id, password_hash, role FROM tb_users WHERE email = ?",
         [email]
     );
 
@@ -14,7 +14,7 @@ export async function findAuthByEmail(email){
 export async function findAuthByUsername(username){
 
     const [rows] = await conn.execute(
-        "SELECT id, password_hash FROM tb_users WHERE username = ?",
+        "SELECT id, password_hash, role FROM tb_users WHERE username = ?",
         [username]
     );
 
@@ -25,22 +25,22 @@ export async function findAuthByUsername(username){
 export async function registerUser(nickName, firstName, lastName, email, password){
 
     let fullName = `${firstName} ${lastName}`;
-    const admin = 0;
+    const role = 'user';
 
     const [result] = await conn.execute(
         `
-            INSERT INTO tb_users (username, email, admin, password_hash, fullName)
+            INSERT INTO tb_users (username, email, role, password_hash, fullName)
             VALUES (?, ?, ?, ?, ?)
         `,
         [
             nickName,
             email,
-            admin,
+            role,
             password,
             fullName
         ]
     );
 
-    return result;
+    return [result.insertId, role];
 
 }

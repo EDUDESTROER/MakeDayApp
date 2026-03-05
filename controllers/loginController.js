@@ -1,5 +1,6 @@
 import loginSchema from '../schemas/login.schema.js';
 import { validateLogin } from '../services/auth.service.js';
+import { createUserSession } from '../services/session.service.js';
 
 export async function login(req, res) {
 
@@ -32,9 +33,7 @@ export async function login(req, res) {
 
     }else{
 
-        req.session.user = user;
-
-        return res.json({ redirectUrl: '/workspace' });
+        createUserSession(req, res, user);
 
     }
 

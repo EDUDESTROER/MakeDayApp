@@ -15,7 +15,8 @@ export async function validateLogin(email, password) {
     if (!isValid) return null;
 
     return {
-        id: user.id
+        id: user.id,
+        role: user.role
     };
 
 }
@@ -26,10 +27,9 @@ export async function CreateUser(data){
 
         const result = await registerUser(data.nickName, data.firstName, data.lastName, data.email, password_hash);
 
-        //console.log(result.insertId);
-
         return {
-            id: result.insertId
+            id: result[0],
+            role: result[1]
         }
 
     }catch(err){

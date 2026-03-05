@@ -10,6 +10,6 @@
 
 # Other Tasks List:
 
-- [ ] Update register secure.
+- [x] Update register secure.
 - [ ] Create an error log.
-- [ ] Token in register and login.
+- [ ] Invalidate old sessions after changing the password.

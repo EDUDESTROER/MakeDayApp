@@ -89,7 +89,7 @@ export class LoginController{
             terms: allFields[6].checked
         }
 
-       if(this.isValidUsername(newUser.nickName) || true){
+       if(this.isValidUsername(newUser.nickName)){
 
             if(this.isValidName(newUser.firstName) && this.isValidName(newUser.lastName)){
     
