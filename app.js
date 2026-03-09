@@ -5,7 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import 'dotenv/config';
-import { sessionMiddleware } from './configs/session.js';
+import { sessionMiddleware } from './config/session.js';
 
 import errorRouter from './routes/error.js';
 import loginRouter from './routes/login.js';

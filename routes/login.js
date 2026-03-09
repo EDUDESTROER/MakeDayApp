@@ -2,7 +2,7 @@ import express from 'express';
 import { login } from '../controllers/loginController.js';
 import { loginLimiter } from '../middlewares/security/loginLimiter.js';
 import { loginSlowDown } from '../middlewares/security/loginSlowDown.js';
-import { csrfProtection } from '../configs/csrf.js';
+import { csrfProtection } from '../config/csrf.js';
 
 const router = express.Router();
 

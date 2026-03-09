@@ -1,4 +1,4 @@
-import conn from './db.repository.js';
+import conn from '../config/db.js';
 
 
 export async function findAuthByEmail(email){

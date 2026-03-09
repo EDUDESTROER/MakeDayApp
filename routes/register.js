@@ -1,8 +1,8 @@
-import express, { response } from 'express';
+import express from 'express';
 import { register } from '../controllers/registerController.js';
 import { registerLimiter } from '../middlewares/security/registerLimiter.js';
 import { registerSlowDown } from '../middlewares/security/registerSlowDown.js';
-import { csrfProtection } from '../configs/csrf.js';
+import { csrfProtection } from '../config/csrf.js';
 
 var router = express.Router();
 

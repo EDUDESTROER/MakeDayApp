@@ -1,7 +1,7 @@
 import slowDown from "express-slow-down";
 import {ipKeyGenerator} from "express-rate-limit";
 import { RedisStore } from "rate-limit-redis";
-import { redisClient } from "../../configs/redis.js";
+import { redisClient } from "../../config/redis.js";
 
 export const loginSlowDown = slowDown({
     windowMs: 15 * 60 * 1000, // 15 minutes
