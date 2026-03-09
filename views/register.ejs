@@ -1,0 +1,70 @@
+<%- include("inc/sing-in-up-head") -%>
+
+        <div class="register-wrapper" id="register">
+
+            <div class="wrapper-rigister-header">
+                <h2>Create new account.</h2>
+                <span>Your journey begins now!</span>
+            </div>
+
+            <div class="wrapper-rigister-form">
+                <div class="register-with-us">
+
+                    <div class="wrapper-register-input">
+
+                        <input class="input-register" type="text" name="nickname" id="input-nickname" placeholder="Nickname">
+
+                    </div>
+
+                    <div class="wrapper-register-input wrapper-register-fullname">
+
+                        <input class="input-register" type="text" name="first-name" id="input-first-name" placeholder="First Name">
+                        <input class="input-register" type="text" name="last-name" id="input-last-name" placeholder="Last Name">
+
+                    </div>
+
+                    <div class="wrapper-register-input">
+
+                        <input class="input-register" type="text" name="email" id="input-email" placeholder="Email">
+
+                    </div>
+
+                    <div class="wrapper-register-input wrapper-register-password">
+
+                        <input class="input-register" type="password" name="password" id="input-password" placeholder="Enter your Password">
+                        <input class="input-register" type="password" name="confirm-password" id="input-confirm-password" placeholder="Confirm Password">
+
+                    </div>
+
+                    <div class="wrapper-agree">
+
+                        <input class="input-register" type="checkbox" name="terms-agree" id="input-terms-agree">
+                        <p>I've read and agree with <a href="/terms-of-service">Terms of Service</a> and our <a href="/privacy-policy">Privacy Policy</a></p>
+
+                    </div>
+
+                    <div class="wrapper-sign-up-form">
+
+                        <button class="buttuns-purple-style btn-register-page" type="button" id="btn-sign-up">Sign up</button>
+
+                    </div>
+
+                </div>
+
+                <%- include("inc/or") -%>
+
+                <div class="register-with-api">
+
+                    <button id="btn-register-with-google" class="buttuns-purple-style btn-register-page" type="button"><img src="icons/google-icon.png" alt="google icon"> <span>Sign up with Google</span></button>
+                    <button id="btn-register-with-apple" class="buttuns-purple-style btn-register-page" type="button"><img src="icons/apple-icon.png" alt="apple icon"> <span>Sign up with Apple</span></button>
+
+                </div>
+                <div class="wrapper-register-in">
+                    <span>Already have an account? <a href="/login">Sign In</a></span>
+                </div>
+
+            </div>
+
+        </div>
+
+<%- include("inc/footer-in-up") -%>

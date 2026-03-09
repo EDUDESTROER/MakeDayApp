@@ -7,3 +7,9 @@
 - [ ] Implement customisation features.
 - [ ] Google OAuth 2.0 authentication (testing mode)
 - [ ] AI-powered features using JavaScript and external APIs
+
+# Other Tasks List:
+
+- [x] Update register secure.
+- [ ] Create an error log.
+- [ ] Invalidate old sessions after changing the password.

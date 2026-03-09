@@ -4,14 +4,12 @@ import { fileURLToPath } from 'url';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import users from './inc/users.js';
 import 'dotenv/config';
-import session from 'express-session';
-import connectRedis from 'connect-redis';
-import redis from 'redis';
+import { sessionMiddleware } from './config/session.js';
 
 import errorRouter from './routes/error.js';
 import loginRouter from './routes/login.js';
+import registerRouter from './routes/register.js'
 import workspaceRouter from './routes/workspace.js';
 import notFoundRouter from './routes/not-found.js';
 
@@ -20,26 +18,7 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const redisClient = redis.createClient({
-  host: 'localhost',
-  port: 6379,
-});
-
-const RedisStore = connectRedis(session);
-
-app.use(session({
-  store: new RedisStore({
-    client: redisClient,
-    prefix: "sess:"
-  }),
-  secret: 'BobaFettTop1Bjs',
-  resave: true,
-  saveUninitialized: false,
-  cookie: {
-    secure: false,   // true se HTTPS
-    httpOnly: true
-  }
-}));
+app.use(sessionMiddleware);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({
@@ -47,93 +26,24 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
-//app.use(helmet());
+//app.use(helmet()); // Use this if it's not a development environment.
 app.use(helmet({
-    contentSecurityPolicy: false  // útil para ambientes de desenvolvimento
+    contentSecurityPolicy: false  // useful for development environments
 }));
 app.use(morgan('dev'));
 
 app.use('/error', errorRouter);
 app.use('/not-found', notFoundRouter);
 app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 app.use('/workspace', workspaceRouter);
 
+app.set("trust proxy", 1)
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res)=>{
 
   res.status(200).render('index');
-
-});
-
-app.post('/', async(req, res)=>{
-
-  const {email, password} = req.body;
-
-  console.log('Email:', email);
-  console.log('Senha:', password);
-
-  if(email){
-
-    if(password){
-
-      if(email.indexOf('@') > -1){
-
-        users.loginEmail(email, password).then(user=>{
-
-          req.session.user = user;
-
-          res.json({
-            redirectUrl: '/workspace'
-          });
-
-        }).catch(err=>{
-
-          return res.status(401).json({
-            gravity: 0,
-            error: err || err.message
-          });
-
-        });
-
-      }else if(email.indexOf('@') <= -1){
-
-        users.loginUsername(email, password).then(user=>{
-
-          req.session.user = user;
-
-          res.json({
-            redirectUrl: '/workspace'
-          });
-
-        }).catch(err=>{
-
-          return res.status(401).json({
-            gravity: 0,
-            error: err || err.message
-          });
-
-        });
-
-      }
-
-    }else{
-
-      return res.status(400).json({
-        gravity: 0,
-        error: 'The password field is required...'
-      });
-
-    }
-
-  }else{
-
-    return res.status(400).json({
-      gravity: 0,
-      error: 'The email field is required...'
-    });
-
-  }
 
 });
 
@@ -145,8 +55,17 @@ app.use((req, res)=>{
 
 app.use((err, req, res, next)=>{
 
+  if(err.code === 'EBADCSRFTOKEN'){
+
+    return res.status(422).json({
+      gravity: 0,
+      error: 'Invalid or expired request.'
+    });
+
+  }
+
   console.error(err.stack);
-  //res.status(500).redirect('/error');
+  res.status(500).redirect('/error');
 
 });
 

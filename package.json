@@ -15,17 +15,23 @@
   "author": "EDUDESTROER",
   "license": "MIT",
   "dependencies": {
-    "connect-redis": "^3.3.3",
+    "bcrypt": "^6.0.0",
+    "connect-redis": "^9.0.0",
     "cors": "^2.8.5",
+    "csurf": "^1.11.0",
     "dotenv": "^17.2.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
     "express-session": "^1.18.1",
+    "express-slow-down": "^3.0.1",
     "helmet": "^8.1.0",
     "morgan": "^1.10.0",
     "mysql2": "^3.14.1",
-    "redis": "^2.8.0",
-    "sass": "^1.89.2"
+    "rate-limit-redis": "^4.3.1",
+    "redis": "^5.11.0",
+    "sass": "^1.89.2",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

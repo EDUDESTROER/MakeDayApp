@@ -2,8 +2,10 @@ export class LoginEffects{
 
     constructor(){
 
+        this.inputEnterEvent();
         this.addMenuEvent();
         this.addSlideBtnEvents();
+        this._type = document.querySelector('.wrapper-main').lastElementChild.id;
         this.slideEvents();
         this.currentSlide = 1;
         this.slideInterval;
@@ -74,6 +76,53 @@ export class LoginEffects{
             this.currentSlide = this.currentSlide + 1;
 
         },12000);
+
+    }
+
+    inputEnterEvent(){
+
+        let inputs = document.querySelectorAll('input');
+
+        let position = 0;
+
+        inputs.forEach(input=>{
+
+            input.addEventListener('keyup', e=>{
+
+                if(e.key === 'Enter'){
+
+                    if(position < (inputs.length - 1)){
+
+                        position++;
+
+                    }else{
+
+                        //console.log(this._type);
+                        if(this._type === 'login'){
+
+                            document.querySelector('#btn-login').click();
+                            position = 0;
+
+                        }else if(this._type === 'register'){
+
+                            document.querySelector('#btn-sign-up').click();
+                            position = 0;
+
+                        }
+
+                    }
+
+                    e.preventDefault();
+
+                    //console.log(inputs, position);
+
+                    inputs[position].focus();
+
+                }
+
+            });
+
+        });
 
     }
     
