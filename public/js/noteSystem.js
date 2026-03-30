@@ -1,3 +1,7 @@
-import {NoteController} from './controller/NoteController.js';
+import {NoteController} from './controllers/NoteController.js';
 
-window.app = new NoteController();
+document.addEventListener('DOMContentLoaded', startNote);
+
+function startNote(){
+    new NoteController();
+}

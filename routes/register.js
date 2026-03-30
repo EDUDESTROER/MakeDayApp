@@ -4,7 +4,7 @@ import { registerLimiter } from '../middlewares/security/registerLimiter.js';
 import { registerSlowDown } from '../middlewares/security/registerSlowDown.js';
 import { csrfProtection } from '../config/csrf.js';
 
-var router = express.Router();
+const router = express.Router();
 
 router.get("/", csrfProtection, function(req, res, next){
 

@@ -11,5 +11,7 @@
 # Other Tasks List:
 
 - [x] Update register secure.
+- [x] Fix the ".new-section" in layout
 - [ ] Create an error log.
 - [ ] Invalidate old sessions after changing the password.
+- [ ] When you enter 1234@ in register page, an error occured, because we don't say wath is the problem in the password.

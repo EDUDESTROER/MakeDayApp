@@ -167,6 +167,7 @@ main{
     height: 100%;
     display: flex;
     flex-direction: column;
+    z-index: 3;
 
 }
 .wrapper-favorites{
@@ -182,7 +183,7 @@ main{
     display: flex;
     padding-bottom: .15rem;
     align-items: center;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
 
 }
@@ -355,6 +356,16 @@ div.wrapper-history{
     display: none;
 
 }*/
+
+.wrapper-main-content{
+
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+}
+
 .note-wrapper{
 
     background-color: aliceblue;
@@ -363,7 +374,6 @@ div.wrapper-history{
     top: 0;
     height: 100%;
     width: 100%;
-    display: none; // flex in mobile
     flex-direction: column;
 
 }
@@ -469,12 +479,15 @@ div.wrapper-history{
 .new-section{
 
     background-color: #000000b4;
-    height: 100%;
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
+    position: absolute;
+    z-index: 3;
+    top: 0;
 
 }
 .wrapper-new-categorie-title{
@@ -988,7 +1001,7 @@ footer{
 
     }
 
-    &>#btn-new-categorie{
+    &>#btn-new-note{
 
         width: calc((100% / 4) - 1rem);
         height: 95%;
@@ -1151,17 +1164,25 @@ footer{
         justify-content: center;
 
     }
+    .wrapper-main-content{
+
+        flex: 1;
+        position: relative;
+
+    }
     .note-wrapper{
         
         margin-left: 1px;
         position: relative;
-        width: 60%;
+        width: 100%;
         display: flex;
 
     }
-    .wrapper-note-btn{
+    .new-section{
 
-        width: 60%;
+        display: flex;
+        width: 100%;
+        right: 0;
 
     }
     #btn-note-option{
@@ -1169,8 +1190,6 @@ footer{
         right: 0;
 
     }
-
-    
 
 }
 @media (min-width: 1200px){
@@ -1198,16 +1217,6 @@ footer{
     .wrapper-pc-footer{
 
         width: 65%;
-    }
-    .note-wrapper{
-
-        width: 65%;
-
-    }
-    .wrapper-note-btn{
-
-        width: 65%;
-
     }
     .new-categorie-options-wrapper  .favorites-content-wrapper{
 

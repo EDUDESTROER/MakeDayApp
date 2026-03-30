@@ -11,6 +11,16 @@ export async function findAuthByEmail(email){
     return rows[0];
 
 }
+export async function findAuthById(userId){
+
+    const [rows] = await conn.execute(
+        "SELECT username FROM tb_users WHERE id = ?",
+        [userId]
+    );
+
+    return rows[0];
+
+}
 export async function findAuthByUsername(username){
 
     const [rows] = await conn.execute(

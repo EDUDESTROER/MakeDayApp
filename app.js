@@ -12,6 +12,7 @@ import loginRouter from './routes/login.js';
 import registerRouter from './routes/register.js'
 import workspaceRouter from './routes/workspace.js';
 import notFoundRouter from './routes/not-found.js';
+import meRouter from './routes/me.js'
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -37,6 +38,7 @@ app.use('/not-found', notFoundRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/workspace', workspaceRouter);
+app.use('/me', meRouter);
 
 app.set("trust proxy", 1)
 app.set('view engine', 'ejs');
