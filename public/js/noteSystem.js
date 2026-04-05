@@ -1,7 +1,7 @@
-import {NoteController} from './controllers/NoteController.js';
+import { WorkspaceController } from './controllers/WorkspaceController.js';
 
 document.addEventListener('DOMContentLoaded', startNote);
 
 function startNote(){
-    new NoteController();
+    new WorkspaceController();
 }

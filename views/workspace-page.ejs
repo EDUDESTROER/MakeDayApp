@@ -15,7 +15,7 @@
     <header class="wrapper-header">
         <div class="wrapper-mobile-header">
             <div class="wrapper-avatar">
-                <button data-action="showTarget" data-target="#user-menu" class="buttons-basic-efects" title="User Menu" id="btn-user-menu">
+                <button data-action="showTarget?" data-target="#user-menu" class="buttons-basic-efects" title="User Menu" id="btn-user-menu">
                     <img id="user-avatar" src="/img/user-default-avatar.png" alt="user avatar">
                 </button>
                 <div class="wrapper-username">
@@ -34,7 +34,7 @@
                 <span class="basic-shadow-size1">MakeDay</span>
             </div>
             <div class="wrapper-configuration">
-                <button data-action="showTarget" data-target="#configs-menu" id="btn-configs-pc">
+                <button data-action="showTarget?" data-target="#configs-menu" id="btn-configs-pc">
                     <i title="Configurations" class="fa-solid fa-toolbox"></i>
                 </button>
             </div>
@@ -42,64 +42,67 @@
     </header>
     <main>
         <section id="left-side-bar">
-            <div class="wrapper-favorites side-wrappers">
+
+            <div class="wrapper-Card side-wrappers">
                 <h2>Favorites <button data-action="create" data-group-id="1" class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
-                <div class="favorites-content-wrapper">
-                    <div class="favorites-square list-style">
-                        <div class="favorites-icon"><i class="fa-regular fa-bookmark"></i></div>
-                        <img class="favorites-background" src="/img/Afazeres-test.jpg" alt="Afazeres Background">
-                        <h3 class="favorites-text">Afazeres</h3>
+                <div class="wrapper-card-content">
+                    <div class="card-square list-style">
+                        <div class="card-icon"><i class="fa-regular fa-bookmark"></i></div>
+                        <img class="card-background" src="/img/Afazeres-test.jpg" alt="Afazeres Background">
+                        <h3 class="card-text">Afazeres</h3>
                     </div>
-                    <div class="favorites-square list-style">
-                        <div class="favorites-icon"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <img class="favorites-background" src="/img/ListaDeCompras-test.jpg" alt="Lista de compras Background">
-                        <h3 class="favorites-text">lista de compras</h3>
+                    <div class="card-square list-style">
+                        <div class="card-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                        <img class="card-background" src="/img/ListaDeCompras-test.jpg" alt="Lista de compras Background">
+                        <h3 class="card-text">lista de compras</h3>
                     </div>
-                    <div class="favorites-square list-style">
-                        <div class="favorites-icon"><i class="fa-solid fa-laptop-code"></i></i></div>
-                        <img class="favorites-background" src="/img/computação-test.jpg" alt="Teoria da Computação Background">
-                        <h3 class="favorites-text">Teoria Da computação</h3>
+                    <div class="card-square list-style">
+                        <div class="card-icon"><i class="fa-solid fa-laptop-code"></i></i></div>
+                        <img class="card-background" src="/img/computação-test.jpg" alt="Teoria da Computação Background">
+                        <h3 class="card-text">Teoria Da computação</h3>
                     </div>
-                    <div class="favorites-square list-style">
-                        <div class="favorites-icon"><i class="fa-solid fa-star"></i></div>
-                        <img class="favorites-background" src="/img/Important-test.jpg" alt="Eventos importantes da empresa Background">
-                        <h3 class="favorites-text">Eventos importantes da empresa</h3>
+                    <div class="card-square list-style">
+                        <div class="card-icon"><i class="fa-solid fa-star"></i></div>
+                        <img class="card-background" src="/img/Important-test.jpg" alt="Eventos importantes da empresa Background">
+                        <h3 class="card-text">Eventos importantes da empresa</h3>
                     </div>
                     
                 </div>
             </div>
-            <div class="wrapper-history side-wrappers">
+            
+            <div class="wrapper-list side-wrappers">
                 <h2>History <button data-action="create" data-group-id="1" class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
-                <div class="history-content-wrapper basic-content">
-                    <div class="history-list list-style basic-list">
+                <div class="list-content-wrapper basic-content">
+                    <div class="list-style basic-list">
                         <div class="basic-icon-list"><i class="fa-solid fa-star"></i></i></div>
                         <h3 class="list-text">Eventos importantes da empresa</h3>
                         <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
                     </div>
-                    <div class="history-list list-style basic-list">
+                    <div class="list-style basic-list">
                         <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
                         <h3 class="list-text">lista de compras</h3>
                         <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
                     </div>
-                    <div class="history-list list-style basic-list">
+                    <div class="list-style basic-list">
                         <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
                         <h3 class="list-text">Afazeres</h3>
                         <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
                     </div>
-                    <div class="history-list list-style basic-list">
+                    <div class="list-style basic-list">
                         <div class="basic-icon-list"><i class="fa-solid fa-laptop-code"></i></div>
                         <h3 class="list-text">Teoria Da computação</h3>
                         <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
                     </div>
-                    <div class="history-list list-style basic-list">
+                    <div class="list-style basic-list">
                         <div class="basic-icon-list"><i class="fa-solid fa-thumbtack"></i></div>
                         <h3 class="list-text">Terefas</h3>
                         <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
                     </div>
                 </div>
             </div>
+            
             <div class="wrapper-all-tasks side-wrappers">
-                <h2>All Tasks <button data-action="all-categorie:create" class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
+                <h2>All Tasks <button data-action="all-category:create" class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
                 <div class="all-tasks-content-wrapper basic-content">
                     <div class="all-tasks-list list-style basic-list">
                         <div class="basic-icon-list"><i class="fa-solid fa-star"></i></i></div>
@@ -163,55 +166,60 @@
                     </div>
                 </div>
             </section>
-            <section id="new-categorie" class="new-section" style="opacity: 0;" inert>
-                <div class="wrapper-new-categorie-title">
-                    <span>Create a new categorie</span>
+            <section id="new-category" class="new-section" style="opacity: 0;" inert>
+                <div class="wrapper-new-category-title">
+                    <span>Create a new category</span>
                 </div>
-                <div class="new-categorie-options-wrapper">
-                    <input type="text" class="input-new-type-name" id="input-new-categorie-name" placeholder="Categorie Name">
-                    <div class="wrapper-categorie-styles">
+                <div class="new-category-options-wrapper">
+                    <div class="error-wrapper" >
+                        <span id="create-new-category-error">
+                            
+                        </span>
+                    </div>
+                    <input type="text" class="input-new-type-name" id="input-new-category-name" placeholder="Category Name">
+                    <div class="wrapper-category-styles">
                         <span>Choose a style:</span>
-                        <div class="new-categorie-styles">
-                            <button data-action="select-new-categorie-standard" data-id="none" class="buttuns-purple-style select-style" type="button">Standard</button>
-                            <button data-action="select-new-categorie-card" class="buttuns-purple-style" type="button">Card</button>
+                        <div class="new-category-styles">
+                            <button id="btn-new-category-style-list" data-action="select-new-category" data-target="#btn-new-category-style-list" data-category-style="List" class="buttuns-purple-style" type="button">List</button>
+                            <button id="btn-new-category-style-card" data-action="select-new-category" data-target="#btn-new-category-style-card" data-category-style="Card" class="buttuns-purple-style select-style" type="button">Card</button>
                         </div>
                     </div>
-                    <div class="wrapper-categorie-result">
+                    <div class="wrapper-category-result">
                         <span>Result:</span>
-                    <div class="wrapper-favorites side-wrappers">
-                            <h2>Categorie Name <button disabled class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
-                            <div class="favorites-content-wrapper">
-                                <div class="favorites-square list-style">
-                                    <div class="favorites-icon"><i class="fa-solid fa-1"></i></div>
-                                    <img class="favorites-background" src="/img/Afazeres-test.jpg" alt="Afazeres Background">
-                                    <h3 class="favorites-text">Item</h3>
+                        <div id="new-category-style-card" class="wrapper-Card side-wrappers">
+                            <h2 class="category-result-title">Category Name<button disabled class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
+                            <div class="wrapper-card-content">
+                                <div class="card-square list-style">
+                                    <div class="card-icon"><i class="fa-solid fa-1"></i></div>
+                                    <img class="card-background" src="/img/Afazeres-test.jpg" alt="Afazeres Background">
+                                    <h3 class="card-text">Item</h3>
                                 </div>
-                                <div class="favorites-square list-style">
-                                    <div class="favorites-icon"><i class="fa-solid fa-2"></i></div>
-                                    <img class="favorites-background" src="/img/ListaDeCompras-test.jpg" alt="Lista de compras Background">
-                                    <h3 class="favorites-text">Item</h3>
+                                <div class="card-square list-style">
+                                    <div class="card-icon"><i class="fa-solid fa-2"></i></div>
+                                    <img class="card-background" src="/img/ListaDeCompras-test.jpg" alt="Lista de compras Background">
+                                    <h3 class="card-text">Item</h3>
                                 </div>
-                                <div class="favorites-square list-style">
-                                    <div class="favorites-icon"><i class="fa-solid fa-3"></i></div>
-                                    <img class="favorites-background" src="/img/computação-test.jpg" alt="Teoria da Computação Background">
-                                    <h3 class="favorites-text">Item</h3>
+                                <div class="card-square list-style">
+                                    <div class="card-icon"><i class="fa-solid fa-3"></i></div>
+                                    <img class="card-background" src="/img/computação-test.jpg" alt="Teoria da Computação Background">
+                                    <h3 class="card-text">Item</h3>
                                 </div>
                             </div>
                         </div>
-                        <div class="wrapper-history side-wrappers" style="opacity: 0;" inet>
-                            <h2>Categorie Name <button disabled class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
-                            <div class="history-content-wrapper basic-content">
-                                <div class="history-list list-style basic-list">
+                        <div id="new-category-style-list" class="wrapper-list side-wrappers" style="opacity: 0; position: absolute;" inet>
+                            <h2  class="category-result-title">Category Name<button disabled class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
+                            <div class="list-content-wrapper basic-content">
+                                <div class="list-style basic-list">
                                     <div class="basic-icon-list"><i class="fa-solid fa-1"></i></div>
                                     <h3 class="list-text">Item</h3>
                                     <button disabled class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
                                 </div>
-                                <div class="history-list list-style basic-list">
+                                <div class="list-style basic-list">
                                     <div class="basic-icon-list"><i class="fa-solid fa-2"></i></div>
                                     <h3 class="list-text">Item</h3>
                                     <button disabled class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
                                 </div>
-                                <div class="history-list list-style basic-list">
+                                <div class="list-style basic-list">
                                     <div class="basic-icon-list"><i class="fa-solid fa-3"></i></div>
                                     <h3 class="list-text">Item</h3>
                                     <button disabled class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
@@ -219,17 +227,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="wrapper-submit-new">
+
+                        <button data-action="createNewCategory" id="create-new-category" class="buttuns-purple-style"><i class="fa-solid fa-check"></i></button>
+
+                    </div>
                 </div>
             </section>
             <section id="new-note" class="new-section" style="opacity: 0;" inert>
-                <div class="wrapper-new-categorie-title">
+                <div class="wrapper-new-category-title">
                     <span>Create a new note</span>
                 </div>
-                <div class="new-categorie-options-wrapper">
+                <div class="new-category-options-wrapper">
                     <input class="input-new-type-name" type="text" id="input-new-note-name" placeholder="Note Name">
-                    <div class="wrapper-categorie-styles">
+                    <div class="wrapper-category-styles">
                         <span>Choose a icon:</span>
-                        <div class="new-categorie-styles">
+                        <div class="new-category-styles">
                             <button data-action="new-note-icon" data-id="i1" class="buttuns-purple-style select-style" type="button"><i class="fa-solid fa-anchor"></i></button>
                             <button data-action="new-note-icon" data-id="i2" class="buttuns-purple-style" type="button"><i class="fa-solid fa-anchor-circle-exclamation"></i></button>
                             <button data-action="new-note-icon" data-id="i3" class="buttuns-purple-style" type="button"><i class="fa-brands fa-android"></i></button>
@@ -238,32 +251,37 @@
                             <button data-action="new-note-icon" data-id="i6" class="buttuns-purple-style" type="button"><i class="fa-solid fa-apple-whole"></i></button>
                         </div>
                     </div>
-                    <div class="wrapper-categorie-styles">
+                    <div class="wrapper-category-styles">
                         <span>Choose a image:</span>
-                        <div class="new-categorie-styles">
+                        <div class="new-category-styles">
                             <button data-action="new-note-chose-file" data-id="none" class="note-btn buttuns-purple-style" type="button"><i class="fa-solid fa-folder-open"></i> Select a file</button>
                         </div>
                     </div>
-                    <div class="wrapper-categorie-result">
+                    <div class="wrapper-category-result">
                         <span>Result:</span>
-                    <div class="wrapper-favorites side-wrappers categorie-note-center">
-                            <div class="favorites-content-wrapper">
-                                <div class="favorites-square list-style">
-                                    <div class="favorites-icon"><i class="fa-solid fa-anchor"></i></div>
-                                    <img class="favorites-background" src="/img/Afazeres-test.jpg" alt="Afazeres Background">
-                                    <h3 class="favorites-text">Note Name</h3>
+                        <div class="wrapper-Card side-wrappers category-note-center">
+                            <div class="wrapper-card-content">
+                                <div class="card-square list-style">
+                                    <div class="card-icon"><i class="fa-solid fa-anchor"></i></div>
+                                    <img class="card-background" src="/img/Afazeres-test.jpg" alt="Afazeres Background">
+                                    <h3 class="card-text">Note Name</h3>
                                 </div>
                             </div>
                         </div>
-                        <div class="wrapper-history side-wrappers" style="opacity: 0;" inert>
-                            <div class="history-content-wrapper basic-content">
-                                <div class="history-list list-style basic-list">
+                        <div class="wrapper-list side-wrappers" style="opacity: 0; position: absolute;" inert>
+                            <div class="list-content-wrapper basic-content">
+                                <div class="list-style basic-list">
                                     <div class="basic-icon-list"><i class="fa-solid fa-anchor"></i></div>
                                     <h3 class="list-text">Note Name</h3>
                                     <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="wrapper-submit-new">
+
+                        <button id="create-new-note" class="buttuns-purple-style"><i class="fa-solid fa-check"></i></button>
+
                     </div>
                 </div>
             </section>
@@ -277,17 +295,17 @@
                 <div class="wrapper-search-content">
                     <div class="search-title-notes search-notes">
                         <span class="search-title-style">All notes</span>
-                        <div class="history-list list-style basic-list">
+                        <div class="list-style basic-list">
                             <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
                             <h3 class="list-text">lista de compras</h3>
                             <button disabled class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
                         </div>
-                        <div class="history-list list-style basic-list">
+                        <div class="list-style basic-list">
                             <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
                             <h3 class="list-text">Afazeres</h3>
                             <button disabled class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
                         </div>
-                        <div class="history-list list-style basic-list">
+                        <div class="list-style basic-list">
                             <div class="basic-icon-list"><i class="fa-solid fa-laptop-code"></i></div>
                             <h3 class="list-text">Teoria Da computação</h3>
                             <button disabled class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
@@ -631,7 +649,7 @@
                 <button data-action="returnTo" data-target="#left-side-bar" class="buttuns-purple-style" title="Main"><i class="fa-solid fa-house"></i></button>
                 <button data-action="createNote" data-target="#new-note" data-sheet="all-notes" id="btn-new-note" class="buttuns-purple-style" title="Create a new note"><i class="fa-solid fa-square-plus"></i></button>
                 <button data-action="showTarget" data-target="#important-wrapper" class="buttuns-purple-style" title="Important"><i class="fa-solid fa-triangle-exclamation"></i></button>
-                <button data-action="showTarget" data-target="#new-categorie" id="btn-new-categorie" class="buttuns-purple-style" title="Create a new categorie"><i class="fa-solid fa-layer-group"></i></button>
+                <button data-action="showTarget" data-target="#new-category" id="btn-new-category" class="buttuns-purple-style" title="Create a new category"><i class="fa-solid fa-layer-group"></i></button>
             </div>
         </div>
         <div class="wrapper-pc-footer">
@@ -641,7 +659,5 @@
         </div>
     </footer>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script type="module" src="js/noteSystem.js"></script>
 </html>

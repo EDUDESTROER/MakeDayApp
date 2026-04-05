@@ -15,3 +15,14 @@
 - [ ] Create an error log.
 - [ ] Invalidate old sessions after changing the password.
 - [ ] When you enter 1234@ in register page, an error occured, because we don't say wath is the problem in the password.
+
+# Customization Tasks List:
+
+### Categories
+- [ ] Categories Color.
+- [ ] Categories Icon.
+- [ ] Categories Custom sorting.
+- [ ] Categories pinned.
+- [ ] Categories Soft delete.
+- [ ] Categories Visibility.
+- [ ] More Categories viewMode.

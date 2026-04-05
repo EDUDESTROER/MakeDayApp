@@ -122,4 +122,14 @@ export class WorkspaceView{
 
     }
 
+    errorLog(logElementId, error){
+
+        let elementToLog = document.querySelector(logElementId);
+
+        elementToLog.textContent = '';
+
+        elementToLog.textContent = error;
+
+    }
+
 }
