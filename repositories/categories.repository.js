@@ -13,7 +13,8 @@ export async function createNewCategory(id, userId, title, viewMode, parentId){
         title,
         viewMode,
         parentId: parentId ?? null,
-        createAt: new Date()
+        createAt: new Date(),
+        updatedAt: new Date()
     };
 
 }

@@ -612,6 +612,167 @@ div.wrapper-list{
     }
 
 }
+.new-note-image{
+
+    padding: 1.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &>div{
+
+        padding: .5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+
+        i{
+            margin-right: .3rem;
+        }
+
+    }
+    &>span{
+
+        padding: .4rem;
+        color: #fff;
+        font-weight: bolder;
+        font-size: 1.2rem;
+
+    }
+
+}
+.wrapper-icons-new-note{
+
+    width: 100%;
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &>.wrapper-icons-btn{
+
+        //background-color: aqua;
+        width: 100%;
+        padding: .5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        color: #fff;
+        font-weight: bolder;
+
+        &>.wrapper-icon-or-emoji{
+
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            padding-top: .4rem;
+            align-items: center;
+            justify-content: center;
+
+            button{
+                width: 5.5rem;
+                height: 2.5rem;
+                margin: 0 .5rem;
+                font-size: 1.3rem;
+                z-index: 1;
+            }
+            button.select-style{
+
+                border: .2rem solid #E68732;
+
+            }
+
+        }
+
+    }
+    &>.new-notes-icon-wrapper{
+
+        width: 100%;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+
+        &>.new-note-icons{
+
+            //background-color: blue;
+            width: 100%;
+            height: 33vh;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: .6rem;
+            display: flex;
+            flex-wrap: wrap;
+            position: relative;
+
+            &>.btn-new-note-icons{
+
+                margin: .3rem;
+                width: 3rem;
+                height: 3rem;
+                z-index: 1;
+
+            }
+            &>.select-style{
+
+                border: .2rem solid #E68732;
+
+            }
+
+        }
+        &>.load-more-wrapper{
+
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &>.scroll-hint{
+
+            width: 10rem;
+            height: 3.5rem;
+            margin: .6rem;
+            animation: bounce 1.5s infinite;
+            align-self: center;
+            transform: translateY(50%);
+            
+
+            span{
+
+                padding-right: .2rem;
+                font-size: 1.2rem;
+                font-weight: bolder;
+
+            }
+            i{
+                font-size: 1.5rem;
+            }
+
+        }
+
+        }
+        
+
+    }
+
+
+}
+.wrapper-card-content-new-note-result{
+
+    padding: .5rem;
+
+    &>.card-square {
+
+        padding: 1rem;
+
+    }
+
+}
 .category-note-center{
 
     align-items: center;

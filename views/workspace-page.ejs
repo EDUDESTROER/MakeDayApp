@@ -180,8 +180,8 @@
                     <div class="wrapper-category-styles">
                         <span>Choose a style:</span>
                         <div class="new-category-styles">
-                            <button id="btn-new-category-style-list" data-action="select-new-category" data-target="#btn-new-category-style-list" data-category-style="List" class="buttuns-purple-style" type="button">List</button>
-                            <button id="btn-new-category-style-card" data-action="select-new-category" data-target="#btn-new-category-style-card" data-category-style="Card" class="buttuns-purple-style select-style" type="button">Card</button>
+                            <button  data-action="select-new-category"  data-category-style="List" class="buttuns-purple-style" type="button">List</button>
+                            <button  data-action="select-new-category"  data-category-style="Card" class="buttuns-purple-style select-style" type="button">Card</button>
                         </div>
                     </div>
                     <div class="wrapper-category-result">
@@ -239,40 +239,63 @@
                     <span>Create a new note</span>
                 </div>
                 <div class="new-category-options-wrapper">
+                    <div class="error-wrapper" >
+                        <span id="create-new-note-error-input">
+                            
+                        </span>
+                    </div>
                     <input class="input-new-type-name" type="text" id="input-new-note-name" placeholder="Note Name">
-                    <div class="wrapper-category-styles">
-                        <span>Choose a icon:</span>
-                        <div class="new-category-styles">
-                            <button data-action="new-note-icon" data-id="i1" class="buttuns-purple-style select-style" type="button"><i class="fa-solid fa-anchor"></i></button>
-                            <button data-action="new-note-icon" data-id="i2" class="buttuns-purple-style" type="button"><i class="fa-solid fa-anchor-circle-exclamation"></i></button>
-                            <button data-action="new-note-icon" data-id="i3" class="buttuns-purple-style" type="button"><i class="fa-brands fa-android"></i></button>
-                            <button data-action="new-note-icon" data-id="i4" class="buttuns-purple-style" type="button"><i class="fa-brands fa-angellist"></i></button>
-                            <button data-action="new-note-icon" data-id="i5" class="buttuns-purple-style" type="button"><i class="fa-solid fa-ankh"></i></button>
-                            <button data-action="new-note-icon" data-id="i6" class="buttuns-purple-style" type="button"><i class="fa-solid fa-apple-whole"></i></button>
+                    <div class="wrapper-icons-new-note">
+                        <div class="wrapper-icons-btn">
+
+                            <span>Choose one:</span>
+                            <div class="wrapper-icon-or-emoji">
+                                <button class="buttuns-purple-style select-style" type="button">Icons</button>
+                                <span>Or</span>
+                                <button class="note-btn buttuns-purple-style" type="button">Emojis</button>
+                            </div>
+
+                        </div>
+                        <div class="new-notes-icon-wrapper">
+                            <div class="new-note-icons">
+                            </div>
+                            <div class="load-more-wrapper">
+                                <button id="load-more" class="scroll-hint buttuns-purple-style">
+                                    <span>Load More</span>
+                                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="wrapper-category-styles">
+                    <div id="wrapper-new-note-choose-image-wrapper" class="wrapper-category-styles">
                         <span>Choose a image:</span>
-                        <div class="new-category-styles">
-                            <button data-action="new-note-chose-file" data-id="none" class="note-btn buttuns-purple-style" type="button"><i class="fa-solid fa-folder-open"></i> Select a file</button>
+                        <div class="error-wrapper" >
+                            <span id="create-new-note-error-image">
+                                
+                            </span>
                         </div>
+                        <label class="new-note-image">
+                            <input hidden type="file" id="new-note-image" accept="image/*">
+                            <div id="new-note-image-accept" class="note-btn buttuns-purple-style"><i class="fa-solid fa-folder-open"></i> Select a image</div>
+                            <span id="new-note-image-name">image-name.jpg</span>
+                        </label>
                     </div>
                     <div class="wrapper-category-result">
                         <span>Result:</span>
-                        <div class="wrapper-Card side-wrappers category-note-center">
-                            <div class="wrapper-card-content">
+                        <div id="wrapper-note-result-card" class="wrapper-Card side-wrappers category-note-center">
+                            <div class="wrapper-card-content wrapper-card-content-new-note-result">
                                 <div class="card-square list-style">
-                                    <div class="card-icon"><i class="fa-solid fa-anchor"></i></div>
-                                    <img class="card-background" src="/img/Afazeres-test.jpg" alt="Afazeres Background">
-                                    <h3 class="card-text">Note Name</h3>
+                                    <div class="card-icon"><i class="fa-solid fa-question new-note-result-icon"></i></div>
+                                    <img class="card-background new-note-result-image" src="/img/Afazeres-test.jpg" alt="Afazeres Background">
+                                    <h3 class="card-text note-result-title">Note Name</h3>
                                 </div>
                             </div>
                         </div>
-                        <div class="wrapper-list side-wrappers" style="opacity: 0; position: absolute;" inert>
+                        <div id="wrapper-note-result-list" class="wrapper-list side-wrappers" style="opacity: 0; position: absolute;" inert>
                             <div class="list-content-wrapper basic-content">
                                 <div class="list-style basic-list">
-                                    <div class="basic-icon-list"><i class="fa-solid fa-anchor"></i></div>
-                                    <h3 class="list-text">Note Name</h3>
+                                    <div class="basic-icon-list"><i class="fa-solid fa-question new-note-result-icon"></i></div>
+                                    <h3 class="list-text note-result-title">Note Name</h3>
                                     <button class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
                                 </div>
                             </div>
@@ -280,7 +303,7 @@
                     </div>
                     <div class="wrapper-submit-new">
 
-                        <button id="create-new-note" class="buttuns-purple-style"><i class="fa-solid fa-check"></i></button>
+                        <button data-action="createNewNote" id="create-new-note" class="buttuns-purple-style"><i class="fa-solid fa-check"></i></button>
 
                     </div>
                 </div>
@@ -647,7 +670,7 @@
             <div class="bottom-bar-wrapper">
                 <button data-action="showTarget" data-target="#search-wrapper" class="buttuns-purple-style" title="Search Anything"><i class="fa-solid fa-magnifying-glass"></i></button>
                 <button data-action="returnTo" data-target="#left-side-bar" class="buttuns-purple-style" title="Main"><i class="fa-solid fa-house"></i></button>
-                <button data-action="createNote" data-target="#new-note" data-sheet="all-notes" id="btn-new-note" class="buttuns-purple-style" title="Create a new note"><i class="fa-solid fa-square-plus"></i></button>
+                <button data-action="createNote" data-target="#new-note" data-parent-id="all-notes" id="btn-new-note" class="buttuns-purple-style" title="Create a new note"><i class="fa-solid fa-square-plus"></i></button>
                 <button data-action="showTarget" data-target="#important-wrapper" class="buttuns-purple-style" title="Important"><i class="fa-solid fa-triangle-exclamation"></i></button>
                 <button data-action="showTarget" data-target="#new-category" id="btn-new-category" class="buttuns-purple-style" title="Create a new category"><i class="fa-solid fa-layer-group"></i></button>
             </div>
@@ -660,4 +683,6 @@
     </footer>
 </body>
 <script type="module" src="js/noteSystem.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </html>

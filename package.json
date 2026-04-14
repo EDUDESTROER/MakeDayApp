@@ -15,6 +15,9 @@
   "author": "EDUDESTROER",
   "license": "MIT",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.2.0",
+    "@fortawesome/free-regular-svg-icons": "^7.2.0",
+    "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "bcrypt": "^6.0.0",
     "connect-redis": "^9.0.0",
     "cors": "^2.8.5",
@@ -27,6 +30,7 @@
     "express-slow-down": "^3.0.1",
     "helmet": "^8.1.0",
     "morgan": "^1.10.0",
+    "multer": "^2.1.1",
     "mysql2": "^3.14.1",
     "rate-limit-redis": "^4.3.1",
     "redis": "^5.11.0",

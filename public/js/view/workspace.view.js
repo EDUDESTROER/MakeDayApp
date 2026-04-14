@@ -24,6 +24,8 @@ export class WorkspaceView{
 
         let el = document.querySelector(id);
 
+        //console.log(el);
+
         el.style.opacity = '0';
 
         el.setAttribute('inert', '');

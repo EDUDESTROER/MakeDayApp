@@ -5,7 +5,7 @@ export class CategoryController{
     constructor(workspaceView){
 
         this.workspaceView = workspaceView;
-        this.categoryView = new CategoryView;
+        this.categoryView = new CategoryView();
 
         this.state = {
             title: '',
@@ -126,7 +126,7 @@ export class CategoryController{
         
         if(where === 'Create error'){
 
-            log = '#create-new-category-error';
+            log = '#create-new-note-error-input';
 
             this.workspaceView.errorLog(log, error);
 

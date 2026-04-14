@@ -3,14 +3,13 @@ export class CategoryView{
     constructor(){
 
         this.categoriesWrapper = document.querySelector('#left-side-bar');
+        this.previewTitles = document.querySelectorAll('.category-result-title');
 
     }
 
     updateCategoryPreview(value){
 
-        let previewTitles = document.querySelectorAll('.category-result-title');
-
-        previewTitles.forEach(title => {
+        this.previewTitles.forEach(title => {
 
             title.textContent = value;
 
@@ -30,7 +29,7 @@ export class CategoryView{
 
     assembleCategory(id, title, viewMode){
 
-        let contentWrapper = this.createCategoryContentWrapper(viewMode);
+        let contentWrapper = this.createCategoryContentWrapper(viewMode, id);
 
         let h2 = this.createCategoryTitle(title, id);
 
@@ -42,15 +41,16 @@ export class CategoryView{
 
     }
 
-    createCategoryContentWrapper(viewMode){
+    createCategoryContentWrapper(viewMode, id){
 
         let wrapper = document.createElement('div');
 
-        wrapper.classList.add('basic-content');
+        wrapper.id = id;
 
         if(viewMode === 'card'){
-            wrapper.classList.add('wrapper-Card');
+            wrapper.classList.add('wrapper-card-content');
         }else{
+            wrapper.classList.add('basic-content');
             wrapper.classList.add('list-content-wrapper');
         }
 
@@ -85,8 +85,9 @@ export class CategoryView{
         button.type = 'button';
         button.title = `Create a new note in ${title} category`;
         button.classList.add("buttuns-purple-style");
-        button.dataset.action = 'createNoteIn';
-        button.dataset.categoryId = id;
+        button.dataset.target = '#new-note';
+        button.dataset.action = 'createNote';
+        button.dataset.parentId = id;
 
         button.appendChild(icon);
 
