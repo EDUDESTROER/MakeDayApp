@@ -1,4 +1,5 @@
 @use "themeDefault";
+@use "defaultEditor";
 
 *{
     box-sizing: border-box;
@@ -196,6 +197,7 @@ main{
     position: relative;
     min-width: 40vw;
     height: 95%;
+    padding: 1rem 0;
     margin-right: .5rem;
     border: 1px solid black;
     border-radius: .5rem;
@@ -364,6 +366,7 @@ div.wrapper-list{
     width: 100%;
     height: 100%;
     position: absolute;
+    overflow: hidden;
 
 }
 
@@ -403,7 +406,8 @@ div.wrapper-list{
     padding: .2rem;
     width: 100%;
     height: 4rem;
-    position: fixed;
+    position: sticky;
+    top: 0;
 
 }
 .note-menu-btn{
@@ -472,6 +476,7 @@ div.wrapper-list{
 .note-content{
 
     padding: .4rem;
+    padding-bottom: 8rem;
     //background-color: blue;
     width: 100%;
     min-height: fit-content;

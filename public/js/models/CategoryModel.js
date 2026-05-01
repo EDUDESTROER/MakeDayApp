@@ -1,12 +1,13 @@
 export class CategoryModel {
 
-    constructor({id, title, viewMode, parentId, createAt}){
+    constructor({id, title, view_mode, parentId, created_at, updated_at}){
 
         this.id = id;
         this.title = title;
-        this.viewMode = viewMode;
+        this.viewMode = view_mode;
         this.parentId = parentId;
-        this.createAt = createAt;
+        this.createdAt = created_at;
+        this.updatedAt = updated_at;
 
     }
 

@@ -10,6 +10,8 @@ export async function getUserInfo(req, res){
 
     }catch(err){
 
+        req.session.destroy();
+
         return res.status(401).json({
             gravity: 10,
             error: err.message || 'Error!'

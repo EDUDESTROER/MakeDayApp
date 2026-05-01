@@ -17,6 +17,42 @@ export class NoteView{
         this.newNoteResultImageTag = document.querySelector('.new-note-result-image');
         this.newNoteErrorImage = document.querySelector('#create-new-note-error-image');
         this.allTasksEl = document.querySelector('.all-tasks-content-wrapper');
+        this.noteTitleEl = document.querySelector('#note-title');
+        this.noteIconEl = document.querySelector('#note-icon');
+        this.noteImageEl = document.querySelector('#note-image');
+        this.noteImageWrapperEl = document.querySelector('#note-image-wrapper');
+        this.noteIconWrapperEl = document.querySelector('#note-icon-wrapper');
+
+    }
+
+    setInAllNote(title, icon, image){
+
+        /*console.log('Render note page: ');
+        console.log('Note Title: ', title);
+        console.log('Note icon: ', icon);
+        console.log('Note image: ', image);*/
+
+        if(!image){
+            
+            this.workspaceView.unShowEl(`#${this.noteImageWrapperEl.id}`);
+            this.noteImageWrapperEl.style.position = 'absolute';
+            this.noteIconWrapperEl.style.marginTop = '1rem';
+
+        }else{
+
+            this.workspaceView.showEl(`#${this.noteImageWrapperEl.id}`);
+            this.noteImageWrapperEl.style.position = 'static';
+            this.noteIconWrapperEl.style.marginTop = '-1rem';
+
+            this.noteImageEl.src = `/uploads/${image}`;
+
+        }
+
+        if(!icon || !title) throw new Error('Invalid note.');
+
+        this.noteTitleEl.textContent = title;
+        this.noteIconEl.className = icon;
+        
 
     }
 
@@ -104,7 +140,7 @@ export class NoteView{
     }
     renderNote(note, renderType){
 
-        console.log('Creating a new note: ', note, renderType);
+        //console.log('Creating a new note: ', note, renderType);
 
         if(renderType === 'card'){
 
@@ -122,7 +158,7 @@ export class NoteView{
 
             }
 
-            console.log(newNote);
+            //console.log(newNote);
 
         }else if(renderType === 'list'){
 
@@ -140,7 +176,7 @@ export class NoteView{
 
             }
 
-            console.log(newNote);
+            //console.log(newNote);
 
         }else{
 
@@ -148,6 +184,28 @@ export class NoteView{
 
         }
         
+    }
+
+    renderFavoritesView(note){
+
+        const newNote = this.assembleCard(note.icon, note.image, note.title, note.id);
+
+        const parentEl = document.getElementById('favorites-content');
+
+        parentEl.appendChild(newNote);
+
+        this.showFavoritesWrapper();
+
+    }
+
+    showFavoritesWrapper(){
+
+        const wrapper = document.getElementById('favorites-wrapper');
+
+        wrapper.style.position = 'static';
+
+        this.workspaceView.showEl(`#${wrapper.id}`);
+
     }
 
     assembleList(icon, title, id){

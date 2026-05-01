@@ -1,16 +1,29 @@
 import notesSchema from '../schemas/notes.schema.js';
-import { createNewNote } from '../repositories/notes.repository.js';
+import { createNewNote, getAllNote, updateNote } from '../repositories/notes.repository.js';
 import * as z from 'zod';
+import { sanitizeNote } from '../utils/sanitizeHtml.js';
 
 export async function createNoteService(userId, title, parentId, icon, image, content, favorite){
 
     try{
 
         if(parentId === '' || parentId === 'null' || parentId === 'undefined') parentId = null;
-        
-        favorite = favorite === "true" ? true : false ;
 
-        const validation = notesSchema.safeParse({title, parentId, icon, image, content, favorite});
+        const normalizedContent = JSON.parse(JSON.stringify(content));
+
+        const id = crypto.randomUUID();
+
+        //console.log(normalizedContent);
+
+        const validation = notesSchema.safeParse({
+            id,
+            title, 
+            parentId, 
+            icon, 
+            image, 
+            content: normalizedContent, 
+            favorite
+        });
 
         if(!validation.success){
 
@@ -24,11 +37,11 @@ export async function createNoteService(userId, title, parentId, icon, image, co
 
         //console.log('zod validated Data: ', validation.data);
 
-        const id = crypto.randomUUID();
+        const sanitized = sanitizeNote(validation.data);
 
-        const {title: testedTitle, parentId: testedParentId, icon: testedIcon, image: testedImage, content: testedContent, favorite: testedFavorite} = validation.data;
+        const {id: testedId, title: testedTitle, parentId: testedParentId, icon: testedIcon, image: testedImage, content: testedContent, favorite: testedFavorite} = sanitized;
 
-        const note = await createNewNote(id, userId, testedTitle, testedParentId, testedIcon, testedImage, testedContent, testedFavorite);
+        const note = await createNewNote(testedId, userId, testedTitle, testedParentId, testedIcon, testedImage, testedContent, testedFavorite);
 
         //console.log(note);
 
@@ -36,7 +49,95 @@ export async function createNoteService(userId, title, parentId, icon, image, co
 
     }catch(error){
 
+        //console.log(error);
+
         throw new Error(error);
+
+    }
+
+}
+export async function updateNoteService(
+        userId,
+        id,
+        title, 
+        parentId, 
+        icon, 
+        image, 
+        content, 
+        favorite
+    ){
+
+    try{
+
+        if(parentId === '' || parentId === 'null' || parentId === 'undefined') parentId = null;
+
+        if(favorite == 0) favorite = false;
+        if(favorite == 1) favorite = true;
+
+        //console.log('normalizedContent: ', normalizedContent);
+
+        /*console.log('To validated Data: ', {
+            id,
+            title, 
+            parentId, 
+            icon, 
+            image, 
+            content, 
+            favorite
+        });*/
+
+        const validation = notesSchema.safeParse({
+            id,
+            title, 
+            parentId, 
+            icon, 
+            image, 
+            content, 
+            favorite
+        });
+
+        if(!validation.success){
+
+            const errors = z.flattenError(validation.error);
+                
+            const firstValue = Object.values(errors.fieldErrors)[0];
+                
+            throw new Error(firstValue || 'erro zod');
+
+        }
+
+        //console.log('zod validated Data: ', validation.data);
+        
+        const sanitized = sanitizeNote(validation.data);
+
+        const {id: testedId, title: testedTitle, parentId: testedParentId, icon: testedIcon, image: testedImage, content: testedContent, favorite: testedFavorite} = sanitized;
+
+        const note = await updateNote(testedId, userId, testedTitle, testedParentId, testedIcon, testedImage, testedContent, testedFavorite);
+
+        //console.log(note);
+
+        return note;
+
+    }catch(error){
+
+        //console.log(error);
+
+        throw new Error(error);
+
+    }
+
+}
+export async function getUserNoteService(userId){
+
+    try{
+
+        const notes = await getAllNote(userId);
+
+        return notes;
+
+    }catch(err){
+
+        throw new Error(err);
 
     }
 

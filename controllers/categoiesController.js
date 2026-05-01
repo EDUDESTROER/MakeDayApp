@@ -1,4 +1,4 @@
-import { createCategoryService } from "../services/categories.service.js";
+import { createCategoryService, getUserCategoryService } from "../services/categories.service.js";
 
 export async function createCategory(req, res){
 
@@ -22,6 +22,26 @@ export async function createCategory(req, res){
     } catch (error) {
 
         res.status(400).json({ error: error.message });
+
+    }
+
+}
+
+export async function getUserCategory(req, res){
+
+    try{
+
+        const userId = req.session.user.id;
+
+        const categories = await getUserCategoryService(userId);
+
+        //console.log(categories);
+
+        res.status(201).json(categories);
+
+    }catch(err){
+
+        res.status(400).json({error: err.message});
 
     }
 

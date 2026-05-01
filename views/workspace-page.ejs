@@ -43,96 +43,17 @@
     <main>
         <section id="left-side-bar">
 
-            <div class="wrapper-Card side-wrappers">
+            <div id="favorites-wrapper" class="wrapper-Card side-wrappers" style="opacity: 0; position: absolute;" inert>
                 <h2>Favorites <button data-action="create" data-group-id="1" class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
-                <div class="wrapper-card-content">
-                    <div class="card-square list-style">
-                        <div class="card-icon"><i class="fa-regular fa-bookmark"></i></div>
-                        <img class="card-background" src="/img/Afazeres-test.jpg" alt="Afazeres Background">
-                        <h3 class="card-text">Afazeres</h3>
-                    </div>
-                    <div class="card-square list-style">
-                        <div class="card-icon"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <img class="card-background" src="/img/ListaDeCompras-test.jpg" alt="Lista de compras Background">
-                        <h3 class="card-text">lista de compras</h3>
-                    </div>
-                    <div class="card-square list-style">
-                        <div class="card-icon"><i class="fa-solid fa-laptop-code"></i></i></div>
-                        <img class="card-background" src="/img/computação-test.jpg" alt="Teoria da Computação Background">
-                        <h3 class="card-text">Teoria Da computação</h3>
-                    </div>
-                    <div class="card-square list-style">
-                        <div class="card-icon"><i class="fa-solid fa-star"></i></div>
-                        <img class="card-background" src="/img/Important-test.jpg" alt="Eventos importantes da empresa Background">
-                        <h3 class="card-text">Eventos importantes da empresa</h3>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="wrapper-list side-wrappers">
-                <h2>History <button data-action="create" data-group-id="1" class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
-                <div class="list-content-wrapper basic-content">
-                    <div class="list-style basic-list">
-                        <div class="basic-icon-list"><i class="fa-solid fa-star"></i></i></div>
-                        <h3 class="list-text">Eventos importantes da empresa</h3>
-                        <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                    </div>
-                    <div class="list-style basic-list">
-                        <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <h3 class="list-text">lista de compras</h3>
-                        <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                    </div>
-                    <div class="list-style basic-list">
-                        <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
-                        <h3 class="list-text">Afazeres</h3>
-                        <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                    </div>
-                    <div class="list-style basic-list">
-                        <div class="basic-icon-list"><i class="fa-solid fa-laptop-code"></i></div>
-                        <h3 class="list-text">Teoria Da computação</h3>
-                        <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                    </div>
-                    <div class="list-style basic-list">
-                        <div class="basic-icon-list"><i class="fa-solid fa-thumbtack"></i></div>
-                        <h3 class="list-text">Terefas</h3>
-                        <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                    </div>
+                <div id="favorites-content" class="wrapper-card-content">
+                    <!--add with a filter-->
                 </div>
             </div>
             
             <div class="wrapper-all-tasks side-wrappers">
-                <h2>All Tasks <button data-action="all-category:create" class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
+                <h2>All Tasks <button data-action="createNote" data-target="#new-note" data-parent-id="all-notes" class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
                 <div class="all-tasks-content-wrapper basic-content">
-                    <div class="all-tasks-list list-style basic-list">
-                        <div class="basic-icon-list"><i class="fa-solid fa-star"></i></i></div>
-                        <h3 class="list-text">Eventos importantes da empresa</h3>
-                        <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                    </div>
-                    <div class="all-tasks-list list-style basic-list">
-                        <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <h3 class="list-text">lista de compras</h3>
-                        <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                    </div>
-                    <div class="all-tasks-list list-style basic-list">
-                        <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
-                        <h3 class="list-text">Afazeres</h3>
-                        <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                    </div>
-                    <div class="all-tasks-list list-style basic-list">
-                        <div class="basic-icon-list"><i class="fa-solid fa-laptop-code"></i></div>
-                        <h3 class="list-text">Teoria Da computação</h3>
-                        <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                    </div>
-                    <div class="all-tasks-list list-style basic-list">
-                        <div class="basic-icon-list"><i class="fa-solid fa-thumbtack"></i></div>
-                        <h3 class="list-text">Terefas</h3>
-                        <button data-action="open-config" data-group-id="1" class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                    </div>
-                    <div class="all-tasks-list list-style basic-list">
-                        <div class="basic-icon-list"><i class="fa-solid fa-ellipsis"></i></div>
-                        <h3 class="list-text">See all</h3>
-                    </div>
+                     <!--add with a filter-->
                 </div>
             </div>
         </section>
@@ -140,29 +61,22 @@
             <section id="all-note" class="note-wrapper" style="opacity: 0;" inert>
                 <div class="content-wrapper">
                     <div class="wrapper-note-btn">
-                        <button data-action="main-menu:return" class="buttons-icon-efect note-menu-btn" id="btn-return-page"><i class="fa-solid fa-angles-left"></i></button>
+                        <button data-action="returnTo" data-target="#left-side-bar" class="buttons-icon-efect note-menu-btn" id="btn-return-page"><i class="fa-solid fa-angles-left"></i></button>
                         <button data-action="open-config" data-group-id="1" class="buttons-icon-efect note-menu-btn" id="btn-note-option"><i class="fa-solid fa-ellipsis"></i></button>
                     </div>
                     <div class="wrapper-info">
-                        <div class="wrapper-img">
-                            <img draggable="false" src="/img/Tarefas-capa.jpg" alt="">
+                        <div class="wrapper-img" id="note-image-wrapper">
+                            <img id="note-image" draggable="false" src="/img/Tarefas-capa.jpg" alt="">
                         </div>
-                        <div class="wrapper-icon">
-                            <i class="fa-solid fa-thumbtack"></i>
+                        <div class="wrapper-icon" id="note-icon-wrapper">
+                            <i id="note-icon" class="fa-solid fa-thumbtack"></i>
                         </div>
                         <div class="wrapper-title">
-                            <span>Tarefas</span>
+                            <span id="note-title">Tarefas</span>
                         </div>
                     </div>
-                    <div class="note-content">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet laudantium facilis modi suscipit, commodi iusto, eaque dignissimos repellat labore officiis nobis asperiores nemo exercitationem eveniet nesciunt dolorem rerum totam. Necessitatibus.</p>
+                    <div id="note-content" class="note-content">
+                        
                     </div>
                 </div>
             </section>

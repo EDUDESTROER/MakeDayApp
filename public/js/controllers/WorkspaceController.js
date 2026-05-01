@@ -18,6 +18,7 @@ export class WorkspaceController{
         this.iconsController = new IconsController();
         this.categories = new Map();
         this.notes = new Map();
+        this.getAllCategories();
 
     }
 
@@ -34,9 +35,153 @@ export class WorkspaceController{
 
     getCategoryViewMode(id){
 
+        //console.log(this.categories, id);
+
         const category = this.categories.get(id);
+
+        //console.log(category);
+
         if(!category) return 'list';
+
+        //console.log(!category.viewMode || category.viewMode === '' || category.viewMode === undefined);
+
+        if(!category.viewMode || category.viewMode === '' || category.viewMode === undefined) return 'list';
+        
+
         return category.viewMode;
+
+    }
+
+    async getAllCategories(){
+
+        try{
+
+            const categories = await this.categoryController.getAll();
+
+            //console.log(categories);
+
+            categories.forEach(cat =>{
+
+                const model = new CategoryModel(cat);
+
+                this.categories.set(model.id, model);
+
+            });
+
+            //console.log(this.categories);
+
+            this.categories.forEach(cat=>{
+
+                this.categoryController.render(cat);
+
+            });
+
+            this.getAllNotes();
+
+        }catch(err){
+
+            alert('Make an error Log on workspace!!!', err);
+
+        }
+
+        
+
+    }
+
+    updateNote(note){
+
+        //console.log('Here! ', note);
+
+        const model = new NoteModel(note);
+
+        if(!model.createdAt || model.createdAt == undefined) {
+
+            model.createdAt = this.notes.get(model.id)?.createdAt;
+
+        }
+
+        //console.log(model);
+
+        this.notes.set(model.id, model);
+
+        //console.log(this.notes);
+
+    }
+
+    async getAllNotes(){
+
+        
+        try{
+
+            const notes = await this.noteController.getAll();
+
+            //console.log(notes);
+
+            notes.forEach(note =>{
+
+                const model = new NoteModel(note);
+
+                this.notes.set(model.id, model);
+
+            });
+
+            //console.log(this.notes);
+
+            this.notes.forEach(note=>{
+
+                this.noteController.render(note);
+
+            });
+
+            this.checkFavorites();
+
+        }catch(err){
+
+            console.error(err);
+
+            alert('Make an error Log on workspace!!!', err);
+
+        }
+
+    }
+
+    getNoteById(id){
+
+        //console.log(this.notes, id);
+
+        const note = this.notes.get(id);
+
+        //console.log(category);
+
+        if(!note) return new Error('We were unable to find your note :(');
+        
+
+        return note;
+
+    }
+
+    checkFavorites(){
+
+        const favorites = this.getFavorites();
+
+        //console.log(this.notes);
+
+        if(favorites.length < 1) return;
+
+        console.log(favorites);
+
+        favorites.forEach(note => {
+
+            this.noteController.renderFavorites(note);
+
+        });
+
+    }
+
+
+    getFavorites(){
+
+        return [...this.notes.values()].filter( note => note.favorite );
 
     }
 
@@ -56,6 +201,7 @@ export class WorkspaceController{
             "createNewCategory": (elOrigin) => this.createNewCategory(elOrigin),
             "select-new-note-icon": (elOrigin, iconName, iconStyle) => this.noteController.changeNoteIcon(elOrigin, iconName, iconStyle),
             "createNewNote": (elOrigin) => this.createNewNote(elOrigin),
+            "openNote": (noteId) => this.guideOpenNote(noteId)
         };
 
         const wrapperHeader = document.querySelector('.wrapper-header');
@@ -64,12 +210,18 @@ export class WorkspaceController{
         const wrapperCategoryStyle = document.querySelectorAll('.new-category-styles');
         const wrappersSubmitNew = document.querySelectorAll('.wrapper-submit-new');
         const newNoteWrapper = document.querySelectorAll('.new-note-icons');
+        const wrapperNoteBtn = document.querySelector('.wrapper-note-btn');
 
         leftSideBar.addEventListener('click', e=>{
 
             this.clickHandle(e, actions);
 
         });
+        wrapperNoteBtn.addEventListener('click', e=>{
+
+            this.clickHandle(e, actions);
+
+        })
         wrapperHeader.addEventListener('click', e=>{
 
             this.clickHandle(e, actions);
@@ -135,12 +287,21 @@ export class WorkspaceController{
         const parentId = el.dataset.parentId;
         const iconName = el.dataset.icon;
         const iconStyle = el.dataset.style;
+        const noteId = el.dataset.noteId;
 
         //console.log(actions);
 
         const handle = actions[action];
 
-        if(target && !parentId){
+        if(!target && noteId){
+
+            if(handle){
+
+                handle(noteId);
+
+            }
+
+        }else if(target && !parentId){
                 
             if(handle){
 
@@ -178,6 +339,7 @@ export class WorkspaceController{
 
         if(parent === 'all-notes') parent = null;
 
+        this.noteController.noteReset();
         this.noteController.setParent(parent);
 
     }
@@ -228,13 +390,14 @@ export class WorkspaceController{
 
             this.notes.set(notesModel.id, notesModel);
 
-            //this.categories = category.map(cat => new CategoryModel(cat));
-
             //console.log(this.categories);
             //console.log(this.notes);
 
             // Send to view 
             this.noteController.render(notesModel);
+            this.noteController.openNote(notesModel);
+
+            this.checkFavorites();
 
         }catch(error){
 
@@ -245,6 +408,16 @@ export class WorkspaceController{
             clickBtn.disabled = false;
 
         }
+
+    }
+
+    guideOpenNote(noteId){
+
+        const note = this.getNoteById(noteId);
+
+        //console.log(note);
+
+        this.noteController.openNote(note);
 
     }
 

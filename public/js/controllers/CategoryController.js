@@ -102,6 +102,21 @@ export class CategoryController{
 
     }
 
+    async getAll(){
+
+        const response = await fetch('/categories', {
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if(!response.ok) throw new Error('Failed to get all categories');
+
+        return await response.json();
+
+    }
+
     render(category){
 
         this.categoryView.renderCategory(category);

@@ -1,6 +1,33 @@
 import * as z from 'zod';
 
+const blockSchema = z.object({
+    id: z
+        .string()
+        .min(1),
+    type: z
+        .enum(["paragraph", "heading", "list"]),
+    content: z
+        .string()
+        .max(20000),
+    parentId: z
+        .string()
+        .nullable()
+        .optional(),
+    children: z
+        .array(z.string())
+
+});
+
+const contentSchema = z.object({
+    byId: z
+        .record(z.string(), blockSchema),
+    rootIds: z
+        .array(z.string())
+});
+
 const notesSchema = z.strictObject({
+        id: z
+            .uuid(),
         title: z
             .string()
             .trim()
@@ -11,23 +38,18 @@ const notesSchema = z.strictObject({
             .nullable()
             .optional(),
         icon: z
-        .string()
-        .trim()
-        .max(50, "Icon is too big"),
+            .string()
+            .trim()
+            .regex(/^fa-[a-z-]+ fa-[a-z-]+$/)
+            .max(50, "Icon is too big"),
         image: z
-        .string()
-        .max(255, "Invalid URL")
-        .optional()
-        .nullable(),
-        content: z
-        .string()
-        .trim()
-        .max(20000, "The content is very large.")
-        .optional()
-        .default(""),
+            .string()
+            .max(255, "Invalid URL")
+            .optional()
+            .nullable(),
+        content: contentSchema,
         favorite: z
-        .boolean(),
-        
+            .boolean(),
     })
 
 export default notesSchema;
