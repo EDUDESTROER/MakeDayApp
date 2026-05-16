@@ -3,7 +3,7 @@ import { createNewNote, getAllNote, updateNote } from '../repositories/notes.rep
 import * as z from 'zod';
 import { sanitizeNote } from '../utils/sanitizeHtml.js';
 
-export async function createNoteService(userId, title, parentId, icon, image, content, favorite){
+export async function createNoteService(userId, title, parentId, icon, emoji, image, content, favorite){
 
     try{
 
@@ -14,12 +14,14 @@ export async function createNoteService(userId, title, parentId, icon, image, co
         const id = crypto.randomUUID();
 
         //console.log(normalizedContent);
+        //console.log(userId, title, parentId, `icon: ${icon}`, `emoji: ${emoji}`, image, content, favorite);
 
         const validation = notesSchema.safeParse({
             id,
             title, 
             parentId, 
-            icon, 
+            icon,
+            emoji, 
             image, 
             content: normalizedContent, 
             favorite
@@ -35,13 +37,13 @@ export async function createNoteService(userId, title, parentId, icon, image, co
 
         }
 
-        //console.log('zod validated Data: ', validation.data);
+        console.log('zod validated Data: ', validation.data);
 
         const sanitized = sanitizeNote(validation.data);
 
-        const {id: testedId, title: testedTitle, parentId: testedParentId, icon: testedIcon, image: testedImage, content: testedContent, favorite: testedFavorite} = sanitized;
+        const {id: testedId, title: testedTitle, parentId: testedParentId, icon: testedIcon, emoji: testedEmoji, image: testedImage, content: testedContent, favorite: testedFavorite} = sanitized;
 
-        const note = await createNewNote(testedId, userId, testedTitle, testedParentId, testedIcon, testedImage, testedContent, testedFavorite);
+        const note = await createNewNote(testedId, userId, testedTitle, testedParentId, testedIcon, testedEmoji, testedImage, testedContent, testedFavorite);
 
         //console.log(note);
 
@@ -49,7 +51,7 @@ export async function createNoteService(userId, title, parentId, icon, image, co
 
     }catch(error){
 
-        //console.log(error);
+        console.log(error);
 
         throw new Error(error);
 
@@ -61,7 +63,8 @@ export async function updateNoteService(
         id,
         title, 
         parentId, 
-        icon, 
+        icon,
+        emoji, 
         image, 
         content, 
         favorite
@@ -90,7 +93,8 @@ export async function updateNoteService(
             id,
             title, 
             parentId, 
-            icon, 
+            icon,
+            emoji, 
             image, 
             content, 
             favorite
@@ -110,9 +114,9 @@ export async function updateNoteService(
         
         const sanitized = sanitizeNote(validation.data);
 
-        const {id: testedId, title: testedTitle, parentId: testedParentId, icon: testedIcon, image: testedImage, content: testedContent, favorite: testedFavorite} = sanitized;
+        const {id: testedId, title: testedTitle, parentId: testedParentId, icon: testedIcon, emoji: testedEmoji, image: testedImage, content: testedContent, favorite: testedFavorite} = sanitized;
 
-        const note = await updateNote(testedId, userId, testedTitle, testedParentId, testedIcon, testedImage, testedContent, testedFavorite);
+        const note = await updateNote(testedId, userId, testedTitle, testedParentId, testedIcon, testedEmoji, testedImage, testedContent, testedFavorite);
 
         //console.log(note);
 

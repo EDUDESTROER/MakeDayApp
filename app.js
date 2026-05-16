@@ -14,7 +14,6 @@ import workspaceRouter from './routes/workspace.js';
 import notFoundRouter from './routes/not-found.js';
 import meRouter from './routes/me.js';
 import categoriesRouter from './routes/categories.js';
-import iconsRouter from './routes/icons.js';
 import notesRouter from './routes/notes.js';
 
 const PORT = process.env.PORT || 3000;
@@ -43,7 +42,6 @@ app.use('/register', registerRouter);
 app.use('/workspace', workspaceRouter);
 app.use('/me', meRouter);
 app.use('/categories', categoriesRouter);
-app.use('/icons', iconsRouter);
 app.use('/notes', notesRouter);
 
 app.use('/uploads', express.static('uploads'));

@@ -36,6 +36,7 @@ export class CategoryController{
 
     setTitle(value){
 
+        console.log(value);
         this.state.title = value.trim();
         this.updatePreview();
 
@@ -121,6 +122,11 @@ export class CategoryController{
 
         this.categoryView.renderCategory(category);
         this.categoryReset();
+
+    }
+    renderCategoriesEmptyState(id){
+
+        this.categoryView.emptyStateTo(id);
 
     }
     categoryReset(){

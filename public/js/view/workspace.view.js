@@ -4,9 +4,42 @@ export class WorkspaceView{
 
         this.firstShow = true;
         this.menuHidden = false;
+        this.firstPanelElement = true;
         this.focusId = '#left-side-bar';
         this.wideScreen = this.checkDevice();
         this.checkResize();
+        this.smartDashboardEl = this.getDashboard();
+        this.selectIconEmojiBtn = document.getElementById('newNoteIconBtn');
+        this.newNoteWrappers = {
+            'icons': document.querySelector('.new-note-icons'),
+            'emojis': document.querySelector('.new-note-emojis')
+        }
+        this.newNoteWrapperSelect = 'icons';
+    }
+
+    toggleIconsEmojis(el){
+
+        this.selectIconEmojiBtn?.classList.remove('select-style')
+
+        el.classList.add('select-style');
+
+        this.selectIconEmojiBtn = el;
+
+        //console.log(this.newNoteWrappers[this.newNoteWrapperSelect])
+
+        this.unShowEl(`#${this.newNoteWrappers[this.newNoteWrapperSelect].id}`);
+
+        this.newNoteWrapperSelect = el.textContent.toLowerCase();
+
+        this.showEl(`#${this.newNoteWrappers[this.newNoteWrapperSelect].id}`);
+
+        //console.log(el);
+
+    }
+
+    getDashboard(){
+
+        return document.querySelector('.wrapper-smart-history');
 
     }
 
@@ -17,6 +50,8 @@ export class WorkspaceView{
         el.style.opacity = '100';
 
         el.removeAttribute('inert');
+
+        //console.log(id);
 
     }
 
@@ -70,8 +105,8 @@ export class WorkspaceView{
 
             if(this.firstShow || this.focusId === '#left-side-bar'){
 
-                this.showEl('#all-note');          // change to welcome page
-                this.focusId = '#all-note';        // change to welcome page
+                this.showEl('#smart-dashboard');          
+                this.focusId = '#smart-dashboard';        
 
             }else{
 
@@ -121,6 +156,122 @@ export class WorkspaceView{
         //console.log('Unfocus: ', this.focusId);
 
         this.focusId = `${id}`;
+
+    }
+
+    renderSmartDashboard(note, info, steps, endTime){
+
+        const wrapper = document.createElement('div');
+
+        if(this.firstPanelElement) {
+            wrapper.className = 'wrapper-smart-card buttons-basic-efects smart-card-select';
+            this.firstPanelElement = false;
+        }else{
+            wrapper.className = 'wrapper-smart-card buttons-basic-efects';
+        }
+        
+
+        wrapper.dataset.noteId = note.id;
+        wrapper.dataset.action = 'openNote';
+
+        const header = this.assemblerSmartHeader(note.icon, note.emoji, info, note.title);
+        const stepsEl = this.assemblerStepsWrapper(steps);
+
+        const timerEl = this.assemblerTimerWrapper(endTime);
+
+        wrapper.append(header, stepsEl, timerEl);
+
+        this.smartDashboardEl.appendChild(wrapper);
+
+    }
+
+    assemblerTimerWrapper(time){
+
+        const wrapper = document.createElement('div');
+
+        wrapper.className = 'smart-timer';
+
+        const span = document.createElement('span');
+
+        span.textContent = time;
+
+        wrapper.appendChild(span);
+
+        return wrapper;
+
+    }
+
+    assemblerStepsWrapper(stepsObj){
+
+        const wrapper = document.createElement('div');
+
+        wrapper.className = 'wrapper-smart-steps';
+
+        const stepsDoneEl = this.createStepsSpan('smart-steps-done', stepsObj.done);
+        const stepsNotDoneEl = this.createStepsSpan('smart-steps-not-done', `/${stepsObj.notDone}`);
+
+        wrapper.append(stepsDoneEl, stepsNotDoneEl);
+
+        return wrapper;
+
+    }
+
+    createStepsSpan(id, content){
+
+        const span = document.createElement('span');
+
+        span.id = id;
+        span.textContent = content;
+
+        return span;
+
+    }
+
+    assemblerSmartHeader(icon, emoji, info, title){
+
+        const header = document.createElement('div');
+
+        header.className = 'smart-card-header';
+
+        const iconEl = this.getSmartIcon(icon, emoji, info);
+
+        const titleEl = this.getSmartTitle(title);
+
+        header.append(iconEl, titleEl);
+
+        return header;
+
+    }
+
+    getSmartTitle(title){
+
+        const wrapper = document.createElement('div');
+
+        wrapper.className = 'wrapper-smart-title';
+
+        wrapper.textContent = title;
+
+        return wrapper;
+
+    }
+
+    getSmartIcon(icon, emoji, info){
+
+        const wrapper = document.createElement('div');
+
+        wrapper.classList.add('wrapper-smart-icon', info);
+
+        const iconEl = document.createElement('i');
+
+        if(!icon){
+            iconEl.textContent = emoji;
+        }else{
+            iconEl.className = icon;
+        }
+
+        wrapper.appendChild(iconEl);
+
+        return wrapper;
 
     }
 

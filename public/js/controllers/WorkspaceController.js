@@ -4,18 +4,24 @@ import { CategoryModel } from '/js/models/CategoryModel.js';
 import { NoteModel } from '/js/models/NoteModel.js';
 import { NoteController } from '/js/controllers/NoteController.js';
 import { IconsController } from '/js/controllers/iconsController.js';
+import { EmojiController } from '/js/controllers/emojiController.js';
+import { TimeService } from '../services/time.service.js';
+import { GreetingService } from '../services/greeting.service.js';
 
 export class WorkspaceController{
 
     constructor(){
 
+        this.timeService = new TimeService();
+        this.greetingService = new GreetingService(this.timeService);
         this._username;
         this.getUsername();
         this.startEvents();
+        this.iconsController = new IconsController();
+        this.emojiController = new EmojiController();
         this.workspaceView = new WorkspaceView();
         this.categoryController = new CategoryController(this.workspaceView);
-        this.noteController = new NoteController(this, this.workspaceView);
-        this.iconsController = new IconsController();
+        this.noteController = new NoteController(this, this.workspaceView, this.iconsController, this.emojiController);
         this.categories = new Map();
         this.notes = new Map();
         this.getAllCategories();
@@ -80,6 +86,8 @@ export class WorkspaceController{
 
         }catch(err){
 
+            //console.error(err);
+
             alert('Make an error Log on workspace!!!', err);
 
         }
@@ -117,6 +125,11 @@ export class WorkspaceController{
 
             //console.log(notes);
 
+            if(notes.length <= 0) {
+                this.workspaceView.flowControl('#welcome-workspace');
+                this.categoryController.renderCategoriesEmptyState('all-tasks-content-wrapper');
+            }
+
             notes.forEach(note =>{
 
                 const model = new NoteModel(note);
@@ -134,6 +147,7 @@ export class WorkspaceController{
             });
 
             this.checkFavorites();
+            this.renderSmartPanel();
 
         }catch(err){
 
@@ -178,6 +192,53 @@ export class WorkspaceController{
 
     }
 
+    renderSmartPanel(){
+
+        const historyNotes = this.getHistory();
+
+        historyNotes.forEach(note=>{
+
+            const deadLineTxt = this.getDeadLine(note.deadLine || 'none', 'text');
+
+            const steps = {
+                done: note.steps?.done || '0',
+                notDone: note.steps?.notDone || '0'
+            }
+
+            const timeToFinish = this.getFormatTimeToGo(note.timeToFinish);
+
+            this.workspaceView.renderSmartDashboard(note, deadLineTxt, steps, timeToFinish);
+
+        });
+
+    }
+
+    getFormatTimeToGo(time){
+
+        if(!time || time === undefined) return 'No timer';
+
+    }
+
+    getDeadLineList(type){
+
+        const textList = {
+            'fine': 'fine',
+            'danger': 'danger',
+            'warn': 'warn'
+        }
+
+        if(type === 'text') return textList;
+
+    }
+
+    getDeadLine(date, type){
+
+        const list = this.getDeadLineList(type);
+
+        if(date === 'none' || !date) return list['fine'];
+
+    }
+
 
     getFavorites(){
 
@@ -185,9 +246,30 @@ export class WorkspaceController{
 
     }
 
+    getHistory(){
+
+        return [...this.notes.values()]
+        .sort((a, b) => b.updatedAt - a.updatedAt)
+        .slice(0, 6);
+
+    }
+    
+    getWelcome(){
+
+        return `${this.greetingService.getGreeting()}, ${this._username} 👋`;
+
+    }
+    getDayWelcome(){
+
+        return this.timeService.getFullDateFormated();
+
+    }
+
     setInfo(){
 
         document.getElementById('username').textContent = this._username;
+        document.getElementById('presentation-header-name').textContent = this.getWelcome();
+        document.getElementById('presentation-header-day').textContent = this.getDayWelcome();
 
     }
 
@@ -200,8 +282,10 @@ export class WorkspaceController{
             "select-new-category": (elOrigin, typeTarget) => this.categoryController.changeBtnStyle(elOrigin),
             "createNewCategory": (elOrigin) => this.createNewCategory(elOrigin),
             "select-new-note-icon": (elOrigin, iconName, iconStyle) => this.noteController.changeNoteIcon(elOrigin, iconName, iconStyle),
+            "select-new-note-emoji": (elOrigin, emoji) => this.noteController.changeNoteEmoji(elOrigin, emoji),
             "createNewNote": (elOrigin) => this.createNewNote(elOrigin),
-            "openNote": (noteId) => this.guideOpenNote(noteId)
+            "openNote": (noteId) => this.guideOpenNote(noteId),
+            "toggleIconsEmojis": (elOrigin) => this.workspaceView.toggleIconsEmojis(elOrigin)
         };
 
         const wrapperHeader = document.querySelector('.wrapper-header');
@@ -211,8 +295,32 @@ export class WorkspaceController{
         const wrappersSubmitNew = document.querySelectorAll('.wrapper-submit-new');
         const newNoteWrapper = document.querySelectorAll('.new-note-icons');
         const wrapperNoteBtn = document.querySelector('.wrapper-note-btn');
+        const wrapperEmptyState = document.querySelector('.wrapper-button-empty-state');
+        const smartHistory = document.querySelector('.wrapper-smart-history');
+        const wrapperIconsBtn = document.querySelector('.wrapper-icons-btn');
+        const wrapperEmojisBtn = document.querySelector('.new-note-emojis');
 
+        wrapperEmojisBtn.addEventListener('click', e=>{
+
+            this.clickHandle(e, actions);
+
+        });
+        wrapperIconsBtn.addEventListener('click', e=>{
+
+            this.clickHandle(e, actions);
+
+        });
         leftSideBar.addEventListener('click', e=>{
+
+            this.clickHandle(e, actions);
+
+        });
+        smartHistory.addEventListener('click', e=>{
+
+            this.clickHandle(e, actions);
+
+        });
+        wrapperEmptyState.addEventListener('click', e=>{
 
             this.clickHandle(e, actions);
 
@@ -288,10 +396,12 @@ export class WorkspaceController{
         const iconName = el.dataset.icon;
         const iconStyle = el.dataset.style;
         const noteId = el.dataset.noteId;
+        const newNoteEmoji = el.dataset.emoji;
 
         //console.log(actions);
 
         const handle = actions[action];
+
 
         if(!target && noteId){
 
@@ -301,6 +411,12 @@ export class WorkspaceController{
 
             }
 
+        }else if(!target && newNoteEmoji){
+            if(handle){
+
+                handle(el, newNoteEmoji);
+
+            }
         }else if(target && !parentId){
                 
             if(handle){
@@ -366,6 +482,8 @@ export class WorkspaceController{
 
         }catch(error){
 
+            console.error(error);
+
             this.categoryController.error('Create error', error); // temporary
 
         }finally{
@@ -388,6 +506,8 @@ export class WorkspaceController{
 
             const notesModel = new NoteModel(noteData);
 
+            console.log(notesModel);
+
             this.notes.set(notesModel.id, notesModel);
 
             //console.log(this.categories);
@@ -400,6 +520,8 @@ export class WorkspaceController{
             this.checkFavorites();
 
         }catch(error){
+
+            console.error(error);
 
             this.noteController.error('Create error', error); // temporary
 

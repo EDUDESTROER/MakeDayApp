@@ -3,13 +3,15 @@ import { EditorController } from '/js/editor/editor.controller.js';
 
 export class NoteController{
 
-    constructor(workspaceController, workspaceView, editorController){
+    constructor(workspaceController, workspaceView, iconsController, emojiController){
 
         this.workspaceView = workspaceView;
         this.workspaceController = workspaceController;
         this.noteView = new NoteView(this.workspaceView);
         this.editorController = new EditorController(this);
-        this.firstNoteId = crypto.randomUUID();
+        this.firstNoteId = this.getUuid();
+        this.iconsController = iconsController;
+        this.emojiController = emojiController;
 
         this.defaultContent = {
             byId: {
@@ -28,6 +30,7 @@ export class NoteController{
             title: '',
             parentId: '',
             icon: 'fa-solid fa-question',
+            emoji: '',
             image: null,
             content: this.defaultContent,
             favorite: false
@@ -40,9 +43,18 @@ export class NoteController{
         this.inputImage = document.querySelector('#new-note-image');
 
         this.selectedIconBtn = '';
+        this.selectedEmojiBtn = '';
         
 
         this.init();
+
+    }
+
+    getUuid(){
+
+        if(typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+
+        return 'id-' + Date.now() + '-' + Math.random().toString(16).slice(2);
 
     }
 
@@ -51,6 +63,8 @@ export class NoteController{
         this.inputTitle.addEventListener('input', e =>{
 
             this.setTitle(e.target.value);
+            this.iconsController.setSearch(e.target.value.toLowerCase().trim());
+            this.emojiController.setSearch(e.target.value.toLowerCase().trim());
 
         });
 
@@ -90,8 +104,18 @@ export class NoteController{
 
     setIcon(icon){
 
+        //console.log(typeof icon);
+
         this.state.icon = icon;
+        this.state.emoji = '';
         this.updatePreviewIcon();
+
+    }
+    setEmoji(emoji){
+
+        this.state.emoji = emoji;
+        this.state.icon = '';
+        this.updatePreviewEmoji();
 
     }
 
@@ -114,6 +138,7 @@ export class NoteController{
         formData.append('title', this.state.title);
         formData.append('parentId', this.state.parentId);
         formData.append('icon', this.state.icon);
+        formData.append('emoji', this.state.emoji);
         formData.append('image', this.state.image);
         formData.append('content', JSON.stringify(this.state.content));
         formData.append('favorite', this.state.favorite);
@@ -125,9 +150,9 @@ export class NoteController{
             body: formData
         });
 
-        //console.log('Front => after post: ', response);
-
         if(!response.ok) throw new Error('Failed to create note');
+
+        //console.log('Front => after post: ', await response.json());
 
         return await response.json();
 
@@ -210,7 +235,7 @@ export class NoteController{
 
         this.state = structuredClone(note); 
 
-        this.noteView.setInAllNote(note.title, note.icon, note.image);
+        this.noteView.setInAllNote(note.title, note.icon, note.emoji, note.image);
 
         this.editorController.setContent(note.content);
         this.editorController.render();
@@ -228,11 +253,13 @@ export class NoteController{
         this.updatePreviewTitle();
         this.resetNoteImage();
         this.updatePreviewIcon();
+        this.updatePreviewEmoji();
         this.inputTitle.value = '';
 
         this.inputImage.value = '';
 
-        if(this.selectedIconBtn) this.selectedIconBtn.classList.toggle('select-style');
+        if(this.selectedIconBtn) this.selectedIconBtn.classList.remove('select-style');
+        if(this.selectedEmojiBtn) this.selectedEmojiBtn.classList.remove('select-style');
 
         
         this.updateShowType(this.state.parentId);
@@ -268,11 +295,28 @@ export class NoteController{
 
         //console.log(targetBtn, iconName, iconStyle);
 
-        this.setIcon(`${iconStyle} fa-${iconName}`);
+        this.setIcon(`${iconStyle} ${iconName}`);
 
         const buttons = targetBtn.parentElement.children;
 
         this.selectedIconBtn = targetBtn;
+
+        Array.from(buttons).forEach(btn => {
+
+            btn.classList.toggle('select-style', btn === targetBtn);
+
+        });
+
+    }
+    changeNoteEmoji(targetBtn, emoji){
+
+        //console.log(targetBtn, emoji);
+
+        this.setEmoji(emoji);
+
+        const buttons = targetBtn.parentElement.children;
+
+        this.selectedEmojiBtn = targetBtn;
 
         Array.from(buttons).forEach(btn => {
 
@@ -314,6 +358,13 @@ export class NoteController{
 
         this.noteView.updateNotePreviewIcon(
             this.state.icon || 'fa-solid fa-question'
+        );
+
+    }
+    updatePreviewEmoji(){
+
+        this.noteView.updateNotePreviewEmoji(
+            this.state.emoji || '❓'
         );
 
     }

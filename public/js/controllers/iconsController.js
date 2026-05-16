@@ -1,81 +1,84 @@
+import { IconsView } from "../view/icons.view.js";
+
 export class IconsController{
 
     constructor(){
 
-        this.page = 1;
-        this.currentType = "solid";
-        this.container = document.querySelector('.new-note-icons');
+        this.iconsView = new IconsView();
         this.loadMoreBtn = document.getElementById("load-more");
-        this.loading = false;
-        this.readRegular = false;
+        this.allIcons = [];
+
+        this.searchTerm = '';
+        this.visibleCount = 60;
 
         this.init();
         
     }
 
-    init(){
+    setSearch(term){
 
+        this.searchTerm = term;
+        this.visibleCount = 60;
         this.loadIcons();
-        this.loadMoreBtn.addEventListener("click", () => this.loadIcons());
+
+    }
+
+    async init(){
+
+        await this.getIcons();
+        this.loadIcons();
+        this.loadMoreBtn.addEventListener("click", () => {
+            this.visibleCount += 30;
+            this.loadIcons();
+        });
         //this.initInfiniteScroll();
 
     }
 
+    async getIcons(){
+
+        if(this.allIcons?.length > 0) return;
+
+        const icons = await fetch("/icons/icons.json")
+            .then(res => res.json());
+
+        this.allIcons = [
+            ...icons.solid,
+            ...icons.regular
+        ];
+
+    }
+
+    getFilteredIcons(){
+
+        if(!this.searchTerm) return this.allIcons;
+
+        return this.allIcons.filter(icon =>
+            icon.name.toLowerCase().includes(this.searchTerm)
+        );
+
+    }
+
     async loadIcons(){
+        
+        const filtered = this.getFilteredIcons();
+        const iconsToShow = filtered.slice(0, this.visibleCount);
 
-        if (this.loading) return;
-        this.loading = true;
+        
+        this.iconsView.cleanContainer();
 
-        const res = await fetch(`/icons?type=${this.currentType}&page=${this.page}&limit=30`);
-        const icons = await res.json();
+        iconsToShow.forEach(icon => {
 
-        if(!this.container) return;
+            this.iconsView.renderIcons(icon);
 
-        //console.log(icons.length, this.currentType);
+        });
 
-        if(icons.length == 0 && !this.readRegular) {
-            this.currentType = "regular";
-            this.page = 1;
-            this.readRegular = true;
+        if(this.allIcons.length < this.visibleCount){
+            this.iconsView.hiddenLoadMore(this.loadMoreBtn);
+        }else{
+            this.iconsView.showLoadMore(this.loadMoreBtn);
         }
 
-        icons.forEach(icon => {
-
-            const btn = document.createElement("button");
-            btn.className = 'btn-new-note-icons buttuns-purple-style';
-            btn.dataset.action = 'select-new-note-icon';
-            btn.dataset.style = icon.style;
-            btn.dataset.icon = icon.name;
-            
-            const i = document.createElement("i");
-            i.className = `${icon.style} fa-${icon.name}`;
-
-            btn.appendChild(i);
-
-            this.container.appendChild(btn);
-
-        });
-
-        this.page++;
-        this.loading = false;
-
     }
-    resetIcon(){
-        
-    }
-    /*initInfiniteScroll() {
-        const sentinel = document.getElementById("scroll-sentinel");
-
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-            this.loadIcons();
-            }
-        }, {
-            root: null,
-            threshold: 1.0
-        });
-
-        observer.observe(sentinel);
-    }*/
 
 }

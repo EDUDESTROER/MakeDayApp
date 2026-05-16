@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="wrapper-configuration">
-                <button data-action="showTarget" data-target="#configs-menu" id="btn-configs">
+                <button data-action="showTarget?" data-target="#configs-menu" id="btn-configs">
                     <i title="Configurations" class="fa-solid fa-toolbox"></i>
                 </button>
             </div>
@@ -52,12 +52,33 @@
             
             <div class="wrapper-all-tasks side-wrappers">
                 <h2>All Tasks <button data-action="createNote" data-target="#new-note" data-parent-id="all-notes" class="buttuns-purple-style" type="button" title="Create a new note on group"><i class="fa-solid fa-square-plus"></i></button></h2>
-                <div class="all-tasks-content-wrapper basic-content">
-                     <!--add with a filter-->
+                <div id="all-tasks-content-wrapper" class="all-tasks-content-wrapper basic-content">
+                    <!--add with a filter-->
                 </div>
             </div>
         </section>
         <div class="wrapper-main-content">
+            <section id="welcome-workspace" class="welcome-wrapper" style="opacity: 0;" inert>
+                <div class="wrapper-image-empty-state">
+                    <img src="/img/notesEmptyState.png" alt="Your workspace is empty. Create your first note and start organizing your ideas.">
+                </div>
+                <div class="wrapper-button-empty-state">
+                    <button data-action="createNote" data-target="#new-note" data-parent-id="all-notes" class="buttuns-purple-style"><span>Create your first note</span><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </section>
+            <section class="wrapper-smart-dashboard" id="smart-dashboard" style="opacity: 0;" inert>
+                <div class="wrapper-smart-presentation">
+                    <p id="presentation-header-name">
+                        Good morning, ? 👋
+                    </p>
+                    <p>
+                        <span><i class="fa-solid fa-calendar-day"></i>Today is</span><span id="presentation-header-day">?, ? ?th</span>
+                    </p>
+                </div>
+                <div class="wrapper-smart-history">
+                    <!--add with a filter-->
+                </div>
+            </section>
             <section id="all-note" class="note-wrapper" style="opacity: 0;" inert>
                 <div class="content-wrapper">
                     <div class="wrapper-note-btn">
@@ -69,10 +90,10 @@
                             <img id="note-image" draggable="false" src="/img/Tarefas-capa.jpg" alt="">
                         </div>
                         <div class="wrapper-icon" id="note-icon-wrapper">
-                            <i id="note-icon" class="fa-solid fa-thumbtack"></i>
+                            <i id="note-icon" class="fa-solid fa-circle-notch"></i>
                         </div>
                         <div class="wrapper-title">
-                            <span id="note-title">Tarefas</span>
+                            <span id="note-title">loading...</span>
                         </div>
                     </div>
                     <div id="note-content" class="note-content">
@@ -164,14 +185,16 @@
 
                             <span>Choose one:</span>
                             <div class="wrapper-icon-or-emoji">
-                                <button class="buttuns-purple-style select-style" type="button">Icons</button>
+                                <button id="newNoteIconBtn" data-action="toggleIconsEmojis" class="buttuns-purple-style select-style" type="button">Icons</button>
                                 <span>Or</span>
-                                <button class="note-btn buttuns-purple-style" type="button">Emojis</button>
+                                <button id="newNoteEmojiBtn" data-action="toggleIconsEmojis" class="note-btn buttuns-purple-style" type="button">Emojis</button>
                             </div>
 
                         </div>
                         <div class="new-notes-icon-wrapper">
-                            <div class="new-note-icons">
+                            <div class="new-note-icons" id="new-note-icons">
+                            </div>
+                            <div class="new-note-emojis" id="new-note-emojis" style="opacity: 0;position: absolute;" inert>
                             </div>
                             <div class="load-more-wrapper">
                                 <button id="load-more" class="scroll-hint buttuns-purple-style">

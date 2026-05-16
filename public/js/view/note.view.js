@@ -25,11 +25,12 @@ export class NoteView{
 
     }
 
-    setInAllNote(title, icon, image){
+    setInAllNote(title, icon, emoji, image){
 
         /*console.log('Render note page: ');
         console.log('Note Title: ', title);
         console.log('Note icon: ', icon);
+        console.log('Note emoji: ', emoji);
         console.log('Note image: ', image);*/
 
         if(!image){
@@ -48,10 +49,16 @@ export class NoteView{
 
         }
 
-        if(!icon || !title) throw new Error('Invalid note.');
+        if((!icon && !emoji) || !title) throw new Error('Invalid note.');
 
         this.noteTitleEl.textContent = title;
-        this.noteIconEl.className = icon;
+        if(!icon){
+            this.noteIconEl.className = '';
+            this.noteIconEl.textContent = emoji;
+        }else{
+            this.noteIconEl.className = icon;
+            this.noteIconEl.textContent = '';
+        }
         
 
     }
@@ -106,7 +113,17 @@ export class NoteView{
         //console.log(value);
 
         this.newNoteResultIcons.forEach(el =>{
+            el.textContent = '';
             el.className = value;
+            //console.log(el);
+        });
+
+    }
+    updateNotePreviewEmoji(value){
+
+        this.newNoteResultIcons.forEach(el =>{
+            el.textContent = value;
+            el.className = '';
         });
 
     }
@@ -138,21 +155,40 @@ export class NoteView{
         }
 
     }
+
+    removeEmptyState(parent){
+
+        if(parent.dataset.emptyState){
+
+            const child = document.getElementById(parent.dataset.emptyState);
+
+            //console.log(child);
+
+            if(child) parent.removeChild(child);
+
+        }
+
+    }
+
     renderNote(note, renderType){
 
         //console.log('Creating a new note: ', note, renderType);
 
         if(renderType === 'card'){
 
-            const newNote = this.assembleCard(note.icon, note.image, note.title, note.id);
+            const newNote = this.assembleCard(note.icon, note.emoji, note.image, note.title, note.id);
 
             if(!note.parentId){
+
+                this.removeEmptyState(this.allTasksEl);
 
                 this.allTasksEl.appendChild(newNote);
 
             }else if(note.parentId){
 
                 const parentEl = document.getElementById(note.parentId);
+
+                this.removeEmptyState(parentEl);
 
                 parentEl.appendChild(newNote);
 
@@ -162,15 +198,19 @@ export class NoteView{
 
         }else if(renderType === 'list'){
 
-            const newNote = this.assembleList(note.icon, note.title, note.id);
+            const newNote = this.assembleList(note.icon, note.emoji, note.title, note.id);
 
             if(!note.parentId){
+
+                this.removeEmptyState(this.allTasksEl);
 
                 this.allTasksEl.appendChild(newNote);
 
             }else if(note.parentId){
 
                 const parentEl = document.getElementById(note.parentId);
+
+                this.removeEmptyState(parentEl);
 
                 parentEl.appendChild(newNote);
 
@@ -188,7 +228,7 @@ export class NoteView{
 
     renderFavoritesView(note){
 
-        const newNote = this.assembleCard(note.icon, note.image, note.title, note.id);
+        const newNote = this.assembleCard(note.icon, note.emoji, note.image, note.title, note.id);
 
         const parentEl = document.getElementById('favorites-content');
 
@@ -208,9 +248,9 @@ export class NoteView{
 
     }
 
-    assembleList(icon, title, id){
+    assembleList(icon, emoji, title, id){
 
-        const noteIcon = this.createIcon(icon);
+        const noteIcon = this.createIcon(icon, emoji);
         const menuIcon = this.createIcon('fa-solid fa-ellipsis');
         const wrapperIcon = this.createDiv('basic-icon-list');
         const header = this.createHeader('list-text', title);
@@ -228,9 +268,9 @@ export class NoteView{
 
     }
 
-    assembleCard(icon, image, title, id){
+    assembleCard(icon, emoji, image, title, id){
 
-        const iconEl = this.createIcon(icon);
+        const iconEl = this.createIcon(icon, emoji);
 
         const internDiv = this.createDiv('card-icon');
 
@@ -288,11 +328,15 @@ export class NoteView{
 
     }
 
-    createIcon(iconClass){
+    createIcon(iconClass, emoji){
 
         const i = document.createElement('i');
 
-        i.className = iconClass;
+        if(!iconClass || iconClass === undefined){
+            i.textContent = emoji;
+        }else{
+            i.className = iconClass;
+        }
 
         return i;
 

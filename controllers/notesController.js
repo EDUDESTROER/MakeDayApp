@@ -8,7 +8,7 @@ export async function createNote(req, res){
 
         //console.log(req.body);
 
-        const {title, parentId, icon} = req.body;
+        const {title, parentId, icon, emoji} = req.body;
 
         const favorite = req.body.favorite === "true" ? true : false;
 
@@ -23,6 +23,7 @@ export async function createNote(req, res){
             title,
             parentId,
             icon,
+            emoji,
             image,
             content,
             favorite
@@ -54,7 +55,7 @@ export async function updateNote(req, res){
         //console.log(req.body);
         //console.log('Favorite body: ', req.body.favorite);
 
-        const {id, title, parentId, icon, content, favorite, image} = req.body;
+        const {id, title, parentId, icon, emoji, content, favorite, image} = req.body;
         
         //console.log(id, title, parentId, icon, content, favorite, image);
 
@@ -64,6 +65,7 @@ export async function updateNote(req, res){
             title,
             parentId,
             icon,
+            emoji,
             image,
             content,
             favorite

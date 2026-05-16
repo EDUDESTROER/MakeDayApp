@@ -40,8 +40,20 @@ const notesSchema = z.strictObject({
         icon: z
             .string()
             .trim()
-            .regex(/^fa-[a-z-]+ fa-[a-z-]+$/)
-            .max(50, "Icon is too big"),
+            .transform(val => val === "" ? undefined : val)
+            .refine(
+                v => !v || /^fa-[a-z-]+ fa-[a-z-]+$/.test(v),
+                "Invalid icon format"
+            )
+            .optional(),
+        emoji:z
+            .string()
+            .min(1, "icon is required")
+            .max(10, "Invalid emoji")
+            .refine((value)=>{
+                return /\p{Extended_Pictographic}/u.test(value);
+            }, "Invalid emoji")
+            .optional(),
         image: z
             .string()
             .max(255, "Invalid URL")

@@ -5,18 +5,22 @@ export async function createNewNote(
     userId, 
     title, 
     parentId, 
-    icon, 
+    icon,
+    emoji, 
     image, 
     content, 
     favorite
 ){
 
-    //console.log('repository: ', id, userId, title, parentId, icon, image, content, favorite)
+    icon = icon === undefined ? '' : icon;
+
+    //console.log('repository: ', id, userId, title, parentId, icon, emoji, image, content, favorite)
+
 
     const [rows] = await conn.execute(
-        `INSERT INTO notes (id, user_id, title, parent_id, icon, image, content, is_favorite)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        [id, userId, title, parentId ?? null, icon, image ?? null, content ?? null, favorite]
+        `INSERT INTO notes (id, user_id, title, parent_id, icon, emoji, image, content, is_favorite)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [id, userId, title, parentId ?? null, icon, emoji, image ?? null, content ?? null, favorite]
     );
 
     //console.log('repository result: ', rows)
@@ -27,6 +31,7 @@ export async function createNewNote(
         title,
         parent_id: parentId ?? null,
         icon: icon,
+        emoji,
         image: image ?? null,
         content: content,
         is_favorite: favorite,
@@ -40,11 +45,14 @@ export async function updateNote(
     userId, 
     title, 
     parentId, 
-    icon, 
+    icon,
+    emoji, 
     image, 
     content, 
     favorite
 ){
+
+    icon = icon === undefined ? '' : icon;
 
     //console.log('repository: ', id, userId, title, parentId, icon, image, content, favorite)
 
@@ -52,7 +60,8 @@ export async function updateNote(
         `UPDATE notes
         SET title = ?, 
             parent_id = ?, 
-            icon = ?, 
+            icon = ?,
+            emoji = ?, 
             image = ?, 
             content = ?, 
             is_favorite = ?
@@ -61,6 +70,7 @@ export async function updateNote(
             title, 
             parentId ?? null, 
             icon, 
+            emoji,
             image ?? null, 
             content ?? null, 
             favorite,
@@ -75,6 +85,7 @@ export async function updateNote(
         title,
         parent_id: parentId ?? null,
         icon: icon,
+        emoji: emoji,
         image: image ?? null,
         content: content,
         is_favorite: favorite,
@@ -85,7 +96,7 @@ export async function updateNote(
 export async function getAllNote(id){
 
     const [rows] = await conn.execute(
-        `SELECT id, title, parent_id, icon, image, content, is_favorite, created_at, updated_at FROM notes WHERE user_id = ?`,
+        `SELECT id, title, parent_id, icon, emoji, image, content, is_favorite, created_at, updated_at FROM notes WHERE user_id = ? ORDER BY updated_at DESC`,
         [id]
     );
 

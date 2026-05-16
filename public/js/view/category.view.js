@@ -7,6 +7,64 @@ export class CategoryView{
 
     }
 
+    emptyStateTo(id){
+
+        const contentWrapper = document.getElementById(id);
+
+        const emptyId = `category-empty-state-${id}`;
+
+        contentWrapper.dataset.emptyState = emptyId;
+
+        const p = document.createElement('p');
+
+        p.textContent = 'This category is empty';
+
+        const button = this.createEmptyStateButton(id);
+
+        const wrapper = this.createEmptyStateWrapper(emptyId);
+
+        wrapper.append(p, button);
+
+        contentWrapper.appendChild(wrapper);
+
+    }
+
+    createEmptyStateButton(id){
+
+        const span = document.createElement('span');
+
+        span.textContent = 'Create a note';
+
+        const i = document.createElement('i');
+
+        i.className = 'fa-solid fa-plus';
+
+        const button = document.createElement('button');
+
+        button.dataset.action = 'createNote';
+        button.dataset.target = '#new-note';
+        button.dataset.parentId = id !== 'all-tasks-content-wrapper' ? id : 'all-notes';
+
+        button.className = 'buttuns-purple-style';
+
+        button.append(span, i);
+
+        return button;
+
+    }
+
+    createEmptyStateWrapper(id){
+
+        const wrapper = document.createElement('div');
+
+        wrapper.className = 'wrapper-category-empty-state';
+
+        wrapper.id = id;
+
+        return wrapper;
+
+    }
+
     updateCategoryPreview(value){
 
         this.previewTitles.forEach(title => {
@@ -24,6 +82,8 @@ export class CategoryView{
         const categoryEl = this.assembleCategory(category.id, category.title, category.viewMode);
 
         this.categoriesWrapper.appendChild(categoryEl);
+
+        this.emptyStateTo(category.id);
         
     }
 
@@ -53,6 +113,7 @@ export class CategoryView{
             wrapper.classList.add('basic-content');
             wrapper.classList.add('list-content-wrapper');
         }
+        wrapper.style.position = 'relative';
 
         return wrapper;
 
