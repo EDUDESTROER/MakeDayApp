@@ -37,7 +37,7 @@ export async function createNoteService(userId, title, parentId, icon, emoji, im
 
         }
 
-        console.log('zod validated Data: ', validation.data);
+        //console.log('zod validated Data: ', validation.data);
 
         const sanitized = sanitizeNote(validation.data);
 
@@ -51,7 +51,7 @@ export async function createNoteService(userId, title, parentId, icon, emoji, im
 
     }catch(error){
 
-        console.log(error);
+        //console.log(error);
 
         throw new Error(error);
 
