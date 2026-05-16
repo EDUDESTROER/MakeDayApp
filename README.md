@@ -27,6 +27,8 @@ this project was build to demonstrate
 
 🖥️ Workspace Page
 
+<img width="1469" height="758" alt="Captura de tela 2026-05-16 183105" src="https://github.com/user-attachments/assets/cfec38ed-b2d4-477d-91ae-2574f3651e8e" />
+
 ## 🧩 Architecture Overview
 ### Backend
 * Express.js server
