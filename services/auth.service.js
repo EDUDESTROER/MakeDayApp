@@ -1,6 +1,6 @@
 import { comparePassword, hashPassword } from "./password.service.js";
 import {registerUser} from '../repositories/users.repository.js';
-import { findAuthByEmail, findAuthByUsername } from '../repositories/users.repository.js';
+import { findAuthByEmail, findAuthByUsername, findAuthById } from '../repositories/users.repository.js';
 
 export async function validateLogin(email, password) {
     
@@ -35,6 +35,23 @@ export async function CreateUser(data){
     }catch(err){
 
         throw new Error("Unable to complete registration!");
+
+    }
+
+}
+export async function checkUser(id){
+
+    try{
+
+        const user = await findAuthById(id);
+
+        return {
+            username: user.username
+        }
+
+    }catch(err){
+
+        throw new Error("Unable to retrieve user information.");
 
     }
 
