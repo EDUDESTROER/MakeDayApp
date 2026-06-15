@@ -1,4 +1,5 @@
 *.xcf
+.env
 public/img/imageIdeas
 public/img/Editing
 public/fontwesome

@@ -22,6 +22,17 @@
     background-color: #1d1f21;
     border-radius: 20px;
 }
+#exit-menus{
+
+    position: absolute;
+    background-color: #0000008c;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+    transition: ease-in-out;
+    cursor: pointer;
+
+}
 body{
 
     //background-color: aquamarine;
@@ -147,6 +158,964 @@ body{
 
             transform: scale(0.9);
             transition: all ease 200ms;
+
+        }
+
+    }
+
+}
+.important-modal-warn{
+
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-color: #000000be;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.delete-account-wrapper{
+
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 50%;
+    background-color: #1d1f21;
+    border: .1rem solid black;
+    border-radius: 1rem;
+    padding: 1rem;
+
+    &>.title-wrapper{
+
+        color: #FFF;
+        font-size: 1.7rem;
+        margin-bottom: .5rem;
+
+        &>:first-child{
+            color: #D91E0B;
+        }
+        &>:last-child{
+            font-weight: 800;
+        }
+
+    }
+    &>.more-info{
+
+        padding-left: .5rem;
+        margin-bottom: 1rem;
+
+        &>:first-child{
+
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+
+        }
+        &>h3{
+
+            color: #D91E0B;
+            padding: .5rem 0;
+            font-size: 1.3rem;
+
+        }
+        &>ul{
+
+            color: #fff;
+            font-weight: 300;
+            list-style-position: inside;
+            font-size: 1.1rem;
+
+        }
+
+    }
+}
+.wrapper-modal-warn-buttons{
+
+    //background-color: #09DB17;
+    padding: .3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    &>:first-child{
+
+        width: 30%;
+        height: 3rem;
+        font-size: 1.2rem;
+
+        :first-child{
+            margin-right: .2rem;
+        }
+
+    }
+    &>:last-child{
+
+        width: 60%;
+        height: 3rem;
+        font-size: 1.1rem;
+        padding: .2rem;
+
+        :first-child{
+            margin-right: .2rem;
+        }
+
+    }
+
+}
+.sub-modal-delete-account{
+
+    background-color: #1d1f21;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &>.wrapper-first-step{
+
+        //background-color: #470094;
+        width: 100%;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        flex-direction: column;
+        justify-self: center;
+        
+        &>.wrapper-confirm-title{
+
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.7rem;
+            margin: .5rem 0;
+            text-align: center;
+
+        }
+        &>.wrapper-confirm-delete{
+
+            //background-color: bisque;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: .5rem;
+
+            &>div{
+
+                padding: .3rem;
+                color: #D91E0B;
+                font-weight: 700;
+                display: none;
+
+            }
+            &>input{
+
+                width: 100%;
+                height: 2.3rem;
+                border-radius: .3rem;
+                font-size: 1.3rem;
+                text-align: center;
+                outline: transparent;
+
+            }
+
+
+        }
+
+    }
+
+}
+.wrapper-sub-modal-delete-account-btn{
+
+    width: 100%;
+    padding: .4rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    &>button{
+
+        height: 3rem;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: .4rem;
+        font-weight: 700;
+
+        &>:first-child{
+
+            margin-right: .3rem;
+
+        }
+
+    }
+    &>:first-child{
+
+        width: 35%;
+
+    }
+    &>:last-child{
+
+        width: 60%;
+
+    }
+
+}
+#change-account-info-wrapper{
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.wrapper-change-account-first-step,.wrapper-change-account-last-step{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &>.wrapper-title{
+
+        margin-bottom: .5rem;
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+
+    }
+    &>.wrapper-input{
+
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        padding: .5rem 0;
+        &>div{
+
+            color: red;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: none;
+
+        }
+        &>input{
+
+            width: 90%;
+            height: 3rem;
+            outline: transparent;
+            border: 1px solid #000;
+            border-radius: .3rem;
+            padding-left: .6rem;
+
+        }
+
+    }
+
+}
+.wrapper-change-account-last-step{
+
+    display: none;
+
+}
+.wrapper-change-account-info-buttons{
+
+    //background-color: #09DB17;
+    width: 100%;
+    padding: .5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    &>button{
+
+        width: 50%;
+        height: 3.5rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &>:first-child{
+
+            margin-right: .3rem;
+
+        }
+
+    }
+    &>:last-child{
+        width: 40%;
+    }
+
+}
+#configs-menu{
+
+    background-color: #1d1f21;
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+
+    &>button{
+        position: absolute;
+        right: 0;
+        margin: .5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: .2rem;
+        font-size: 1.5rem;
+    }
+
+}
+.wrapper-configs-menu{
+    
+    //background-color: #09DB17;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+
+}
+.left-bar-configs-menu, .configs-content{
+
+    width: 100%;
+    padding: .3rem;
+    display: flex;
+    flex-direction: column;
+
+}
+.configuration-list-item{
+
+    padding: .8rem;
+    border-radius: .5rem;
+    font-size: 1.3rem;
+    color: #fff;
+
+    &.select-config{
+
+        background-color: #ffffff50;
+
+    }
+
+    &>span{
+        margin-left: .3rem;
+        font-weight: bolder;
+    }
+
+}
+.configs-content{
+
+    position: absolute;
+    background-color: #1d1f21;
+    width: 100%;
+    height: 100%;
+
+    &>button{
+
+        position: absolute;
+        right: 0;
+        margin: .5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: .2rem;
+        font-size: 1.5rem;
+        z-index: 3;
+
+    }
+
+}
+.wrapper-configs-content-type{
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+}
+
+.configs-content-header{
+
+    padding: .5rem;
+    color: #fff;
+    font-weight: bolder;
+    font-size: 1.5rem;
+
+}
+.configs-content-list{
+
+    //background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+}
+.configs-content-wrapper{
+
+    //background-color: brown;
+    padding: .5rem;
+    border-top: .1rem solid black;
+    border-bottom: .1rem solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.configs-content-title{
+
+    color: #fff;
+    font-size: 1.2rem;
+
+}
+.configs-content-select{
+
+    //background-color: #09DB17;
+    position: relative;
+    max-width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &>.list-header{
+
+        color: #fff;
+        padding: .5rem;
+        font-size: 1.2rem;
+        border-radius: .3rem;
+
+        &>span{
+            margin-right: .3rem;
+        }
+
+    }
+    &>.type-list{
+
+        position: absolute;
+        background: #470094;
+        background: linear-gradient(0deg, #470094 10%, #6b00e0 100%);
+        background: -webkit-linear-gradient(0deg, #470094 10%, #6b00e0 100%);
+        background: -moz-linear-gradient(0deg, #470094 10%, #6b00e0 100%);
+        top: 100%;
+        z-index: 6;
+        display: flex;
+        flex-direction: column;
+        padding: .3rem;
+        border-radius: .3rem;
+        border: .1rem solid #000;
+
+        &>.list-item{
+
+            padding: .5rem;
+            font-size: 1.4rem;
+            color: #fff;
+            border-radius: .6rem;
+            margin: .1rem 0;
+
+            &.select-item{
+
+                background-color: #ffffff54;
+
+            }
+        }
+
+    }
+    &>.type-button{
+
+        padding: .1em;
+
+        &>button{
+
+            padding: .6rem;
+            color: #fff;
+
+            &>span{
+
+                margin-right: .3rem;
+
+            }
+
+        }
+
+    }
+
+}
+#user-menu{
+
+    background-color: #1d1f21;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 6;
+
+    &>.wrapper-user-menu-header{
+
+        //background-color: #09DB17;
+        display: flex;
+        width: 100%;
+        height: 3.3rem;
+        align-items: center;
+        justify-content: space-between;
+
+        &>span{
+
+            color: white;
+            font-size: 1.4rem;
+            font-weight: bolder;
+
+        }
+        &>button{
+
+            padding: .5rem;
+            margin: .5rem;
+            font-size: 1.4rem;
+
+        }
+
+    }
+
+}
+.wrapper-user-menu{
+
+    background-color: #3a3b3b;
+    width: 100%;
+    height: calc(100% - 3.3rem);
+    padding: .5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+.wrapper-user-info{
+
+    width: 100%;
+    //background-color: blueviolet;
+    display: flex;
+    align-items: center;
+    
+}
+.wrapper-user-menu-picture{
+
+    //background-color: #DB4700;
+    padding: .3rem;
+    overflow: hidden;
+
+    &>img{
+
+        width: 30vw;
+        height: 30vw;
+        border-radius: .6rem;
+        border: 1px solid #000;
+
+    }
+
+}
+.wrapper-user-menu-more-info{
+
+    //background-color: brown;
+    padding: .6rem;
+
+}
+.wrapper-user-menu-username{
+
+    color: white;
+    font-size: 1.6rem;
+    font-weight: bolder;
+
+}
+.wrapper-user-menu-email{
+
+    color: #e4eaffd2;
+
+}
+.wrapper-user-menu-flame{
+
+    background-color: #1d1f21;
+    border-radius: 1rem;
+    border: 1px solid #ffffff6c;
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &>.flame-card{
+
+        //background-color: blue;
+        width: 100%;
+        padding: .8rem;
+        display: flex;
+        align-items: center;
+
+        &>.wrapper-flame-img{
+
+            //background-color: #DC1401;
+            padding: .5rem;
+
+            &>img{
+
+                width: 4rem;
+
+            }
+
+        }
+        &>.wrapper-flame-streak{
+
+            //background-color: #09DB17;
+            padding: .5rem;
+            display: flex;
+            flex-direction: column;
+            color: white;
+
+            &>span{
+
+                font-size: 1.3rem;
+                font-weight: 700;
+                opacity: 85%;
+
+            }
+            &>div{
+
+                font-size: .9rem;
+
+                &>span:first-child{
+
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    margin-right: .3rem;
+
+                }
+
+            }
+
+        }
+
+    }
+    &>.day-streak-card{
+
+        //background-color: cadetblue;
+        width: 100%;
+        height: 10vh;
+        margin-bottom: .4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        &>div{
+
+            //background-color: #DB4700;
+            width: calc((100% / 7) - 0.3rem);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+
+            &>.wrapper-progress-bar{
+
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                //background-color: #6b00e0;
+                height: 2rem;
+                color: white;
+                font-size: 1.1rem;
+
+
+                &>i{
+
+                    position: absolute;
+                    display: none;
+
+                }
+
+                &>.progress-bar{
+
+                    //background-color: aqua;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+
+                    & circle{
+                        
+                        stroke: url(#gradient-color);
+                        stroke-width: .5rem;
+                        cx: 50%;
+                        cy: 50%;
+                        r: 42;
+                        stroke-dasharray: 282.744;
+                        //stroke-dashoffset: 200.744;
+                    }
+                    & svg {
+                        position: absolute;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    & svg  circle.background{
+
+                        stroke: #3a3b3b;
+                        stroke-dasharray: 282.744;
+                        stroke-dashoffset: 0;
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+    &>.steps-card{
+
+        //background-color: chocolate;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        &> :first-child{
+
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffffd5;
+
+        }
+
+        &>.bar{
+
+            background-color: #fff;
+            width: 100%;
+            height: 1.1rem;
+            border-radius: .5rem;
+            
+            & >.bar-done{
+
+                transition: width 1s linear 0s;
+                background-color: #09DB17;
+                box-shadow: 0px 0px 9px 4px rgba(9,219,23,.8235294118);
+                -webkit-box-shadow: 0px 0px 9px 4px rgba(9,219,23,.8235294118);
+                -moz-box-shadow: 0px 0px 9px 4px rgba(9,219,23,.8235294118);
+                height: 100%;
+                border-radius: .5rem;
+                width: 0%;
+
+            }
+
+        }
+
+    }
+    & .wrapper-steps-count{
+
+        //background-color: blue;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+        
+        &>.wrapper-count{
+
+            //background-color: #470094;
+            padding: .3rem;
+
+            &> :first-child{
+
+                font-size: 1.7rem;
+                font-weight: 700;
+                color: #fff;
+                padding: .3rem;
+
+            }
+
+            & :last-child{
+
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: #ffffffd5;
+
+            }
+
+        }
+        &>.wrapper-percent{
+
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffffd5;
+            padding: .6rem;
+
+        }
+
+    }
+
+}
+.wrapper-user-menu-achievements{
+
+    //background-color: brown;
+    width: 100%;
+    min-height: 20vh;
+    padding: .8rem .4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    overflow-y: hidden;
+    overflow-x: auto;
+
+    &>.achievements-card{
+
+        padding: .4rem;
+        background-color: #1d1f21;
+        border: 1px solid #fff;
+
+        &> img{
+
+            width: 15vh;
+            height: 15vh;
+
+        }
+
+    }
+
+}
+.wrapper-user-menu-settings{
+
+    //background-color: burlywood;
+    width: 100%;
+    margin: .6rem;
+
+}
+.user-menu-setting-you{
+
+    //background-color: antiquewhite;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &>.wrapper-btn{
+
+        width: 100%;
+        //background-color: darkblue;
+        border-top: .1rem solid #0000007a;
+        border-bottom: .1rem solid #0000007a;
+
+        button{
+
+            background: none;
+            border: none;
+            width: 100%;
+            height: 3rem;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bolder;
+
+        }
+
+    }
+
+}
+.user-menu-settings-content-title{
+
+    //background-color: cadetblue;
+    margin-bottom: .6rem;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #fff;
+
+}
+#change-account-avatar-wrapper{
+
+    position: absolute;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.change-account-avatar-inputs{
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &>#change-account-avatar-error-log{
+
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #D91E0B;
+        display: none;
+
+    }
+    
+    &>.wrapper-result{
+
+        padding: 1rem 0 0 0;
+
+        img{
+
+            width: 15vh;
+
+        }
+
+    }
+    &>.wrapper-inputs{
+
+        padding: .3rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        &>button{
+
+            width: 80%;
+            height: 3rem;
+            font-size: 1.3rem;
+            margin-bottom: .5rem;
+
+            &>:first-child{
+                margin-right: .3rem;
+            }
+
+        }
+        &>input{
+
+            width: 80%;
+            height: 2rem;
+            outline: transparent;
+            border-radius: .3rem;
+            padding-left: .4rem;
+            font-size: 1.1rem;
+
 
         }
 
@@ -1498,6 +2467,127 @@ footer{
         }
 
     }
+    #user-menu{
+
+        &>.wrapper-user-menu-header{
+
+            height: 3.5rem;
+
+            &>span{
+                font-size: 1.5rem;
+
+            }
+            &>button{
+
+                font-size: 1.5rem;
+
+            }
+
+        }
+
+    }
+    .wrapper-user-menu-picture{
+
+        &>img{
+
+            width: 25vw;
+            height: 25vw;
+
+        }
+
+    }
+    .wrapper-user-menu-username{
+
+        font-size: 1.7rem;
+
+    }
+    .wrapper-user-menu-email{
+
+        font-size: 1.2rem;
+
+    }
+    .wrapper-user-menu-flame{
+
+        &>.flame-card{
+
+            &>.wrapper-flame-img{
+
+                &>img{
+
+                    width: 5rem;
+
+                }
+
+            }
+            &>.wrapper-flame-streak{
+
+                &>span{
+
+                    font-size: 1.4rem;
+
+                }
+                &>div{
+
+                    &>span:first-child{
+
+                        font-size: 2rem;
+
+                    }
+
+                }
+
+            }
+
+        }
+        &>.steps-card{
+
+
+            &> :first-child{
+
+                font-size: 1.5rem;
+
+            }
+
+            &>.bar{
+
+                height: 1.2rem;
+
+            }
+
+        }
+        & .wrapper-steps-count{
+            
+            &>.wrapper-count{
+
+                &> :first-child{
+
+                    font-size: 1.9rem;
+
+                }
+
+            }
+
+        }
+
+    }
+    .user-menu-setting-you{
+
+        &>.wrapper-btn{
+
+            button{
+
+                font-size: 1.4rem;
+
+            }
+
+        }
+
+    }
+    .user-menu-settings-content-title{
+
+        font-size: 2rem;
+
+    }
     
 }
 
@@ -1614,6 +2704,50 @@ footer{
         font-size: 1.3rem;
 
     }
+    .delete-account-wrapper{
+
+        width: 80%;
+
+        &>.title-wrapper{
+
+            font-size: 2rem;
+
+        }
+        &>.more-info{
+
+            &>:first-child{
+                
+                font-size: 1.4rem;
+
+            }
+            &>h3{
+                
+                font-size: 1.5rem;
+
+            }
+            &>ul{
+                
+                font-size: 1.2rem;
+
+            }
+
+        }
+    }
+    .wrapper-modal-warn-buttons{
+
+        &>:first-child{
+            
+            font-size: 1.3rem;
+
+        }
+        &>:last-child{
+            
+            font-size: 1.2rem;
+
+        }
+
+    }
+    
 
     
 
@@ -1651,7 +2785,56 @@ footer{
         }
 
     }
+    #user-menu{
 
+        &>.wrapper-user-menu-header{
+
+            height: 4rem;
+
+            &>span{
+                font-size: 1.8rem;
+
+            }
+            &>button{
+
+                font-size: 1.8rem;
+
+            }
+
+        }
+
+    }
+    .wrapper-user-menu-picture{
+
+        &>img{
+
+            width: 15vw;
+            height: 15vw;
+
+        }
+
+    }
+    .wrapper-user-menu-flame{
+
+        width: 60%;
+
+        &>.steps-card{
+
+
+            &> :first-child{
+
+                font-size: 1.8rem;
+
+            }
+
+        }
+
+    }
+    .wrapper-user-info, .wrapper-user-menu-achievements, .wrapper-user-menu-settings{
+
+        width: 60%;
+
+    }
 }
 
 @media (min-width: 900px){
@@ -1796,6 +2979,240 @@ footer{
         }
 
     }
+    #configs-menu{
+        &>button{
+            
+            width: 3rem;
+            height: 3rem;
+            padding: .1rem;
+            font-size: 1.8rem;
+            right: 60%;
+        }
+
+    }
+    .left-bar-configs-menu{
+
+        width: 40%;
+
+    }
+    .configs-content{
+
+        width: 60%;
+        right: 0;
+
+        &>button{
+
+            display: none;
+
+        }
+
+    }
+    .configs-content-header{
+
+        padding: .6rem;
+        font-size: 2rem;
+
+    }
+    .configs-content-wrapper{
+
+        padding: .7rem;
+
+    }
+    .configs-content-title{
+        
+        font-size: 1.5rem;
+
+    }
+    .configs-content-select{
+
+        &>.list-header{
+            
+            font-size: 1.4rem;
+
+        }
+        &>.type-list{
+
+            &>.list-item{
+
+                padding: .7rem;
+                font-size: 1.5rem;
+
+            }
+
+        }
+        &>.type-button{
+            &>button{
+
+                padding: .7rem;
+                font-size: 1.3rem;
+
+                &>span{
+
+                    margin-right: .4rem;
+
+                }
+
+            }
+
+        }
+
+        }
+    .wrapper-user-menu-picture{
+
+        &>img{
+
+            width: 15vw;
+            height: 15vw;
+
+        }
+
+    }
+    .wrapper-user-menu-username{
+
+        font-size: 2.3rem;
+
+    }
+    .wrapper-user-menu-flame{
+
+        &>.flame-card{
+
+            &>.wrapper-flame-img{
+
+                &>img{
+
+                    width: 5rem;
+
+                }
+
+            }
+            &>.wrapper-flame-streak{
+
+                &>span{
+
+                    font-size: 1.5rem;
+
+                }
+                &>div{
+
+                    font-size: 1rem;
+
+                    &>span:first-child{
+
+                        font-size: 2.5rem;
+
+                    }
+
+                }
+
+            }
+
+        }
+        &>.day-streak-card{
+
+            height: 15vh;
+
+            &>div{
+                
+                font-size: 1.5rem;
+
+                &>.wrapper-progress-bar{
+                    
+                    height: 3.5rem;
+                    font-size: 1.8rem;
+
+                }
+
+            }
+
+        }
+        &>.steps-card{
+
+            &> :first-child{
+
+                font-size: 1.8rem;
+
+            }
+
+            &>.bar{
+                
+                height: 1.2rem;
+
+            }
+
+        }
+        & .wrapper-steps-count{
+            
+            &>.wrapper-count{
+
+                &> :first-child{
+
+                    font-size: 2rem;
+
+                }
+            }
+            &>.wrapper-percent{
+
+                font-size: 1.7rem;
+            }
+
+        }
+
+    }
+    .user-menu-setting-you{
+
+        &>.wrapper-btn{
+
+            button{
+
+                height: 4rem;
+                font-size: 1.8rem;
+
+            }
+
+        }
+
+    }
+    .user-menu-settings-content-title{
+        
+        font-size: 2rem;
+
+    }
+    .delete-account-wrapper{
+
+        width: 60%;
+        height: 53%;
+
+    }
+    #change-account-info-second-input , #change-account-info-first-input{
+
+        font-size: 1.4rem;
+
+    }
+    #change-account-avatar-wrapper{
+
+        height: 70%;
+
+    }
+    .change-account-avatar-inputs{
+
+        &>.wrapper-inputs{
+
+            &>.new-note-image{
+
+                width: fit-content;
+
+            }
+            
+            &>input{
+
+                height: 2.5rem;
+
+
+            }
+
+        }
+
+    }
 
 }
 @media (min-width: 1200px){
@@ -1822,6 +3239,16 @@ footer{
         button{
 
             width: 20vw;
+
+        }
+
+    }
+    .wrapper-user-menu-picture{
+
+        &>img{
+
+            width: 8vw;
+            height: 8vw;
 
         }
 
@@ -1858,6 +3285,14 @@ footer{
         }
 
     }
+    .wrapper-user-info,
+    .wrapper-user-menu-flame, 
+    .wrapper-user-menu-achievements,
+    .wrapper-user-menu-settings{
+
+        width: 50%;
+
+    }
     
 
 }
@@ -1867,6 +3302,24 @@ footer{
 
         width: 15vw;
         height: 15vw;
+
+    }
+    .wrapper-user-menu-picture{
+
+        &>img{
+
+            width: 8vw;
+            height: 8vw;
+
+        }
+
+    }
+    .wrapper-user-info,
+    .wrapper-user-menu-flame, 
+    .wrapper-user-menu-achievements,
+    .wrapper-user-menu-settings{
+
+        width: 30%;
 
     }
 
@@ -1890,6 +3343,11 @@ footer{
             min-height: 12vw;
 
         }
+
+    }
+    .delete-account-wrapper{
+
+        width: 40%;
 
     }
 }

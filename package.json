@@ -36,6 +36,7 @@
     "redis": "^5.11.0",
     "sanitize-html": "^2.17.3",
     "sass": "^1.89.2",
+    "sharp": "^0.35.1",
     "unicode-emoji-json": "^0.9.0",
     "zod": "^4.3.6"
   },

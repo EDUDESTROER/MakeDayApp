@@ -1,5 +1,5 @@
 import { comparePassword, hashPassword } from "./password.service.js";
-import {registerUser} from '../repositories/users.repository.js';
+import {registerUser, deleteUser, changeEmail, changeName, changeNickname, changeAvatar} from '../repositories/users.repository.js';
 import { findAuthByEmail, findAuthByUsername, findAuthById } from '../repositories/users.repository.js';
 
 export async function validateLogin(email, password) {
@@ -39,14 +39,111 @@ export async function CreateUser(data){
     }
 
 }
+export async function deleteThisUser(id){
+
+    try{
+
+        const result = await deleteUser(id);
+
+        if(result[0].affectedRows > 0) return true;
+
+        return false;
+
+    }catch(err){
+
+        throw new Error("Unable to delete User!");
+
+    }
+
+}
+export async function changeEmailService(email, id){
+
+    try{
+
+        const result = await changeEmail(email, id);
+
+        //console.log(result);
+
+        if(result[0].affectedRows > 0) return true;
+
+        return false;
+
+    }catch(err){
+
+        throw new Error("Unable to change email!");
+
+    }
+
+}
+export async function changeNameService(name, id){
+
+    try{
+
+        const result = await changeName(name, id);
+
+        //console.log(result);
+
+        if(result[0].affectedRows > 0) return true;
+
+        return false;
+
+    }catch(err){
+
+        throw new Error("Unable to change name!");
+
+    }
+
+}
+export async function changeNicknameService(nickname, id){
+
+    try{
+
+        const result = await changeNickname(nickname, id);
+
+        //console.log(result);
+
+        if(result[0].affectedRows > 0) return true;
+
+        return false;
+
+    }catch(err){
+
+        throw new Error("Unable to change nickname!");
+
+    }
+
+}
+export async function changeAvatarService(path, id){
+
+    try{
+
+        const result = await changeAvatar(path, id);
+
+        //console.log(result);
+
+        if(result[0].affectedRows > 0) return true;
+
+        return false;
+
+    }catch(err){
+
+        throw new Error("Unable to change avatar!");
+
+    }
+
+}
 export async function checkUser(id){
 
     try{
 
         const user = await findAuthById(id);
 
+        //console.log(user);
+
         return {
-            username: user.username
+            username: user.username,
+            email: user.email,
+            image: user.image
         }
 
     }catch(err){

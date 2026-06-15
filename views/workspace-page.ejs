@@ -12,10 +12,325 @@
     
 </head>
 <body>
+    <div id="modal-warn" class="important-modal-warn" inert style="opacity: 0;">
+        <div id="delete-account-wrapper" class="delete-account-wrapper" inert style="opacity: 0;">
+            <div class="title-wrapper">
+                <span>Delete Account: </span><span id="username-delete-account">...</span>
+            </div>
+            <div class="more-info">
+                <span>This action is permanent and connot be undone!</span>
+                <h3 class="more-info-title">The following data will be deleted:</h3>
+                <ul>
+                    <li>Profile information</li>
+                    <li>Notes</li>
+                    <li>Achievements</li>
+                    <li>Streak history</li>
+                    <li>Settings</li>
+                    <li>Uploaded images</li>
+                </ul>
+            </div>
+            <div class="wrapper-modal-warn-buttons modal-buttons">
+                <button data-action="closeDeleteAccount" type="button" class="buttuns-purple-style"><span>Stay</span><i class="fa-solid fa-people-pulling"></i></button>
+                <button data-action="openDeleteAccountSub" type="button" class="buttuns-red-style"><span>Delete Account</span><i class="fa-solid fa-person-walking"></i></button>
+            </div>
+            <div id="sub-modal-delete-account" class="sub-modal-delete-account" inert style="opacity: 0;">
+
+                <div id="delete-account-sub-modal-one" class="wrapper-first-step">
+                    <div class="wrapper-confirm-title">
+                        Type DELETE to confirm
+                    </div>
+                    <div class="wrapper-confirm-delete">
+                        <div id="delete-account-input-delete-info" class="wrapper-info-input"></div>
+                        <input id="delete-account-input-delete" type="text">
+                    </div>
+                </div>
+                <div id="delete-account-sub-modal-two" class="wrapper-first-step" style="display: none;">
+                    <div class="wrapper-confirm-title">
+                        Type your PASSWORD to confirm
+                    </div>
+                    <div class="wrapper-confirm-delete">
+                        <div id="delete-account-input-password-info" class="wrapper-info-input">Incorrect password</div>
+                        <input id="delete-account-input-password" type="password">
+                    </div>
+                </div>
+                <div class="wrapper-sub-modal-delete-account-btn modal-buttons">
+                    <button data-action="closeDeleteAccountSub" type="button" class="buttuns-purple-style"><span>Stay</span><i class="fa-solid fa-people-pulling"></i></button>
+                    <button data-action="deleteAccount" type="button" class="buttuns-red-style"><span>Delete Account</span><i class="fa-solid fa-person-walking"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="change-account-info-wrapper" class="delete-account-wrapper" inert style="opacity: 0;">
+
+            <div id="wrapper-change-account-first-step" class="wrapper-change-account-first-step">
+
+                <div class="wrapper-title">
+                    <span id="change-account-info-first-title">...</span>
+                </div>
+                <div class="wrapper-input">
+                    <div id="change-account-info-first-input-response">
+                        ...
+                    </div>
+                    <input id="change-account-info-first-input" type="email" placeholder="...">
+
+                </div>
+
+            </div>
+            <div id="wrapper-change-account-last-step" class="wrapper-change-account-last-step">
+
+                <div class="wrapper-title">
+                    <span id="change-account-info-second-title">Type your PASSWORD to confirm</span>
+                </div>
+                <div class="wrapper-input">
+                    <div id="change-account-info-second-input-response">
+                        ...
+                    </div>
+                    <input id="change-account-info-second-input" type="password" placeholder="Password">
+
+                </div>
+
+            </div>
+
+            <div class="wrapper-change-account-info-buttons modal-buttons">
+                <button data-action="cancelChangeAccountInfo" type="button" class="buttuns-red-style"><span>Cancel</span><i class="fa-solid fa-x"></i></i></button>
+                <button data-action="checkChangeAccountInfo" type="button" class="buttuns-purple-style"><span>Confirm</span><i class="fa-solid fa-check"></i></button>
+            </div>
+
+        </div>
+        <div id="change-account-avatar-wrapper" class="delete-account-wrapper" inert style="opacity: 0;">
+            <div class="change-account-avatar-inputs">
+
+                <div class="wrapper-title">
+                    <span>Change Avatar</span>
+                </div>
+
+                <div class="wrapper-result">
+                    <img src="/uploads/avatares/default.png" id="change-account-avatar-result">
+                </div>
+
+                <div id="change-account-avatar-error-log">
+                    
+                </div>
+
+                <div class="wrapper-inputs">
+                    <label class="new-note-image">
+                        <input hidden type="file" id="change-account-avatar-image" accept="image/*">
+                        <div id="change-account-avatar-image-accept" class="note-btn buttuns-purple-style"><i class="fa-solid fa-folder-open"></i> Select a image</div>
+                        <span id="change-account-avatar-image-name">image-name.jpg</span>
+                    </label>
+                    <input type="password" id="change-account-avatar-password" placeholder="Confirm with password">
+                </div>
+
+            </div>
+            <div class="wrapper-change-account-info-buttons modal-buttons">
+                <button data-action="cancelChangeAccountAvatar" type="button" class="buttuns-red-style"><span>Cancel</span><i class="fa-solid fa-x"></i></i></button>
+                <button data-action="checkChangeAccountAvatar" type="button" class="buttuns-purple-style"><span>Confirm</span><i class="fa-solid fa-check"></i></button>
+            </div>
+        </div>
+    </div>
+    <div id="exit-menus" data-action="exit-menus" style="opacity: 0;" inert></div>
+    <div id="configs-menu" style="opacity: 0;" inert>
+        <button title="Close menu" type="button" data-action="unShowConfigs" data-target="#configs-menu" class="buttuns-purple-style"><i class="fa-solid fa-square-xmark"></i></button>
+        <div class="wrapper-configs-menu">
+            <div class="left-bar-configs-menu" id="left-bar-configs-menu">
+                <!--Dynamically Generated-->
+            </div>
+            <div class="configs-content" id="configs-content" style="opacity: 0;" inert>
+                <button id="return-menu-options" title="Return menu" type="button" data-action="unShowConfigs" data-target="#configs-content" class="buttuns-purple-style"><i class="fa-solid fa-angle-left"></i></button>
+                <!--Dynamically Generated--> 
+            </div>
+        </div>
+    </div>
+    <div id="user-menu" style="opacity: 0;" inert>
+        <div class="wrapper-user-menu-header">
+            <button type="button" title="Close user menu" data-action="showTarget" data-target="#smart-dashboard" class="buttuns-purple-style"><i class="fa-solid fa-angle-left"></i></button>
+            <span>My profile</span>
+            <button type="button" title="Close user menu" data-action="unShowUserMenu" data-target="#configs-menu" class="buttuns-purple-style"><i class="fa-solid fa-gear"></i></button>
+        </div>
+        <div class="wrapper-user-menu">
+            <div class="wrapper-user-info">
+                <div class="wrapper-user-menu-picture">
+                    <img id="user-menu-picture" src="" alt="user avatar">
+                </div>
+                <div class="wrapper-user-menu-more-info">
+                    <div id="wrapper-user-menu-username" class="wrapper-user-menu-username">
+                        <span>loading...</span>
+                    </div>
+                    <div id="wrapper-user-menu-email" class="wrapper-user-menu-email">
+                        loading...
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper-user-menu-flame grow-item-effect">
+                <div class="flame-card">
+                    <div class="wrapper-flame-img">
+                        <img id="flame-img-el" src="/icons/flameIcons/0days.png" alt="a fire icon">
+                    </div>
+                    <div class="wrapper-flame-streak">
+                        <span>Streak</span>
+                        <div>
+                            <span id="flame-days-output">...</span>
+                            <span>Days</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-streak-card">
+                    <div class="wrapper-mon">
+                        <div class="wrapper-progress-bar">
+                            <div class="progress-bar">
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100"> 
+                                    <defs>
+                                        <linearGradient id="gradient-color"> 
+                                            <stop offset= "0%" stop-color="#2A772A" />
+                                            <stop offset="1001" stop-color="#04CD04" /> 
+                                        </linearGradient> 
+                                    </defs> 
+                                    <circle id="user-info-7-back" class="background" stroke-linecap="round"></circle>
+                                    <circle id="user-info-7-line" stroke-linecap="round"></circle>
+                                </svg>
+                            </div>
+                            <i id="user-info-7-icon" class="fa-solid fa-check-double"></i>
+                        </div>
+                        <span id="user-info-7-day">...</span>
+                    </div>
+                    <div class="wrapper-tue">
+                        <div class="wrapper-progress-bar">
+                            <div class="progress-bar">
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100"> 
+                                    <defs>
+                                        <linearGradient id="gradient-color"> 
+                                            <stop offset= "0%" stop-color="#DA22FF" />
+                                            <stop offset="1001" stop-color="#9733EE" /> 
+                                        </linearGradient> 
+                                    </defs> 
+                                    <circle id="user-info-6-back" class="background" stroke-linecap="round"></circle>
+                                    <circle id="user-info-6-line" stroke-linecap="round"></circle>
+                                </svg>
+                            </div>
+                            <i id="user-info-6-icon" class="fa-solid fa-check-double"></i>
+                        </div>
+                        <span id="user-info-6-day">...</span>
+                    </div>
+                    <div class="wrapper-wed">
+                        <div class="wrapper-progress-bar">
+                            <div class="progress-bar">
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100"> 
+                                    <defs>
+                                        <linearGradient id="gradient-color"> 
+                                            <stop offset= "0%" stop-color="#DA22FF" />
+                                            <stop offset="1001" stop-color="#9733EE" /> 
+                                        </linearGradient> 
+                                    </defs> 
+                                    <circle id="user-info-5-back" class="background" stroke-linecap="round"></circle>
+                                    <circle id="user-info-5-line" stroke-linecap="round"></circle>
+                                </svg>
+                            </div>
+                            <i id="user-info-5-icon" class="fa-solid fa-check-double"></i>
+                        </div>
+                        <span id="user-info-5-day">...</span>
+                    </div>
+                    <div class="wrapper-thu">
+                        <div class="wrapper-progress-bar">
+                            <div class="progress-bar">
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100"> 
+                                    <defs>
+                                        <linearGradient id="gradient-color"> 
+                                            <stop offset= "0%" stop-color="#DA22FF" />
+                                            <stop offset="1001" stop-color="#9733EE" /> 
+                                        </linearGradient> 
+                                    </defs> 
+                                    <circle id="user-info-4-back" class="background" stroke-linecap="round"></circle>
+                                    <circle id="user-info-4-line" stroke-linecap="round"></circle>
+                                </svg>
+                            </div>
+                            <i id="user-info-4-icon" class="fa-solid fa-check-double"></i>
+                        </div>
+                        <span id="user-info-4-day">...</span>
+                    </div>
+                    <div class="wrapper-fri">
+                        <div class="wrapper-progress-bar">
+                            <div class="progress-bar">
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100"> 
+                                    <defs>
+                                        <linearGradient id="gradient-color"> 
+                                            <stop offset= "0%" stop-color="#DA22FF" />
+                                            <stop offset="1001" stop-color="#9733EE" /> 
+                                        </linearGradient> 
+                                    </defs> 
+                                    <circle id="user-info-3-back" class="background" stroke-linecap="round"></circle>
+                                    <circle id="user-info-3-line" stroke-linecap="round"></circle>
+                                </svg>
+                            </div>
+                            <i id="user-info-3-icon" class="fa-solid fa-check-double"></i>
+                        </div>
+                        <span id="user-info-3-day">...</span>
+                    </div>
+                    <div class="wrapper-sat">
+                        <div class="wrapper-progress-bar">
+                            <div class="progress-bar">
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100"> 
+                                    <defs>
+                                        <linearGradient id="gradient-color"> 
+                                            <stop offset= "0%" stop-color="#DA22FF" />
+                                            <stop offset="1001" stop-color="#9733EE" /> 
+                                        </linearGradient> 
+                                    </defs> 
+                                    <circle id="user-info-2-back" class="background" stroke-linecap="round"></circle>
+                                    <circle id="user-info-2-line" stroke-linecap="round"></circle>
+                                </svg>
+                            </div>
+                            <i id="user-info-2-icon" class="fa-solid fa-check-double"></i>
+                        </div>
+                        <span id="user-info-2-day">...</span>
+                    </div>
+                    <div class="wrapper-sun">
+                        <div class="wrapper-progress-bar">
+                            <div class="progress-bar">
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100"> 
+                                    <defs>
+                                        <linearGradient id="gradient-color"> 
+                                            <stop offset= "0%" stop-color="#DA22FF" />
+                                            <stop offset="1001" stop-color="#9733EE" /> 
+                                        </linearGradient> 
+                                    </defs> 
+                                    <circle id="user-info-1-back" class="background" stroke-linecap="round"></circle>
+                                    <circle id="user-info-1-line" stroke-linecap="round"></circle>
+                                </svg>
+                            </div>
+                            <i id="user-info-1-icon" class="fa-solid fa-check-double"></i>
+                        </div>
+                        <span id="user-info-1-day">...</span>
+                    </div>
+                </div>
+                <div class="steps-card">
+                    <span>STEPS</span>
+                    <div class="wrapper-steps-count">
+                        <div class="wrapper-count">
+                            <span id="steps-card-done">?</span><span id="steps-card-undone">/?</span>
+                        </div>
+                        <span class="wrapper-percent" id="steps-card-percentage">?%</span>
+                    </div>
+                    <div class="bar"><div id="bar-done" class="bar-done"></div></div>
+                </div>
+            </div>
+            <div class="wrapper-user-menu-achievements">
+            </div>
+            <div class="wrapper-user-menu-settings">
+                <div class="user-menu-setting-you">
+                    <div class="user-menu-settings-content-title">More options</div>
+                    <div class="wrapper-btn">
+                        <button class="list-style" type="button"><i class="fa-regular fa-pen-to-square"></i><span>Edit profile</span></button>
+                    </div>
+                    <div class="wrapper-btn">
+                        <button class="list-style" type="button"><i class="fa-solid fa-clock-rotate-left"></i><span>History</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <header class="wrapper-header">
         <div class="wrapper-mobile-header">
             <div class="wrapper-avatar">
-                <button data-action="showTarget?" data-target="#user-menu" class="buttons-basic-efects" title="User Menu" id="btn-user-menu">
+                <button data-action="showTarget" data-target="#user-menu" class="buttons-basic-efects" title="User Menu" id="btn-user-menu">
                     <img id="user-avatar" src="/img/user-default-avatar.png" alt="user avatar">
                 </button>
                 <div class="wrapper-username">
@@ -23,7 +338,7 @@
                 </div>
             </div>
             <div class="wrapper-configuration">
-                <button data-action="showTarget?" data-target="#configs-menu" id="btn-configs">
+                <button data-action="showConfigs" data-target="#configs-menu" id="btn-configs">
                     <i title="Configurations" class="fa-solid fa-toolbox"></i>
                 </button>
             </div>
@@ -34,7 +349,7 @@
                 <span class="basic-shadow-size1">MakeDay</span>
             </div>
             <div class="wrapper-configuration">
-                <button data-action="showTarget?" data-target="#configs-menu" id="btn-configs-pc">
+                <button data-action="showConfigs" data-target="#configs-menu" id="btn-configs-pc">
                     <i title="Configurations" class="fa-solid fa-toolbox"></i>
                 </button>
             </div>
