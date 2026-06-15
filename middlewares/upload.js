@@ -1,8 +1,9 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
 
-const uploadPath = 'uploads/';
+const uploadPath = 'uploads/attachments/';
 
 if (!fs.existsSync(uploadPath)){
     fs.mkdirSync(uploadPath);
@@ -10,11 +11,16 @@ if (!fs.existsSync(uploadPath)){
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null, 'uploads/attachments/');
     },
     filename: function(req, file, cb) {
-        const uniqueName = Date.now() + path.extname(file.originalname);
+
+        const extension = path.extname(file.originalname);
+
+        const uniqueName = `note-${crypto.randomUUID()}${extension}`;
+
         cb(null, uniqueName);
+
     }
 });
 

@@ -48,11 +48,11 @@ const notesSchema = z.strictObject({
             .optional(),
         emoji:z
             .string()
-            .min(1, "icon is required")
             .max(10, "Invalid emoji")
-            .refine((value)=>{
-                return /\p{Extended_Pictographic}/u.test(value);
-            }, "Invalid emoji")
+            .refine(
+            (value) => value === "" || /\p{Extended_Pictographic}/u.test(value),
+            "Invalid emoji"
+            )
             .optional(),
         image: z
             .string()

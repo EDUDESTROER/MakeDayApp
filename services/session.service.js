@@ -22,3 +22,24 @@ export function createUserSession(req, res, user){
     });
 
 }
+export function deleteUserSession(req, res){
+
+    req.session.destroy((err)=>{
+
+        if(err){
+
+            return {
+                error: 'Unable to terminate session.'
+            };
+
+        }
+
+        return {
+            success: true,
+            redirectUrl: '/'
+        }
+
+
+    });
+
+}

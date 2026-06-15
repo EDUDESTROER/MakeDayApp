@@ -14,7 +14,7 @@ export async function findAuthByEmail(email){
 export async function findAuthById(userId){
 
     const [rows] = await conn.execute(
-        "SELECT username FROM tb_users WHERE id = ?",
+        "SELECT username, email, image FROM tb_users WHERE id = ?",
         [userId]
     );
 
@@ -52,5 +52,92 @@ export async function registerUser(nickName, firstName, lastName, email, passwor
     );
 
     return [result.insertId, role];
+
+}
+export async function deleteUser(id){
+
+    const [result] = await conn.execute(
+        `
+            DELETE FROM tb_users WHERE id = ?
+            
+        `,
+        [
+            id
+        ]
+    );
+
+    return [result];
+
+}
+export async function changeEmail(email, id){
+
+    const [result] = await conn.execute(
+        `
+            UPDATE tb_users 
+            SET email = ?
+            WHERE id = ?
+            
+        `,
+        [
+            email,
+            id
+        ]
+    );
+
+    return [result];
+
+}
+export async function changeName(name, id){
+
+    const [result] = await conn.execute(
+        `
+            UPDATE tb_users 
+            SET fullName = ?
+            WHERE id = ?
+            
+        `,
+        [
+            name,
+            id
+        ]
+    );
+
+    return [result];
+
+}
+export async function changeNickname(nickname, id){
+
+    const [result] = await conn.execute(
+        `
+            UPDATE tb_users 
+            SET username = ?
+            WHERE id = ?
+            
+        `,
+        [
+            nickname,
+            id
+        ]
+    );
+
+    return [result];
+
+}
+export async function changeAvatar(path, id){
+
+    const [result] = await conn.execute(
+        `
+            UPDATE tb_users 
+            SET image = ?
+            WHERE id = ?
+            
+        `,
+        [
+            path,
+            id
+        ]
+    );
+
+    return [result];
 
 }

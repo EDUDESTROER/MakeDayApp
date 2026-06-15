@@ -45,7 +45,7 @@ export class NoteView{
             this.noteImageWrapperEl.style.position = 'static';
             this.noteIconWrapperEl.style.marginTop = '-1rem';
 
-            this.noteImageEl.src = `/uploads/${image}`;
+            this.noteImageEl.src = `/uploads/attachments/${image}`;
 
         }
 
@@ -103,7 +103,7 @@ export class NoteView{
     }
     resetPreviewImage(){
 
-        this.newNoteResultImageTag.src = `/uploads/ListaDeCompras-test.jpg`;
+        this.newNoteResultImageTag.src = `/uploads/attachments/default.jpg`;
         this.inputImageName.textContent = `image-name.jpg`;
         this.inputImageSucess();
 
@@ -276,9 +276,9 @@ export class NoteView{
 
         internDiv.appendChild(iconEl);
 
-        if(!image) image = 'ListaDeCompras-test.jpg';
+        if(!image) image = 'default.jpg';
 
-        const img = this.createImgTag('card-background', `uploads/${image}`, `${title} background image.`);
+        const img = this.createImgTag('card-background', `uploads/attachments/${image}`, `${title} background image.`);
 
         const header = this.createHeader('card-text', title);
 

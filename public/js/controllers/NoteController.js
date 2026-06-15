@@ -247,6 +247,7 @@ export class NoteController{
         this.state.title = '';
         this.state.parentId = '';
         this.state.icon = 'fa-solid fa-question';
+        this.state.emoji = '❓';
         this.state.image = null;
         this.state.content = this.defaultContent;
         this.state.favorite = false;
@@ -255,6 +256,9 @@ export class NoteController{
         this.updatePreviewIcon();
         this.updatePreviewEmoji();
         this.inputTitle.value = '';
+
+        this.iconsController.setSearch(this.inputTitle.value.toLowerCase().trim());
+        this.emojiController.setSearch(this.inputTitle.value.toLowerCase().trim());
 
         this.inputImage.value = '';
 

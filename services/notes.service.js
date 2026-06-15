@@ -27,6 +27,8 @@ export async function createNoteService(userId, title, parentId, icon, emoji, im
             favorite
         });
 
+        //console.log(validation);
+
         if(!validation.success){
 
             const errors = z.flattenError(validation.error);
@@ -136,6 +138,8 @@ export async function getUserNoteService(userId){
     try{
 
         const notes = await getAllNote(userId);
+
+        //console.log(notes);
 
         return notes;
 

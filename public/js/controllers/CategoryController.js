@@ -36,7 +36,7 @@ export class CategoryController{
 
     setTitle(value){
 
-        console.log(value);
+        //console.log(value);
         this.state.title = value.trim();
         this.updatePreview();
 
