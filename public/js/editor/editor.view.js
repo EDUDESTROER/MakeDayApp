@@ -29,7 +29,7 @@ export class editorView{
 
         let paragraphEl = document.createElement('p');
 
-        paragraphEl.innerText = content;
+        paragraphEl.textContent = content;
 
         paragraphEl.classList.add('editor-paragraph');
 

@@ -41,9 +41,9 @@ export async function createNoteService(userId, title, parentId, icon, emoji, im
 
         //console.log('zod validated Data: ', validation.data);
 
-        const sanitized = sanitizeNote(validation.data);
+        //const sanitized = sanitizeNote(validation.data);
 
-        const {id: testedId, title: testedTitle, parentId: testedParentId, icon: testedIcon, emoji: testedEmoji, image: testedImage, content: testedContent, favorite: testedFavorite} = sanitized;
+        const {id: testedId, title: testedTitle, parentId: testedParentId, icon: testedIcon, emoji: testedEmoji, image: testedImage, content: testedContent, favorite: testedFavorite} = validation.data;
 
         const searchContent = getText(testedContent);
 
@@ -118,9 +118,9 @@ export async function updateNoteService(
 
         //console.log('zod validated Data: ', validation.data);
         
-        const sanitized = sanitizeNote(validation.data);
+        //const sanitized = sanitizeNote(validation.data);
 
-        const {id: testedId, title: testedTitle, parentId: testedParentId, icon: testedIcon, emoji: testedEmoji, image: testedImage, content: testedContent, favorite: testedFavorite} = sanitized;
+        const {id: testedId, title: testedTitle, parentId: testedParentId, icon: testedIcon, emoji: testedEmoji, image: testedImage, content: testedContent, favorite: testedFavorite} = validation.data;
 
         const searchContent = getText(testedContent);
 
