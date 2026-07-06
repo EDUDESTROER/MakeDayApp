@@ -14,7 +14,7 @@
 - [ ] Change bcrypt to Argon to prevent GPU-Accelerated dictionary attack
 - [x] When saving images, use UUID to change their names, otherwise there may be name conflicts in the database.
 - [x] When saving notes content, save a text version of content in search_content
-- [ ] Fix sanitization issue! When users type: <script>alert()</script>, the database saves: script alert script. This is incorrect because users are saving plain text, not HTML. The original text should be preserved. 
+- [x] Fix sanitization issue! When users type: <script>alert()</script>, the database saves: script alert script. This is incorrect because users are saving plain text, not HTML. The original text should be preserved. 
 
 # Customization Tasks List:
 
