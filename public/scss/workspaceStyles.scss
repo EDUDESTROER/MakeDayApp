@@ -1520,6 +1520,62 @@ div.wrapper-list{
     
 
 }
+.search-empty-state{
+
+    background-color: rgb(255, 255, 255);
+    width: 80%;
+    margin-top: 2rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    border: .2rem solid #4E0FA6;
+    align-self: center;
+
+}
+.wrapper-image-search{
+
+    padding: 1rem;
+    border-radius: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &>img{
+
+        width: 80%;
+
+    }
+
+}
+.wrapper-search-empty-state-message{
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #1E0359;
+
+    &>.wrapper-no-results-for{
+
+        font-size: 1.2rem;
+        font-weight: 700;
+        padding-bottom: .3rem;
+
+    }
+    &>.try-outher{
+
+        font-size: .9rem;
+        opacity: 70%;
+
+    }
+
+}
 
 .wrapper-image-empty-state{
 
@@ -2029,6 +2085,7 @@ div.wrapper-list{
 .wrapper-search-title{
 
     //background-color: chartreuse;
+    margin-top: 1rem;
     padding: .3rem;
     width: 100%;
     min-height: 4rem;
@@ -2041,6 +2098,15 @@ div.wrapper-list{
     &>i{
 
         font-size: 3rem;
+
+    }
+
+    &>#search-error{
+
+        padding: .3rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #D91E0B;
 
     }
 
@@ -2588,6 +2654,34 @@ footer{
         font-size: 2rem;
 
     }
+    .search-empty-state{
+        
+        width: 70%;
+
+    }
+    .wrapper-image-search{
+
+        &>img{
+
+            width: 70%;
+
+        }
+
+    }
+    .wrapper-search-empty-state-message{
+
+        &>.wrapper-no-results-for{
+
+            font-size: 1.5rem;
+
+        }
+        &>.try-outher{
+
+            font-size: 1rem;
+
+        }
+
+    }
     
 }
 
@@ -2747,8 +2841,20 @@ footer{
         }
 
     }
-    
+    .search-empty-state{
+        
+        width: 50%;
 
+    }
+    .wrapper-image-search{
+
+        &>img{
+
+            width: 50%;
+
+        }
+
+    }
     
 
 }
@@ -3213,6 +3319,20 @@ footer{
         }
 
     }
+    .search-empty-state{
+
+        width: 60%;
+
+    }
+    .wrapper-image-search{
+
+        &>img{
+
+            width: 60%;
+
+        }
+
+    }
 
 }
 @media (min-width: 1200px){
@@ -3288,9 +3408,19 @@ footer{
     .wrapper-user-info,
     .wrapper-user-menu-flame, 
     .wrapper-user-menu-achievements,
-    .wrapper-user-menu-settings{
+    .wrapper-user-menu-settings,
+    .search-empty-state{
 
         width: 50%;
+
+    }
+    .wrapper-image-search{
+
+        &>img{
+
+            width: 50%;
+
+        }
 
     }
     
@@ -3350,4 +3480,19 @@ footer{
         width: 40%;
 
     }
+    .search-empty-state{
+
+        width: 40%;
+
+    }
+    .wrapper-image-search{
+
+        &>img{
+
+            width: 40%;
+
+        }
+
+    }
+    
 }

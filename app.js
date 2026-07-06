@@ -18,6 +18,7 @@ import notesRouter from './routes/notes.js';
 import settingsRouter from './routes/settings.js';
 import dashboardRouter from './routes/profile-dashboard.js';
 import achievementsRouter from './routes/achievements.js';
+import searchRouter from './routes/search.js';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -49,6 +50,7 @@ app.use('/notes', notesRouter);
 app.use('/settings', settingsRouter);
 app.use('/profile-dashboard', dashboardRouter);
 app.use('/achievements', achievementsRouter);
+app.use('/search', searchRouter);
 
 app.use('/uploads', express.static('uploads'));
 

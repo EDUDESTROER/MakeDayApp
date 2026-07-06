@@ -563,63 +563,27 @@
             <section id="search-wrapper" class="new-section" style="opacity: 0;" inert>
                 <div class="wrapper-search-title">
                     <i class="fa-brands fa-searchengin"></i>
+                    <span id="search-error"></span>
                 </div>
                 <div class="wrapper-search-bar">
                     <input type="text" id="input-search" placeholder="Search Anything...">
                 </div>
                 <div class="wrapper-search-content">
-                    <div class="search-title-notes search-notes">
-                        <span class="search-title-style">All notes</span>
-                        <div class="list-style basic-list">
-                            <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
-                            <h3 class="list-text">lista de compras</h3>
-                            <button disabled class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                        </div>
-                        <div class="list-style basic-list">
-                            <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
-                            <h3 class="list-text">Afazeres</h3>
-                            <button disabled class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                        </div>
-                        <div class="list-style basic-list">
-                            <div class="basic-icon-list"><i class="fa-solid fa-laptop-code"></i></div>
-                            <h3 class="list-text">Teoria Da computação</h3>
-                            <button disabled class="buttons-basic-efects" type="button"><i class="fa-solid fa-ellipsis"></i></button>
-                        </div>
-                    </div>
-                    <div class="search-title-settings search-notes">
-                        <span class="search-title-style">All settings</span>
-                        <div class="search-wrapper-settings list-style basic-list">
-                            <div class="basic-icon-list"><i class="fa-solid fa-gears"></i></div>
-                            <span class="list-text">Font Style</span>
-                        </div>
-                        <div class="search-wrapper-settings list-style basic-list">
-                            <div class="basic-icon-list"><i class="fa-solid fa-gears"></i></div>
-                            <span class="list-text">Language</span>
-                        </div>
-                        <div class="search-wrapper-settings list-style basic-list">
-                            <div class="basic-icon-list"><i class="fa-solid fa-gears"></i></div>
-                            <span class="list-text">Change profile picture</span>
-                        </div>
-                    </div>
-                    <div class="search-title-note-content search-notes">
-                        <span class="search-title-style">All Note Content</span>
-                        <div class="search-wrapper-note-content list-style basic-list">
-                            <div class="basic-icon-list"><i class="fa-solid fa-bag-shopping"></i></div>
-                            <span class="list-text">lista de compras</span>
-                            <p class="search-text-content">Voluptates <span class="selected-search-content">culpa</span> quos amet earum!</p>
-                        </div>
-                        <div class="search-wrapper-note-content list-style basic-list">
-                            <div class="basic-icon-list"><i class="fa-regular fa-bookmark"></i></div>
-                            <span class="list-text">Afazeres</span>
-                            <p class="search-text-content">Voluptates, <span class="selected-search-content">quos rerum</span>. Beatae minima porro illum. Reiciendis, quod nobis. Officiis explicabo omnis voluptates reprehenderit voluptatibus optio saepe consequuntur soluta cum perspiciatis.</p>
-                        </div>
-                        <div class="search-wrapper-note-content list-style basic-list">
-                            <div class="basic-icon-list"><i class="fa-solid fa-laptop-code"></i></div>
-                            <span class="list-text">Teoria Da computação</span>
-                            <p class="search-text-content">Lorem ipsum <span class="selected-search-content">dolor sit amet consectetur</span> adipisicing elit.</p>
-                        </div>
-                    </div>
+                    <!--Dynamically Generated-->
                 </div>
+                <div class="search-empty-state grow-item-effect" id="search-empty-state">
+                        <div class="wrapper-image-search">
+                            <img src="/img/searchEmptyState.png" alt="No results image">
+                        </div>
+                        <div class="wrapper-search-empty-state-message">
+                            <div class="wrapper-no-results-for">
+                                <span>No Results </span><span id="search-empty-state-term"></span>
+                            </div>
+                            <div class="try-outher">
+                                <p>Check the spelling or try a new search.</p>
+                            </div>
+                        </div>
+                    </div>
             </section>
             <section id="important-wrapper" class="new-section" style="opacity: 0;" inert>
                 <div class="important-header">

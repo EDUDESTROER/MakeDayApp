@@ -10,6 +10,7 @@ import { GreetingService } from '/js/services/greeting.service.js';
 import { SettingsService } from '/js/services/settings.service.js';
 import { SettingsModel } from '/js/models/SettingsModel.js'
 import { SettingsView } from '/js/view/settings.view.js'
+import { SearchController } from './searchController.js';
 
 export class WorkspaceController{
 
@@ -27,6 +28,7 @@ export class WorkspaceController{
         this.settingsView = new SettingsView(this.workspaceView);
         this.categoryController = new CategoryController(this.workspaceView);
         this.noteController = new NoteController(this, this.workspaceView, this.iconsController, this.emojiController);
+        this.searchController = new SearchController();
         this.categories = new Map();
         this.notes = new Map();
 
@@ -710,8 +712,16 @@ export class WorkspaceController{
         const userMenuHeader = document.querySelector('.wrapper-user-menu-header');
         const configsContent = document.querySelectorAll('.configs-content-list');
         const warnModal = document.querySelectorAll('.modal-buttons');
+        const searchWrapper = document.querySelector('.wrapper-search-content');
+
+
 
         userMenuHeader.addEventListener('click', e=>{
+
+            this.clickHandle(e, actions);
+
+        });
+        searchWrapper.addEventListener('click', e=>{
 
             this.clickHandle(e, actions);
 
