@@ -9,7 +9,8 @@ export async function createNewNote(
     emoji, 
     image, 
     content, 
-    favorite
+    favorite,
+    search
 ){
 
     icon = icon === undefined ? '' : icon;
@@ -18,9 +19,9 @@ export async function createNewNote(
 
 
     const [rows] = await conn.execute(
-        `INSERT INTO notes (id, user_id, title, parent_id, icon, emoji, image, content, is_favorite)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [id, userId, title, parentId ?? null, icon, emoji, image ?? null, content ?? null, favorite]
+        `INSERT INTO notes (id, user_id, title, parent_id, icon, emoji, image, content, is_favorite, search_content)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [id, userId, title, parentId ?? null, icon, emoji, image ?? null, content ?? null, favorite, search]
     );
 
     //console.log('repository result: ', rows)
@@ -49,7 +50,8 @@ export async function updateNote(
     emoji, 
     image, 
     content, 
-    favorite
+    favorite,
+    search
 ){
 
     icon = icon === undefined ? '' : icon;
@@ -64,7 +66,8 @@ export async function updateNote(
             emoji = ?, 
             image = ?, 
             content = ?, 
-            is_favorite = ?
+            is_favorite = ?,
+            search_content = ?
         WHERE id = ? AND user_id = ?`,
         [
             title, 
@@ -74,6 +77,7 @@ export async function updateNote(
             image ?? null, 
             content ?? null, 
             favorite,
+            search,
             id,
             userId
         ]
@@ -101,4 +105,63 @@ export async function getAllNote(id){
     );
 
     return rows;
+}
+export async function searchTitle(term, id){
+
+    const [rows] = await conn.execute(
+        `SELECT
+            id,
+            title,
+            parent_id,
+            icon,
+            emoji,
+            MATCH(title)
+            AGAINST(? IN NATURAL LANGUAGE MODE) AS relevance
+        FROM notes
+        WHERE
+            user_id = ?
+            AND(
+                MATCH(title)
+                AGAINST(? IN NATURAL LANGUAGE MODE)
+                OR
+                title LIKE ?
+            )
+        ORDER BY relevance DESC
+        LIMIT 20
+        `,
+        [term, id, term, `%${term}%`]
+    );
+
+    return rows
+
+}
+export async function searchContent(term, id){
+
+    const [rows] = await conn.execute(
+        `SELECT
+            id,
+            title,
+            parent_id,
+            icon,
+            emoji,
+            search_content,
+            MATCH(search_content)
+            AGAINST(? IN NATURAL LANGUAGE MODE) AS relevance
+        FROM notes
+        WHERE
+            user_id = ?
+            AND(
+                MATCH(search_content)
+                AGAINST(? IN NATURAL LANGUAGE MODE)
+                OR
+                search_content LIKE ?
+            )
+        ORDER BY relevance DESC
+        LIMIT 20
+        `,
+        [term, id, term, `%${term}%`]
+    );
+
+    return rows;
+
 }

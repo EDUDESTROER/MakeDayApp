@@ -45,7 +45,11 @@ export async function createNoteService(userId, title, parentId, icon, emoji, im
 
         const {id: testedId, title: testedTitle, parentId: testedParentId, icon: testedIcon, emoji: testedEmoji, image: testedImage, content: testedContent, favorite: testedFavorite} = sanitized;
 
-        const note = await createNewNote(testedId, userId, testedTitle, testedParentId, testedIcon, testedEmoji, testedImage, testedContent, testedFavorite);
+        const searchContent = getText(testedContent);
+
+        //console.log('search column: ', searchContent);
+
+        const note = await createNewNote(testedId, userId, testedTitle, testedParentId, testedIcon, testedEmoji, testedImage, testedContent, testedFavorite, searchContent);
 
         //console.log(note);
 
@@ -118,7 +122,11 @@ export async function updateNoteService(
 
         const {id: testedId, title: testedTitle, parentId: testedParentId, icon: testedIcon, emoji: testedEmoji, image: testedImage, content: testedContent, favorite: testedFavorite} = sanitized;
 
-        const note = await updateNote(testedId, userId, testedTitle, testedParentId, testedIcon, testedEmoji, testedImage, testedContent, testedFavorite);
+        const searchContent = getText(testedContent);
+
+        //console.log('search column: ', searchContent);
+
+        const note = await updateNote(testedId, userId, testedTitle, testedParentId, testedIcon, testedEmoji, testedImage, testedContent, testedFavorite, searchContent);
 
         //console.log(note);
 
@@ -148,5 +156,34 @@ export async function getUserNoteService(userId){
         throw new Error(err);
 
     }
+
+}
+
+function getText(content){
+
+    //console.log(content);
+
+    const result = [];
+
+    function walk(id){
+        //console.log(id);
+        const node = content.byId[id];
+
+        if(!node) return;
+
+        if(node.type === "paragraph"){
+            result.push(node.content);
+        }
+
+        for (const childId of node.children){
+            walk(childId);
+        }
+
+    }
+    for(const rootId of content.rootIds){
+        walk(rootId);
+    }
+
+    return result.join("\n");
 
 }
