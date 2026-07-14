@@ -1,4 +1,5 @@
-import { createNoteService, getUserNoteService, updateNoteService } from "../services/notes.service.js";
+import { success } from "zod";
+import { createNoteService, getUserNoteService, updateNoteService, updateNameService } from "../services/notes.service.js";
 
 export async function createNote(req, res){
 
@@ -86,6 +87,35 @@ export async function updateNote(req, res){
         res.status(400).json({ error: error.message });
 
     }
+
+}
+export async function updateName(req, res){
+
+    try{
+
+        const{ newTitle, id } = req.body;
+        const userId = req.session.user.id;
+
+        //console.log('alterate name to: ', newTitle, ' Of note: ', id);
+
+        const result = await updateNameService(
+            userId,
+            id,
+            newTitle
+        );
+
+        //console.log(result);
+        
+        res.status(201).json(result);
+
+    }catch(error){
+
+        //console.log(error);
+
+        res.status(400).json({error: error.message});
+
+    }
+
 
 }
 export async function getUserNote(req, res){

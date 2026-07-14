@@ -12,9 +12,7 @@
 - [ ] When you enter 1234@ in register page, an error occured, because we don't say wath is the problem in the password.
 - [ ] Sanitize the annotations before saving to the database and again when rendering to prevent XSS.
 - [ ] Change bcrypt to Argon to prevent GPU-Accelerated dictionary attack
-- [x] When saving images, use UUID to change their names, otherwise there may be name conflicts in the database.
-- [x] When saving notes content, save a text version of content in search_content
-- [x] Fix sanitization issue! When users type: <script>alert()</script>, the database saves: script alert script. This is incorrect because users are saving plain text, not HTML. The original text should be preserved. 
+- [ ] When the editor saves the content, it sends all the note information to the server, even though it only needs to send the note content.
 
 # Customization Tasks List:
 

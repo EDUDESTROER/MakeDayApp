@@ -165,3 +165,27 @@ export async function searchContent(term, id){
     return rows;
 
 }
+export async function updateNoteName(userId, noteId, newTitle){
+
+    /*console.log('User: ', userId);
+    console.log('Note: ', noteId);
+    console.log('New note Title: ', newTitle);*/
+
+    const [rows] = await conn.execute(
+        `UPDATE notes
+        SET title = ? 
+        WHERE id = ? AND user_id = ?`,
+        [
+            newTitle,
+            noteId,
+            userId
+        ]
+    );
+
+    //console.log(rows);
+
+    if(rows.affectedRows > 0) return true;
+
+    return false;
+
+}

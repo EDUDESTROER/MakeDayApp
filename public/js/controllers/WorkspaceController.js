@@ -10,7 +10,8 @@ import { GreetingService } from '/js/services/greeting.service.js';
 import { SettingsService } from '/js/services/settings.service.js';
 import { SettingsModel } from '/js/models/SettingsModel.js'
 import { SettingsView } from '/js/view/settings.view.js'
-import { SearchController } from './searchController.js';
+import { SearchController } from '/js/controllers/searchController.js';
+import { ContextMenuController } from '/js/controllers/ContextMenuController.js';
 
 export class WorkspaceController{
 
@@ -29,6 +30,7 @@ export class WorkspaceController{
         this.categoryController = new CategoryController(this.workspaceView);
         this.noteController = new NoteController(this, this.workspaceView, this.iconsController, this.emojiController);
         this.searchController = new SearchController();
+        this.contextMenuController = new ContextMenuController(this.workspaceView, this, this.noteController);
         this.categories = new Map();
         this.notes = new Map();
 
@@ -688,13 +690,17 @@ export class WorkspaceController{
             "ShowSubMenu": (elOrigin, idTarget) => this.settingsView.showBtnSubMenu(idTarget),
             "returnTo": (elOrigin, elTarget) => this.checkState(elTarget),
             "createNote": (elOrigin, sheet, elTarget) => this.createNote(sheet, elTarget),
+            "renameNote": (elOrigin)=> this.contextMenuController.renameNote(),
             "select-new-category": (elOrigin, typeTarget) => this.categoryController.changeBtnStyle(elOrigin),
             "createNewCategory": (elOrigin) => this.createNewCategory(elOrigin),
             "select-new-note-icon": (elOrigin, iconName, iconStyle) => this.noteController.changeNoteIcon(elOrigin, iconName, iconStyle),
             "select-new-note-emoji": (elOrigin, emoji) => this.noteController.changeNoteEmoji(elOrigin, emoji),
             "createNewNote": (elOrigin) => this.createNewNote(elOrigin),
-            "openNote": (noteId) => this.guideOpenNote(noteId),
-            "toggleIconsEmojis": (elOrigin) => this.workspaceView.toggleIconsEmojis(elOrigin)
+            "openNote": (elOrigin, noteId) => this.guideOpenNote(noteId),
+            "toggleIconsEmojis": (elOrigin) => this.workspaceView.toggleIconsEmojis(elOrigin),
+            "openContexMenu": (elOrigin, noteId) => this.contextMenuController.openContextMenu(elOrigin, noteId),
+            "cancelChangeNote": (elOrigin) => this.contextMenuController.calcelChange(),
+            "checkChangeNote": (elOrigin) => this.contextMenuController.checkChange()
         };
 
         const wrapperHeader = document.querySelector('.wrapper-header');
@@ -713,9 +719,14 @@ export class WorkspaceController{
         const configsContent = document.querySelectorAll('.configs-content-list');
         const warnModal = document.querySelectorAll('.modal-buttons');
         const searchWrapper = document.querySelector('.wrapper-search-content');
+        const contextMenu = document.getElementById('context-menu');
 
 
+        contextMenu.addEventListener('click', e=>{
 
+            this.clickHandle(e, actions);
+
+        });
         userMenuHeader.addEventListener('click', e=>{
 
             this.clickHandle(e, actions);
@@ -856,7 +867,7 @@ export class WorkspaceController{
 
             if(handle){
 
-                handle(noteId);
+                handle(el, noteId);
 
             }
 

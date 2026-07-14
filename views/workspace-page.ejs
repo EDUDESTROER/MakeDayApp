@@ -126,6 +126,36 @@
                 <button data-action="checkChangeAccountAvatar" type="button" class="buttuns-purple-style"><span>Confirm</span><i class="fa-solid fa-check"></i></button>
             </div>
         </div>
+        <div id="change-note-wrapper" class="delete-account-wrapper" inert style="opacity: 0;">
+            <div class="change-account-avatar-inputs">
+
+                <div class="wrapper-title">
+                    <span id="change-note-title">Change Note Background</span>
+                </div>
+
+                <div class="wrapper-result" id="change-note-result">
+                    <img src="/uploads/attachments/default.jpg" id="change-note-background-result">
+                </div>
+
+                <div id="change-note-error-log">
+                    
+                </div>
+
+                <div class="wrapper-inputs">
+                    <label class="new-note-image" id="change-note-img-info">
+                        <input hidden type="file" id="change-note-image" accept="image/*">
+                        <div id="change-note-image-accept" class="note-btn buttuns-purple-style"><i class="fa-solid fa-folder-open"></i> Select a image</div>
+                        <span id="change-note-image-name">image-name.jpg</span>
+                    </label>
+                    <input type="text" id="change-note-input" placeholder="New note Name...">
+                </div>
+
+            </div>
+            <div class="wrapper-change-account-info-buttons modal-buttons">
+                <button data-action="cancelChangeNote" type="button" class="buttuns-red-style"><span>Cancel</span><i class="fa-solid fa-x"></i></i></button>
+                <button data-action="checkChangeNote" type="button" class="buttuns-purple-style"><span>Confirm</span><i class="fa-solid fa-check"></i></button>
+            </div>
+        </div>
     </div>
     <div id="exit-menus" data-action="exit-menus" style="opacity: 0;" inert></div>
     <div id="configs-menu" style="opacity: 0;" inert>
@@ -327,6 +357,15 @@
             </div>
         </div>
     </div>
+    <div id="context-menu" style="opacity: 0;" inert>
+        <ul class="context-menu-list">
+            <li class="context-menu-item list-style" data-action="renameNote"><i class="fa-regular fa-pen-to-square"></i><span>Rename</span></li>
+            <li class="context-menu-item list-style" data-action="changeNoteIcon"><i class="fa-solid fa-arrows-spin"></i><span>Change icon</span></li>
+            <li class="context-menu-item list-style" data-action="changeNoteBackground"><i class="fa-regular fa-images"></i><span>Change background image</span></li>
+            <li class="context-menu-item list-style" data-action="addNoteToFavorite"><i class="fa-regular fa-star"></i><span>Add to favorites</span></li>
+            <li class="context-menu-item list-style" data-action="deleteNote"><i class="fa-solid fa-explosion"></i><span>Delete</span></li>
+        </ul>
+    </div>
     <header class="wrapper-header">
         <div class="wrapper-mobile-header">
             <div class="wrapper-avatar">
@@ -398,7 +437,7 @@
                 <div class="content-wrapper">
                     <div class="wrapper-note-btn">
                         <button data-action="returnTo" data-target="#left-side-bar" class="buttons-icon-efect note-menu-btn" id="btn-return-page"><i class="fa-solid fa-angles-left"></i></button>
-                        <button data-action="open-config" data-group-id="1" class="buttons-icon-efect note-menu-btn" id="btn-note-option"><i class="fa-solid fa-ellipsis"></i></button>
+                        <button id="all-notes-contextMenu" data-action="openContexMenu" class="buttons-icon-efect note-menu-btn" id="btn-note-option"><i class="fa-solid fa-ellipsis"></i></button>
                     </div>
                     <div class="wrapper-info">
                         <div class="wrapper-img" id="note-image-wrapper">

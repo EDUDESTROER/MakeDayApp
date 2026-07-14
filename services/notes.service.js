@@ -1,5 +1,6 @@
 import notesSchema from '../schemas/notes.schema.js';
-import { createNewNote, getAllNote, updateNote } from '../repositories/notes.repository.js';
+import noteNameSchema from '../schemas/note.name.schema.js';
+import { createNewNote, getAllNote, updateNote, updateNoteName } from '../repositories/notes.repository.js';
 import * as z from 'zod';
 import { sanitizeNote } from '../utils/sanitizeHtml.js';
 
@@ -139,6 +140,46 @@ export async function updateNoteService(
         throw new Error(error);
 
     }
+
+}
+export async function updateNameService(userId, id, newTitle){
+
+    try {
+
+        //console.log('alterate name to: ', newTitle, ' Of note: ', id);
+
+        const validation = noteNameSchema.safeParse({id, newTitle});
+
+        if(!validation.success){
+
+            const errors = z.flattenError(validation.error);
+                
+            const firstValue = Object.values(errors.fieldErrors)[0];
+                
+            throw new Error(firstValue || 'erro zod');
+
+        }
+
+        //console.log('Zod validation: ', validation.data);
+        
+        const {id:testedId, newTitle: testedNewTitle} = validation.data;
+
+        const result = await updateNoteName(userId, testedId, testedNewTitle);
+
+        //console.log(result);
+
+        if(result) return {id: testedId, title: testedNewTitle};
+
+        throw new Error('Unable to change note name -_-');
+
+        
+    } catch (error) {
+        
+        throw new Error(error);
+
+    }
+
+    
 
 }
 export async function getUserNoteService(userId){

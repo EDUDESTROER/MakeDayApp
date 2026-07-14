@@ -342,6 +342,38 @@ export class NoteView{
 
     }
 
+    cleanElementChilds(el){
+
+        el.replaceChildren();
+
+    }
+
+    updateNoteTitleInCategories(id, title){
+
+        const notesEl = document.querySelectorAll(`[data-note-id="${id}"]`);
+
+        //console.log(notesEl);
+
+        notesEl.forEach(el=>{
+
+            const titleEl = el.querySelector('.list-text');
+            const cardEl = el.querySelector('.card-text');
+            const smartTitle = el.querySelector('.wrapper-smart-title');
+
+            /*console.log(titleEl);
+            console.log(cardEl);
+            console.log(smartTitle);*/
+
+            if(titleEl) titleEl.textContent = title;
+
+            if(cardEl) cardEl.textContent = title;
+
+            if(smartTitle) smartTitle.textContent = title;
+
+        });
+
+    }
+
     createDiv(divClass, dataId, dataAction){
 
         const div = document.createElement('div');

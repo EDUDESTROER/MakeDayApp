@@ -460,6 +460,46 @@ body{
     }
 
 }
+#context-menu{
+
+    background-color: #fff;
+    border: .2rem solid #4e0fa6;
+    border-radius: .5rem;
+    padding: .5rem;
+    min-height: fit-content;
+    width: 70vw;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+
+}
+.context-menu-list{
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+
+    &>.context-menu-item{
+
+        padding: .4rem;
+        list-style: none;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #4e0fa6;
+
+        &>:first-child{
+
+            margin-right: .2rem;
+
+        }
+
+    }
+
+}
+
 #configs-menu{
 
     background-color: #1d1f21;
@@ -1048,7 +1088,7 @@ body{
     color: #fff;
 
 }
-#change-account-avatar-wrapper{
+#change-account-avatar-wrapper, #change-note-wrapper{
 
     position: absolute;
     height: 60%;
@@ -2682,6 +2722,11 @@ footer{
         }
 
     }
+    #context-menu{
+
+        width: 55vw;
+
+    }
     
 }
 
@@ -2855,6 +2900,11 @@ footer{
         }
 
     }
+    #context-menu{
+
+        width: 40vw;
+
+    }
     
 
 }
@@ -2939,6 +2989,11 @@ footer{
     .wrapper-user-info, .wrapper-user-menu-achievements, .wrapper-user-menu-settings{
 
         width: 60%;
+
+    }
+    #context-menu{
+
+        width: 35vw;
 
     }
 }
@@ -3294,7 +3349,7 @@ footer{
         font-size: 1.4rem;
 
     }
-    #change-account-avatar-wrapper{
+    #change-account-avatar-wrapper, #change-note-wrapper{
 
         height: 70%;
 
@@ -3331,6 +3386,11 @@ footer{
             width: 60%;
 
         }
+
+    }
+    #context-menu{
+
+        width: 30vw;
 
     }
 
@@ -3423,6 +3483,11 @@ footer{
         }
 
     }
+    #context-menu{
+
+        width: 20vw;
+
+    }
     
 
 }
@@ -3492,6 +3557,11 @@ footer{
             width: 40%;
 
         }
+
+    }
+    #context-menu{
+
+        width: 15vw;
 
     }
     

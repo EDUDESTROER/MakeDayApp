@@ -42,6 +42,8 @@ export class NoteController{
 
         this.inputImage = document.querySelector('#new-note-image');
 
+        this.contextMenuEl = document.getElementById('all-notes-contextMenu');
+
         this.selectedIconBtn = '';
         this.selectedEmojiBtn = '';
         
@@ -210,6 +212,71 @@ export class NoteController{
         }
 
     }
+    async renameNote(id, newTitle){
+
+        try{
+
+            if(!newTitle){
+
+                throw new Error('Note name cannot be empty.');
+
+            }
+
+            //console.log('Change the name of: ', id,' To: ', newTitle);
+
+            const response = await fetch('/notes/new-name', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify({
+                    id,
+                    newTitle
+                }),
+            });
+
+            const updatedNote = await response.json();
+
+            //console.log('result: ', updatedNote);
+
+            if(updatedNote.id) this.updateTitle(updatedNote);
+
+            if(!response.ok || !updatedNote.id) throw new Error('Failed to update note');
+
+        }catch(err){
+
+            console.error(err);
+
+            alert('Make an error Log on NoteController!!!', err);
+
+        }
+
+    }
+
+    updateTitle(note){
+
+        const oldContent = this.workspaceController.getNoteById(note.id);
+
+        oldContent.title = note.title;
+
+        const newContent = {...oldContent};
+
+        //console.log(newContent);
+
+        this.workspaceController.updateNote(newContent);
+
+        this.noteView.updateNoteTitleInCategories(newContent.id, newContent.title);
+
+        if(this.state.id === newContent.id){
+
+            this.state = structuredClone(newContent);
+            this.noteView.setInAllNote(newContent.title, newContent.icon, newContent.emoji, newContent.image);
+
+        }
+
+        console.log(this.state);
+
+    }
 
     render(note){
 
@@ -232,6 +299,8 @@ export class NoteController{
 
         /*console.log(note);
         console.log(this.workspaceController.notes.get(note.id));*/
+
+        this.contextMenuEl.dataset.noteId = note.id;
 
         this.state = structuredClone(note); 
 
