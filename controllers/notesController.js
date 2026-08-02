@@ -1,5 +1,5 @@
 import { success } from "zod";
-import { createNoteService, getUserNoteService, updateNoteService, updateNameService } from "../services/notes.service.js";
+import { createNoteService, getUserNoteService, updateNoteService, updateNameService, updateIconService } from "../services/notes.service.js";
 
 export async function createNote(req, res){
 
@@ -58,7 +58,7 @@ export async function updateNote(req, res){
 
         const {id, title, parentId, icon, emoji, content, favorite, image} = req.body;
         
-        //console.log(id, title, parentId, icon, content, favorite, image);
+        //console.log(id, title, parentId, icon, emoji, content, favorite, image);
 
         const note = await updateNoteService(
             SendUserId,
@@ -102,6 +102,37 @@ export async function updateName(req, res){
             userId,
             id,
             newTitle
+        );
+
+        //console.log(result);
+        
+        res.status(201).json(result);
+
+    }catch(error){
+
+        //console.log(error);
+
+        res.status(400).json({error: error.message});
+
+    }
+
+
+}
+export async function updateIcon(req, res){
+
+    try{
+
+        const{ id, old, emoji, icon } = req.body;
+        const userId = req.session.user.id;
+
+        //console.log('alterate icon to: ', icon, ' or ', emoji, ' Of note: ', id);
+
+        const result = await updateIconService(
+            userId,
+            id, 
+            old, 
+            emoji, 
+            icon
         );
 
         //console.log(result);

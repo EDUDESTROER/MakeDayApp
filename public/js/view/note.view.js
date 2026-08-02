@@ -373,6 +373,59 @@ export class NoteView{
         });
 
     }
+    updateIconInCategories(id, icon, emoji){
+
+        const notesEl = document.querySelectorAll(`[data-note-id="${id}"]`);
+
+        //console.log(notesEl);
+
+        notesEl.forEach(el=>{
+
+            const i = document.createElement('i');
+
+            if(icon){
+
+                i.className = icon;
+
+            }
+            if(emoji){
+
+                i.textContent = emoji;
+
+            }
+
+            const iconWrapper = el.querySelector('.basic-icon-list');
+            const smartIcon = el.querySelector('.wrapper-smart-icon');
+            const cardIcon = el.querySelector('.card-icon');
+
+            /*console.log(iconWrapper);
+            console.log(smartIcon);
+            console.log(cardIcon);*/
+
+            if(iconWrapper) {
+
+                iconWrapper.replaceChildren();
+                iconWrapper.appendChild(i);
+
+            }
+
+            if(smartIcon) {
+
+                smartIcon.replaceChildren();
+                smartIcon.appendChild(i);
+
+            }
+
+            if(cardIcon){
+
+                cardIcon.replaceChildren();
+                cardIcon.appendChild(i);
+
+            }
+
+        });
+
+    }
 
     createDiv(divClass, dataId, dataAction){
 

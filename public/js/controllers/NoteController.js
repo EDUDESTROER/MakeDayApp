@@ -252,6 +252,81 @@ export class NoteController{
         }
 
     }
+    async changeIcon(id, old, emoji, icon){
+
+        //console.log('Change note: ', id, ' icon of ', old, ' to: ', icon, ' or: ', emoji);
+
+        try{
+
+            if(!id){
+
+                throw new Error('Note empty.');
+
+            }
+
+            //console.log('Change the name of: ', id,' To: ', newTitle);
+
+            const response = await fetch('/notes/new-icon', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify({
+                    id,
+                    old,
+                    emoji,
+                    icon
+                }),
+            });
+
+            const updatedNote = await response.json();
+
+            //console.log('result: ', updatedNote);
+            
+            if(updatedNote.id) this.updateIcon(updatedNote);
+
+            if(!response.ok || !updatedNote.id) throw new Error('Failed to update note');
+
+        }catch(err){
+
+            console.error(err);
+
+            alert('Make an error Log on NoteController!!!', err);
+
+        }
+
+
+    }
+
+    updateIcon(note){
+
+        const oldContent = this.workspaceController.getNoteById(note.id);
+
+        //console.log(oldContent);
+
+        oldContent.icon = note.icon;
+        oldContent.emoji = note.emoji;
+
+        const newContent = {...oldContent};
+
+        this.workspaceController.notes.set(newContent.id, newContent);
+
+        this.noteView.updateIconInCategories(newContent.id, newContent.icon, newContent.emoji);
+
+        if(this.state.id === newContent.id){
+
+            this.state = structuredClone(newContent);
+            this.noteView.setInAllNote(newContent.title, newContent.icon, newContent.emoji, newContent.image);
+
+        }
+
+    }
+
+    changeBackground(file){
+
+        
+
+    }
 
     updateTitle(note){
 
@@ -263,7 +338,7 @@ export class NoteController{
 
         //console.log(newContent);
 
-        this.workspaceController.updateNote(newContent);
+        this.workspaceController.notes.set(newContent.id, newContent);
 
         this.noteView.updateNoteTitleInCategories(newContent.id, newContent.title);
 
@@ -274,7 +349,7 @@ export class NoteController{
 
         }
 
-        console.log(this.state);
+        //console.log(this.state);
 
     }
 

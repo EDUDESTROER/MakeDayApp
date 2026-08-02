@@ -1,8 +1,9 @@
 export class EmojiView{
 
-    constructor(){
+    constructor(container, action){
 
-        this.container = document.querySelector('.new-note-emojis');
+        this.container = container;
+        this.action = action;
 
     }
     renderEmojis(emoji){
@@ -11,7 +12,7 @@ export class EmojiView{
 
         const btn = document.createElement("button");
         btn.className = 'btn-new-note-emojis buttuns-purple-style';
-        btn.dataset.action = 'select-new-note-emoji';
+        btn.dataset.action = this.action;
         btn.dataset.emoji = emoji[0];
         btn.textContent = emoji[0];
 

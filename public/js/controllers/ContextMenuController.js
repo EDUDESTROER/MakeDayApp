@@ -1,4 +1,6 @@
 import { ContextMenuView } from "/js/view/context.menu.view.js";
+import { IconsController } from '/js/controllers/iconsController.js';
+import { EmojiController } from '/js/controllers/emojiController.js';
 
 export class ContextMenuController{
     constructor(workspaceView, workspaceController, noteController){
@@ -7,6 +9,8 @@ export class ContextMenuController{
 
         this.workspaceView = workspaceView;
         this.contextMenuView = new ContextMenuView();
+        this.iconsController = new IconsController(document.getElementById('load-more-icons-in-change-note'), document.querySelector('.wrapper-icon-list-note-change'), 'changeNoteIconContextMenu');
+        this.emojiController = new EmojiController(document.getElementById("load-more-icons-in-change-note"), document.querySelector('.wrapper-emoji-list-note-change'), 'changeNoteEmojiContextMenu');
         this.workspaceController = workspaceController;
         this.noteController = noteController;
         
@@ -17,6 +21,64 @@ export class ContextMenuController{
             type: null
         };
 
+        this.startFilter();
+        this.startImgEvent();
+
+    }
+
+    startFilter(){
+
+        const filter = document.getElementById('change-note-icons-filter');
+
+        filter.addEventListener('input', e=>{
+
+            this.iconsController.setSearch(e.target.value.toLowerCase().trim());
+            this.emojiController.setSearch(e.target.value.toLowerCase().trim());
+
+        });
+
+    }
+
+    chooseEmoji(el){
+
+        this.contextMenuView.showEmojiList();
+
+        el.parentNode.children[0].classList.add('select');
+        el.parentNode.children[2].classList.remove('select');
+
+    }
+    chooseIcon(el){
+
+        this.contextMenuView.showIconList();
+
+        el.parentNode.children[0].classList.remove('select');
+        el.parentNode.children[2].classList.add('select');
+
+    }
+
+    setIcon(el, iconName, iconStyle){
+
+        //console.log(iconName, iconStyle);
+
+        this.contextMenuView.changeIcon(iconName, iconStyle);
+
+        this.state.note.icon = `${iconStyle} ${iconName}`;
+        this.state.note.emoji = '';
+
+        //console.log(this.state);
+
+    }
+    setEmoji(el, emoji){
+
+        //console.log(emoji);
+
+        this.contextMenuView.changeEmoji(emoji);
+
+        this.state.note.icon = '';
+        this.state.note.emoji = emoji;
+
+        //console.log(this.state);
+
     }
 
     renameNote(){
@@ -25,9 +87,44 @@ export class ContextMenuController{
 
         this.contextMenuView.showRename(this.state.note.title);
 
+        this.updateModals();
+
+    }
+    newIconNote(){ //document.querySelector('.wrapper-icon-list-note-change')
+
+        this.state.type = 'icon';
+
+        this.state.oldIcon = this.state.note.icon?.length > 0 ?  this.state.note.icon : this.state.note.emoji;
+
+        this.contextMenuView.showIcon(this.state.note.title, this.state.note.icon, this.state.note.emoji);
+
+        this.updateModals();
+    }
+
+    updateModals(){
+
         this.workspaceView.showEl('#modal-warn');
         this.workspaceView.showEl('#change-note-wrapper');
         setTimeout(()=>this.workspaceView.unShowEl('#context-menu'), 1); // I use this because startEvents() is called about a millisecond before unShowEl() is executed, so it doesn't work.
+
+    }
+
+    newBackgroundNote(){
+
+        this.state.type = 'background';
+
+        //console.log(this.state);
+
+        this.contextMenuView.showBackground(this.state.note.title, this.state.note.image);
+
+        this.updateModals();
+
+    }
+    startImgEvent(){
+
+        document.getElementById('change-note-image').addEventListener('change',
+            e=>this.contextMenuView.renderImagePreview(e.target.files[0])
+        );
 
     }
     calcelChange(){
@@ -37,34 +134,21 @@ export class ContextMenuController{
 
         this.contextMenuView.clear();
 
+        this.iconsController.setSearch('');
+        this.emojiController.setSearch('');
+        this.state.oldIcon = '';
+
     }
     checkChange(){
 
         //console.log('Type of change: ', this.state.type);
         //console.log('Note: ', this.state.note);
 
-        const newTitle = this.contextMenuView.textInput.value;
+        if(this.state.type === 'rename') this.alterName();
 
-        if(newTitle.trim().length < 1){
-            this.contextMenuView.logError('Note Name Cannot be empty.');
-            return;
-        }
-        if(newTitle.trim().length > 120){
-            this.contextMenuView.logError('Note Name must be less than 120 caracteres.');
-            return;
-        }
-        if(newTitle === this.state.note.title){
-            this.contextMenuView.logError('The new name must not be the same as the current one.');
-            return;
-        }
+        if(this.state.type === 'icon') this.alterIcon();
 
-        if(this.state.type === 'rename'){
-
-            this.noteController.renameNote(this.state.id, newTitle);
-
-            this.calcelChange();
-
-        }
+        if(this.state.type === 'background') this.alterBackground();
 
     }
 
@@ -151,6 +235,73 @@ export class ContextMenuController{
             this.contextMenuEl.style.right = '0';
         }
         //console.log((left + 50) + this.contextMenuEl.getBoundingClientRect().width  > window.innerWidth);
+
+    }
+
+    alterIcon(){
+
+        if(this.state.note.icon === this.state.oldIcon){
+
+            this.contextMenuView.logError('Please select a different icon.');
+            return;
+
+        }
+        if(this.state.note.emoji === this.state.oldIcon){
+
+            this.contextMenuView.logError('Please select a different emoji.');
+            return;
+
+        }
+        if(!this.state.oldIcon){
+
+            this.contextMenuView.logError('No changes detected.');
+            return;
+
+        }
+
+        this.noteController.changeIcon(this.state.id, this.state.oldIcon, this.state.note.emoji, this.state.note.icon);
+
+        this.calcelChange();
+
+    }
+
+    alterBackground(){
+
+        const file = this.contextMenuView.noteImgInput.files[0];
+
+        console.log(file);
+
+        if(!file){
+            this.contextMenuView.logError('Bsckground Cannot be empty');
+            return;
+        }
+
+        this.noteController.changeBackground(file);
+
+        this.calcelChange();
+
+    }
+
+    alterName(){
+
+        const newTitle = this.contextMenuView.textInput.value;
+
+        if(newTitle.trim().length < 1){
+            this.contextMenuView.logError('Note Name Cannot be empty.');
+            return;
+        }
+        if(newTitle.trim().length > 120){
+            this.contextMenuView.logError('Note Name must be less than 120 caracteres.');
+            return;
+        }
+        if(newTitle === this.state.note.title){
+            this.contextMenuView.logError('The new name must not be the same as the current one.');
+            return;
+        }
+
+        this.noteController.renameNote(this.state.id, newTitle);
+
+        this.calcelChange();
 
     }
 

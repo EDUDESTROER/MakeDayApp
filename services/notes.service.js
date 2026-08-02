@@ -1,6 +1,7 @@
 import notesSchema from '../schemas/notes.schema.js';
 import noteNameSchema from '../schemas/note.name.schema.js';
-import { createNewNote, getAllNote, updateNote, updateNoteName } from '../repositories/notes.repository.js';
+import noteIconSchema from '../schemas/note.icon.schema.js';
+import { createNewNote, getAllNote, updateNote, updateNoteName, updateNoteIcon } from '../repositories/notes.repository.js';
 import * as z from 'zod';
 import { sanitizeNote } from '../utils/sanitizeHtml.js';
 
@@ -84,7 +85,7 @@ export async function updateNoteService(
         if(favorite == 0) favorite = false;
         if(favorite == 1) favorite = true;
 
-        //console.log('normalizedContent: ', normalizedContent);
+        //console.log('Content: ', content);
 
         /*console.log('To validated Data: ', {
             id,
@@ -171,6 +172,54 @@ export async function updateNameService(userId, id, newTitle){
         if(result) return {id: testedId, title: testedNewTitle};
 
         throw new Error('Unable to change note name -_-');
+
+        
+    } catch (error) {
+        
+        throw new Error(error);
+
+    }
+
+    
+
+}
+export async function updateIconService(userId, id, old, emoji, icon){
+
+    try {
+
+        if(old === icon) throw new Error('The new icon must be different from the current one.');
+        if(old === emoji) throw new Error('The new emoji must be different from the current one.');
+
+        //console.log(icon, emoji);
+
+        if(icon === undefined) icon = '';
+        if(emoji === undefined) emoji = '';
+
+        const validation = noteIconSchema.safeParse({id, icon, emoji});
+
+        if(!validation.success){
+
+            const errors = z.flattenError(validation.error);
+                
+            const firstValue = Object.values(errors.fieldErrors)[0];
+
+            //console.log(firstValue);
+                
+            throw new Error(firstValue || 'erro zod');
+
+        }
+
+        //console.log('Zod validation: ', validation.data);
+        
+        const {id:testedId, icon: testedIcon, emoji: testedEmoji} = validation.data;
+
+        const result = await updateNoteIcon(userId, testedId, testedIcon, testedEmoji);
+
+        //console.log(result);
+
+        if(result) return {id: testedId, icon: testedIcon, emoji: testedEmoji};
+
+        throw new Error('Unable to change note icon -_-');
 
         
     } catch (error) {

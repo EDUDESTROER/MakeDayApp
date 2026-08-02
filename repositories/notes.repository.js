@@ -189,3 +189,29 @@ export async function updateNoteName(userId, noteId, newTitle){
     return false;
 
 }
+export async function updateNoteIcon(userId, noteId, icon, emoji){ // problem in change emoji!
+
+    //console.log(icon);
+    //console.log(emoji);
+    if(icon === undefined) icon = '';
+
+    const [rows] = await conn.execute(
+        `UPDATE notes
+        SET icon = ?,
+            emoji = ? 
+        WHERE id = ? AND user_id = ?`,
+        [
+            icon,
+            emoji,
+            noteId,
+            userId
+        ]
+    );
+
+    //console.log(rows);
+
+    if(rows.affectedRows > 0) return true;
+
+    return false;
+
+}

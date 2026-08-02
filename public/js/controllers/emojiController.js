@@ -1,11 +1,14 @@
-import { EmojiView } from "../view/emoji.view.js"
+import { EmojiView } from "/js/view/emoji.view.js";
+import emojisService from "/js/services/emojis.service.js";
+
 
 export class EmojiController{
 
-    constructor(){
+    constructor(loadBtn, container, action){
 
-        this.emojiView = new EmojiView();
-        this.loadMoreBtn = document.getElementById("load-more");
+        this.emojiView = new EmojiView(container, action);
+        this.loadMoreBtn = loadBtn;
+        this.emojiService = emojisService;
 
         this.searchTerm = '';
         this.visibleCount = 60;
@@ -22,18 +25,10 @@ export class EmojiController{
 
     }
 
-    async getEmojis(){
-
-        const reponse = await fetch("/icons/emojis.json");
-
-        this.allEmojis = await reponse.json()
-        //console.log(this.allEmojis);
-
-    }
-
     async init(){
 
-        await this.getEmojis();
+        await this.emojiService.load();
+
         this.loadEmojis();
         this.loadMoreBtn.addEventListener("click", () => {
             this.visibleCount += 30;
@@ -45,9 +40,9 @@ export class EmojiController{
 
     getFilteredEmojis(){
 
-        if(!this.searchTerm) return Object.entries(this.allEmojis);
+        if(!this.searchTerm) return Object.entries(this.emojiService.get());
 
-        return Object.entries(this.allEmojis).filter(emoji =>
+        return Object.entries(this.emojiService.get()).filter(emoji =>
             emoji[1].name.toLowerCase().includes(this.searchTerm)
         );
 
@@ -65,10 +60,14 @@ export class EmojiController{
 
         });
 
-        if(this.allEmojis.length < this.visibleCount){
+        if(this.emojiService.get().length < this.visibleCount){
+
            this.emojiView.hiddenLoadMore(this.loadMoreBtn);
-        }else{
+
+        }else if(this.emojiService.get().length > this.visibleCount){
+
             this.emojiView.showLoadMore(this.loadMoreBtn);
+
         }
 
     }

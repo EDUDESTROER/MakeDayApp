@@ -22,8 +22,8 @@ export class WorkspaceController{
         this.settingsService = new SettingsService();
         this._user = null;
 
-        this.iconsController = new IconsController();
-        this.emojiController = new EmojiController();
+        this.iconsController = new IconsController(document.getElementById("load-more"), document.querySelector('.new-note-icons'), 'select-new-note-icon');
+        this.emojiController = new EmojiController(document.getElementById("load-more"), document.querySelector('.new-note-emojis'), 'select-new-note-emoji');
         this.workspaceView = new WorkspaceView();
         this.settingsModel = new SettingsModel();
         this.settingsView = new SettingsView(this.workspaceView);
@@ -691,6 +691,8 @@ export class WorkspaceController{
             "returnTo": (elOrigin, elTarget) => this.checkState(elTarget),
             "createNote": (elOrigin, sheet, elTarget) => this.createNote(sheet, elTarget),
             "renameNote": (elOrigin)=> this.contextMenuController.renameNote(),
+            "changeNoteIcon": (elOrigin)=> this.contextMenuController.newIconNote(),
+            "changeNoteBackground": (elOrigin)=> this.contextMenuController.newBackgroundNote(),
             "select-new-category": (elOrigin, typeTarget) => this.categoryController.changeBtnStyle(elOrigin),
             "createNewCategory": (elOrigin) => this.createNewCategory(elOrigin),
             "select-new-note-icon": (elOrigin, iconName, iconStyle) => this.noteController.changeNoteIcon(elOrigin, iconName, iconStyle),
@@ -700,7 +702,11 @@ export class WorkspaceController{
             "toggleIconsEmojis": (elOrigin) => this.workspaceView.toggleIconsEmojis(elOrigin),
             "openContexMenu": (elOrigin, noteId) => this.contextMenuController.openContextMenu(elOrigin, noteId),
             "cancelChangeNote": (elOrigin) => this.contextMenuController.calcelChange(),
-            "checkChangeNote": (elOrigin) => this.contextMenuController.checkChange()
+            "checkChangeNote": (elOrigin) => this.contextMenuController.checkChange(),
+            "change-note-choose-emoji": (elOrigin) => this.contextMenuController.chooseEmoji(elOrigin),
+            "change-note-choose-icon": (elOrigin) => this.contextMenuController.chooseIcon(elOrigin),
+            "changeNoteIconContextMenu": (elOrigin, iconName, iconStyle) => this.contextMenuController.setIcon(elOrigin, iconName, iconStyle),
+            "changeNoteEmojiContextMenu": (elOrigin, emoji) => this.contextMenuController.setEmoji(elOrigin, emoji)
         };
 
         const wrapperHeader = document.querySelector('.wrapper-header');
@@ -720,8 +726,13 @@ export class WorkspaceController{
         const warnModal = document.querySelectorAll('.modal-buttons');
         const searchWrapper = document.querySelector('.wrapper-search-content');
         const contextMenu = document.getElementById('context-menu');
+        const changeNoteListEmojiIcon = document.querySelector('.wrapper-change-icons-emoji-list');
 
+        changeNoteListEmojiIcon.addEventListener('click', e=>{
 
+            this.clickHandle(e, actions);
+
+        });
         contextMenu.addEventListener('click', e=>{
 
             this.clickHandle(e, actions);

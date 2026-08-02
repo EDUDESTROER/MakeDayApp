@@ -129,12 +129,43 @@
         <div id="change-note-wrapper" class="delete-account-wrapper" inert style="opacity: 0;">
             <div class="change-account-avatar-inputs">
 
-                <div class="wrapper-title">
+                <div class="wrapper-title-change-note">
                     <span id="change-note-title">Change Note Background</span>
                 </div>
 
-                <div class="wrapper-result" id="change-note-result">
-                    <img src="/uploads/attachments/default.jpg" id="change-note-background-result">
+                <div style="display: none;" class="wrapper-result" id="wrapper-change-note-result-background">
+                    <img src="/uploads/attachments/default.jpg" id="change-note-result-background">
+                </div>
+
+                <div id="wrapper-icon-list-change" class="wrapper-icon-list-change" style="display: none;">
+                    <div class="wrapper-result-icon">
+                        <i id="change-note-icon-el" class="fa-solid fa-laptop-code"></i>
+                        <h3 id="change-note-icon-title">Tarefas</h3>
+                    </div>
+                    <div class="wrapper-icons-filter">
+                        <input type="text" id="change-note-icons-filter" placeholder="Icon name">
+                    </div>
+                    <div class="wrapper-change-icons-emoji-list">
+                        <div class="wrapper-choose-change-icon-emoji">
+                            <button type="button" class="buttuns-purple-style" data-action="change-note-choose-emoji">
+                                <i>😎</i>
+                                <span>Emoji</span>
+                            </button>
+                            <div>Or</div>
+                            <button type="button" class="buttuns-purple-style select" data-action="change-note-choose-icon">
+                                <i class="fa-solid fa-font-awesome"></i>
+                                <span>Icon</span>
+                            </button>
+                        </div>
+                        <div class="wrapper-icon-list-note-change">
+                        
+                        </div>
+                        <div class="wrapper-emoji-list-note-change" style="display: none;">
+                        
+                        </div>
+                    </div>
+                    
+                    <button id="load-more-icons-in-change-note" class="buttuns-purple-style load-more-icons-in-change-note-icon"><span>Load more</span><i class="fa-solid fa-rotate-left"></i></button>
                 </div>
 
                 <div id="change-note-error-log">
@@ -142,7 +173,7 @@
                 </div>
 
                 <div class="wrapper-inputs">
-                    <label class="new-note-image" id="change-note-img-info">
+                    <label class="new-note-image" id="change-note-img-info" style="display: none;">
                         <input hidden type="file" id="change-note-image" accept="image/*">
                         <div id="change-note-image-accept" class="note-btn buttuns-purple-style"><i class="fa-solid fa-folder-open"></i> Select a image</div>
                         <span id="change-note-image-name">image-name.jpg</span>
