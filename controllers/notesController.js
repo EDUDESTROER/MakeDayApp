@@ -1,5 +1,12 @@
 import { success } from "zod";
-import { createNoteService, getUserNoteService, updateNoteService, updateNameService, updateIconService } from "../services/notes.service.js";
+import { 
+    createNoteService, 
+    getUserNoteService, 
+    updateNoteService, 
+    updateNameService, 
+    updateIconService,
+    updateBackgroundService 
+} from "../services/notes.service.js";
 
 export async function createNote(req, res){
 
@@ -116,6 +123,34 @@ export async function updateName(req, res){
 
     }
 
+
+}
+export async function updateBackground(req, res){
+
+    try{
+
+        //console.log('upload Background: ', req.body);
+
+        const {id, oldImage} = req.body;
+        const image = req.file ? req.file.filename : null;
+        const userId = req.session.user.id;
+
+        const result = await updateBackgroundService(
+            userId,
+            id,
+            image,
+            oldImage
+        );
+
+        res.status(201).json(result);
+
+    }catch(err){
+
+        //console.error(err);
+
+        res.status(400).json({error: err.message});
+
+    }
 
 }
 export async function updateIcon(req, res){

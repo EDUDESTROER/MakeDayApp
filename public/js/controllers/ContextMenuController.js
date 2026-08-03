@@ -179,6 +179,8 @@ export class ContextMenuController{
 
         const noteInfo = this.workspaceController.getNoteById(this.state.id);
 
+        console.log(noteInfo);
+
         this.state.note = {
             title: noteInfo.title,
             image: noteInfo.image,
@@ -269,14 +271,15 @@ export class ContextMenuController{
 
         const file = this.contextMenuView.noteImgInput.files[0];
 
-        console.log(file);
+        //console.log(file);
+        //console.log(this.state);
 
         if(!file){
             this.contextMenuView.logError('Bsckground Cannot be empty');
             return;
         }
 
-        this.noteController.changeBackground(file);
+        this.noteController.changeBackground(this.state.id, file, this.state.note.image);
 
         this.calcelChange();
 

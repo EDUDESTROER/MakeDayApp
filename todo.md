@@ -13,6 +13,8 @@
 - [ ] Sanitize the annotations before saving to the database and again when rendering to prevent XSS.
 - [ ] Change bcrypt to Argon to prevent GPU-Accelerated dictionary attack
 - [ ] When the editor saves the content, it sends all the note information to the server, even though it only needs to send the note content.
+- [ ] when updating notes background in a phone, and the photo have a big height the layout don't adapt very well.
+- [ ] when a users saves a attachment, the middleware upload.js saves a image even when the operation fails, so change to save in a temp pastes and when the operations don't fails move the image to the correct paste in the server.
 
 # Customization Tasks List:
 

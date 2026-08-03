@@ -215,3 +215,21 @@ export async function updateNoteIcon(userId, noteId, icon, emoji){ // problem in
     return false;
 
 }
+export async function updateNoteBackground(userId, noteId, image){
+
+    const [rows] = await conn.execute(
+        `UPDATE notes
+        SET image = ?
+        WHERE id = ? AND user_id = ?`,
+        [
+            image,
+            noteId,
+            userId
+        ]
+    );
+
+    if(rows.affectedRows > 0) return true;
+
+    return false;
+
+}

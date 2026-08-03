@@ -427,6 +427,20 @@ export class NoteView{
 
     }
 
+    updateCategoriesCard(id, image){
+
+        const notesEl = document.querySelectorAll(`[data-note-id="${id}"]`);
+
+        notesEl.forEach(el=>{
+
+            const cardImage = el.querySelector('.card-background');
+
+            if(cardImage) cardImage.src = `uploads/attachments/${image}`;
+
+        });
+
+    }
+
     createDiv(divClass, dataId, dataAction){
 
         const div = document.createElement('div');

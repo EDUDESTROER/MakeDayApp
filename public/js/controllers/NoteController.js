@@ -298,6 +298,64 @@ export class NoteController{
 
     }
 
+    async changeBackground(id, file, oldImage){
+
+        try{
+
+            //console.log('Change background of: ', id, ' to ', file.name);
+
+            const formData = new FormData();
+
+            formData.append('id', id);
+            formData.append('image', file);
+            formData.append('oldImage', oldImage);
+
+            //console.log('Front => before post: ', [...formData.entries()]); //FormData is not a common object.
+
+            const response = await fetch('/notes/new-background', {
+                method: 'PATCH',
+                body: formData
+            });
+
+            const updatedNote = await response.json();
+
+            if(updatedNote.id) this.updateBackground(updatedNote);
+
+            if(!response.ok || !updatedNote.id) throw new Error(`Failed to update backgroun of ${id}`);
+
+        }catch(err){
+
+            //console.error(err);
+
+            alert('Make an error Log on NoteController!!!', err);
+
+        }
+
+    }
+
+    updateBackground(note){
+
+        const oldContent = this.workspaceController.getNoteById(note.id);
+
+        oldContent.image = note.image;
+
+        const newContent = {...oldContent};
+
+        this.workspaceController.notes.set(newContent.id, newContent);
+
+        this.noteView.updateCategoriesCard(newContent.id, newContent.image);
+
+        if(this.state.id = newContent.id){
+
+            this.state = structuredClone(newContent);
+
+            this.noteView.setInAllNote(newContent.title, newContent.icon, newContent.emoji, newContent.image);
+
+        }
+
+    }
+
+
     updateIcon(note){
 
         const oldContent = this.workspaceController.getNoteById(note.id);
@@ -319,12 +377,6 @@ export class NoteController{
             this.noteView.setInAllNote(newContent.title, newContent.icon, newContent.emoji, newContent.image);
 
         }
-
-    }
-
-    changeBackground(file){
-
-        
 
     }
 

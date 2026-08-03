@@ -1,9 +1,17 @@
 import notesSchema from '../schemas/notes.schema.js';
 import noteNameSchema from '../schemas/note.name.schema.js';
 import noteIconSchema from '../schemas/note.icon.schema.js';
-import { createNewNote, getAllNote, updateNote, updateNoteName, updateNoteIcon } from '../repositories/notes.repository.js';
+import backgroundChangeSchema from '../schemas/background.change.schema.js';
+import { createNewNote, 
+    getAllNote, 
+    updateNote, 
+    updateNoteName, 
+    updateNoteIcon,
+    updateNoteBackground 
+} from '../repositories/notes.repository.js';
 import * as z from 'zod';
 import { sanitizeNote } from '../utils/sanitizeHtml.js';
+import { removeOldBackground } from '../utils/removeOldBackground.js';
 
 export async function createNoteService(userId, title, parentId, icon, emoji, image, content, favorite){
 
@@ -181,6 +189,49 @@ export async function updateNameService(userId, id, newTitle){
     }
 
     
+
+}
+export async function updateBackgroundService(userId, noteId, image, oldImage){
+
+    try{
+
+        //console.log('old Image:', oldImage, 'new image: ', image);
+
+        //console.log(typeof oldImage)
+
+        if(oldImage === undefined || oldImage === 'undefined' || !oldImage) oldImage = '';
+
+        const validation = backgroundChangeSchema.safeParse({noteId, image, oldImage});
+
+        if(!validation.success){
+
+            const errors = z.flattenError(validation.error);
+                
+            const firstValue = Object.values(errors.fieldErrors)[0];
+
+            //console.log(firstValue);
+                
+            throw new Error(firstValue || 'erro zod');
+
+        }
+
+        const {noteId:testedId, image: testedimage, oldImage: testedOldImage} = validation.data;
+
+        const result = await updateNoteBackground(userId, testedId, testedimage);
+
+        //console.log(result);
+
+        if(testedOldImage) await removeOldBackground(testedOldImage);
+
+        if(result) return {id: testedId, image: testedimage};
+
+        throw new Error('Unable to change note icon -_-');
+
+    }catch(err){
+
+        throw new Error(err);
+
+    }
 
 }
 export async function updateIconService(userId, id, old, emoji, icon){
