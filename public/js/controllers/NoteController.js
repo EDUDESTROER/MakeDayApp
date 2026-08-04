@@ -333,6 +333,73 @@ export class NoteController{
 
     }
 
+    deleteNote(id, image, password){
+
+        console.log('deleting note: ', id);
+
+    }
+
+    async changeNoteFavorites(id, favorite){
+
+        try{
+
+            if(!id){
+
+                throw new Error('Select a note first.');
+
+            }
+
+            /*if(favorite){
+                console.log('Adding note: ', id,' To favorites');
+            }else{
+                console.log('Removing note: ', id,' To favorites');
+            }*/
+
+            const response = await fetch('/notes/favorites', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify({
+                    id,
+                    favorite
+                }),
+            });
+
+            const updatedNote = await response.json();
+
+            //console.log('result: ', updatedNote);
+
+            if(updatedNote.id) this.updateFavorites(updatedNote);
+
+            if(!response.ok || !updatedNote.id) throw new Error('Failed to update note');
+
+        }catch(err){
+
+            console.error(err);
+
+            alert('Make an error Log on NoteController!!!', err);
+
+        }
+
+    }
+
+    updateFavorites(note){
+
+        const oldContent = this.workspaceController.getNoteById(note.id);
+
+        oldContent.favorite = note.favorite;
+
+        const newContent = {...oldContent};
+
+        this.workspaceController.notes.set(newContent.id, newContent);
+
+        this.noteView.clearFavorites();
+        
+        this.workspaceController.checkFavorites();  
+
+    }
+
     updateBackground(note){
 
         const oldContent = this.workspaceController.getNoteById(note.id);

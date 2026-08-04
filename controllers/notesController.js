@@ -5,7 +5,8 @@ import {
     updateNoteService, 
     updateNameService, 
     updateIconService,
-    updateBackgroundService 
+    updateBackgroundService,
+    updateFavorite
 } from "../services/notes.service.js";
 
 export async function createNote(req, res){
@@ -123,6 +124,35 @@ export async function updateName(req, res){
 
     }
 
+
+}
+export async function changeFavorite(req, res){
+
+
+    try{
+
+        const{ favorite, id } = req.body;
+        const userId = req.session.user.id;
+
+        //console.log(id);
+
+        const result = await updateFavorite(
+            userId,
+            id,
+            favorite
+        );
+
+        //console.log(result);
+        
+        res.status(201).json(result);
+
+    }catch(error){
+
+        //console.log(error);
+
+        res.status(400).json({error: error.message});
+
+    }
 
 }
 export async function updateBackground(req, res){

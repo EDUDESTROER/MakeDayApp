@@ -120,11 +120,41 @@ export class ContextMenuController{
         this.updateModals();
 
     }
+    openDeleteNote(){
+
+        this.state.type = 'delete';
+
+        console.log(this.state);
+
+        this.contextMenuView.showDeleteNote(this.state.note.title);
+
+        this.updateModals();
+
+    }
     startImgEvent(){
 
         document.getElementById('change-note-image').addEventListener('change',
             e=>this.contextMenuView.renderImagePreview(e.target.files[0])
         );
+
+    }
+    addToFavorites(){
+
+        //console.log(this.state);
+
+        if(this.state.note.favorite == 0 || this.state.note.favorite == '0'){
+
+            this.state.note.favorite = 1;
+
+        }else{
+
+            this.state.note.favorite = 0;
+
+        }
+
+        this.noteController.changeNoteFavorites(this.state.id, this.state.note.favorite);
+
+        setTimeout(()=>this.workspaceView.unShowEl('#context-menu'), 1); // I use this because startEvents() is called about a millisecond before unShowEl() is executed, so it doesn't work.
 
     }
     calcelChange(){
@@ -149,6 +179,8 @@ export class ContextMenuController{
         if(this.state.type === 'icon') this.alterIcon();
 
         if(this.state.type === 'background') this.alterBackground();
+
+        if(this.state.type === 'delete') this.deleteNote();
 
     }
 
@@ -179,14 +211,17 @@ export class ContextMenuController{
 
         const noteInfo = this.workspaceController.getNoteById(this.state.id);
 
-        console.log(noteInfo);
+        //console.log(noteInfo);
 
         this.state.note = {
             title: noteInfo.title,
             image: noteInfo.image,
             emoji: noteInfo.emoji,
-            icon: noteInfo.icon
+            icon: noteInfo.icon,
+            favorite: noteInfo.favorite
         };
+
+        this.checkFavoriteTxt(noteInfo.favorite);
 
         this.contextMenuEl.style.left = `${this.getLeft(elOrigin)}px`;
         this.contextMenuEl.style.top = `${this.getTop(elOrigin)}px`;
@@ -212,6 +247,19 @@ export class ContextMenuController{
         //console.log('top: ', top);
 
         return top;
+
+    }
+    checkFavoriteTxt(isFavorite){
+
+        if(isFavorite){
+
+            this.contextMenuView.changeFavoriteMsg('Remove to favorites');
+
+            return;
+
+        }
+
+        this.contextMenuView.changeFavoriteMsg('Add to favorites');
 
     }
     checkOutside(){
@@ -282,6 +330,25 @@ export class ContextMenuController{
         this.noteController.changeBackground(this.state.id, file, this.state.note.image);
 
         this.calcelChange();
+
+    }
+
+    deleteNote(){
+
+        const password = this.contextMenuView.deleteInput.value;
+
+        //console.log(password);
+
+        if(password.trim().length < 1){
+
+            this.contextMenuView.logError('Password cannot be empty!');
+            return;
+
+        }
+
+        this.noteController.deleteNote(this.state.note.id, this.state.note.image, password);
+
+        this.cancelChange();
 
     }
 

@@ -238,6 +238,20 @@ export class NoteView{
 
     }
 
+    clearFavorites(){
+
+        const parentEl = document.getElementById('favorites-content');
+
+        parentEl.replaceChildren();
+
+        if(parentEl.children.length < 1){
+
+            this.hiddenFavoritesWrapper();
+
+        }
+
+    }
+
     showFavoritesWrapper(){
 
         const wrapper = document.getElementById('favorites-wrapper');
@@ -245,6 +259,16 @@ export class NoteView{
         wrapper.style.position = 'static';
 
         this.workspaceView.showEl(`#${wrapper.id}`);
+
+    }
+
+    hiddenFavoritesWrapper(){
+
+        const wrapper = document.getElementById('favorites-wrapper');
+
+        wrapper.style.position = 'absolute';
+
+        this.workspaceView.unShowEl(`#${wrapper.id}`);
 
     }
 

@@ -233,3 +233,21 @@ export async function updateNoteBackground(userId, noteId, image){
     return false;
 
 }
+export async function updateNoteFavorite(userId, noteId, favorite){
+
+    const [rows] = await conn.execute(
+        `UPDATE notes
+        SET is_favorite = ?
+        WHERE id = ? AND user_id = ?`,
+        [
+            favorite,
+            noteId,
+            userId
+        ]
+    );
+
+    if(rows.affectedRows > 0) return true;
+
+    return false;
+
+};

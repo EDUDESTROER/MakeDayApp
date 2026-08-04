@@ -2,12 +2,14 @@ import notesSchema from '../schemas/notes.schema.js';
 import noteNameSchema from '../schemas/note.name.schema.js';
 import noteIconSchema from '../schemas/note.icon.schema.js';
 import backgroundChangeSchema from '../schemas/background.change.schema.js';
+import updateFavoriteSchema from '../schemas/update.favorite.schema.js';
 import { createNewNote, 
     getAllNote, 
     updateNote, 
     updateNoteName, 
     updateNoteIcon,
-    updateNoteBackground 
+    updateNoteBackground,
+    updateNoteFavorite
 } from '../repositories/notes.repository.js';
 import * as z from 'zod';
 import { sanitizeNote } from '../utils/sanitizeHtml.js';
@@ -188,7 +190,43 @@ export async function updateNameService(userId, id, newTitle){
 
     }
 
-    
+}
+export async function updateFavorite(userId, id, favorite){
+
+    try {
+
+        //console.log(id, ' to ', favorite);
+
+        const validation = updateFavoriteSchema.safeParse({id, favorite});
+
+        if(!validation.success){
+
+            const errors = z.flattenError(validation.error);
+                
+            const firstValue = Object.values(errors.fieldErrors)[0];
+                
+            throw new Error(firstValue || 'erro zod');
+
+        }
+
+        //console.log('Zod validation: ', validation.data);
+        
+        const {id:testedId, favorite: testedFavorite} = validation.data;
+
+        const result = await updateNoteFavorite(userId, testedId, testedFavorite);
+
+        //console.log(result);
+
+        if(result) return {id: testedId, favorite: testedFavorite};
+
+        throw new Error('Unable to change note favorite -_-');
+
+        
+    } catch (error) {
+        
+        throw new Error(error);
+
+    }
 
 }
 export async function updateBackgroundService(userId, noteId, image, oldImage){

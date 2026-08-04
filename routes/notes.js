@@ -6,6 +6,7 @@ import { notesLimiter } from '../middlewares/security/notesLimiter.js';
 import newNoteRouter from './new-name.js';
 import newIconRouter from './new-icon.js';
 import newBackgroundRouter from './new-background.js';
+import favoritesRouter from './favorites.js';
 
 const router = express.Router();
 
@@ -18,6 +19,7 @@ router.put("/", requireAuth, notesLimiter, updateNote);
 router.use('/new-name', newNoteRouter);
 router.use('/new-icon', newIconRouter);
 router.use('/new-background', newBackgroundRouter);
+router.use('/favorites', favoritesRouter);
 
 // when delete a note be more restricted with limiter!
 

@@ -8,6 +8,7 @@ export class ContextMenuView{
         this.iconWrapper = document.getElementById('wrapper-icon-list-change');
 
         this.textInput = document.getElementById('change-note-input');
+        this.deleteInput = document.getElementById('delete-note-password-input');
 
         this.imgResultEl = document.getElementById('change-note-result-background');
         this.imgNameEl = document.getElementById('change-note-image-name');
@@ -44,6 +45,15 @@ export class ContextMenuView{
         this.iconChangeEl.className = '';
 
     }
+    changeFavoriteMsg(msg){
+
+        const favoriteEl = document.querySelector(`[data-action="addNoteToFavorite"]`);
+
+        //console.log(favoriteEl);
+
+        favoriteEl.children[1].textContent = msg;
+
+    }
 
     showIconList(){
 
@@ -60,6 +70,17 @@ export class ContextMenuView{
         this.imgInfo.style.display = 'none';
         this.iconWrapper.style.display = 'none';
         this.textInput.style.display = 'block';
+        this.deleteInput.style.display = 'none';
+
+    }
+    showDeleteNote(title){
+
+        this.titleEl.textContent = `Delete note: ${title}`;
+        this.resultImg.style.display = 'none';
+        this.imgInfo.style.display = 'none';
+        this.iconWrapper.style.display = 'none';
+        this.textInput.style.display = 'none';
+        this.deleteInput.style.display = 'block';
 
     }
     showIcon(title, icon, emoji){
@@ -76,6 +97,7 @@ export class ContextMenuView{
         this.imgInfo.style.display = 'none';
         this.iconWrapper.style.display = 'flex';
         this.textInput.style.display = 'none';
+        this.deleteInput.style.display = 'none';
 
     }
     renderImagePreview(file){
@@ -138,6 +160,7 @@ export class ContextMenuView{
         this.imgInfo.style.display = 'flex';
         this.iconWrapper.style.display = 'none';
         this.textInput.style.display = 'none';
+        this.deleteInput.style.display = 'none';
 
         if(!background || background === null || background === undefined){
 
@@ -177,6 +200,7 @@ export class ContextMenuView{
     clear(){
 
         this.textInput.value = '';
+        this.deleteInput.value = '';
         this.noteImgInput.value = '';
         this.imgResultEl.src = '/uploads/attachments/default.jpg';
         document.getElementById('change-note-icons-filter').value = '';

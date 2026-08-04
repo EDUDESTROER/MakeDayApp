@@ -317,7 +317,7 @@ export class WorkspaceController{
 
         if(favorites.length < 1) return;
 
-        console.log(favorites);
+        //console.log(favorites);
 
         favorites.forEach(note => {
 
@@ -706,7 +706,9 @@ export class WorkspaceController{
             "change-note-choose-emoji": (elOrigin) => this.contextMenuController.chooseEmoji(elOrigin),
             "change-note-choose-icon": (elOrigin) => this.contextMenuController.chooseIcon(elOrigin),
             "changeNoteIconContextMenu": (elOrigin, iconName, iconStyle) => this.contextMenuController.setIcon(elOrigin, iconName, iconStyle),
-            "changeNoteEmojiContextMenu": (elOrigin, emoji) => this.contextMenuController.setEmoji(elOrigin, emoji)
+            "changeNoteEmojiContextMenu": (elOrigin, emoji) => this.contextMenuController.setEmoji(elOrigin, emoji),
+            "addNoteToFavorite": (elOrigin) => this.contextMenuController.addToFavorites(),
+            "deleteNote": (elOrigin)=> this.contextMenuController.openDeleteNote()
         };
 
         const wrapperHeader = document.querySelector('.wrapper-header');
