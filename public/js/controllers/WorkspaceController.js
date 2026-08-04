@@ -10,7 +10,8 @@ import { GreetingService } from '/js/services/greeting.service.js';
 import { SettingsService } from '/js/services/settings.service.js';
 import { SettingsModel } from '/js/models/SettingsModel.js'
 import { SettingsView } from '/js/view/settings.view.js'
-import { SearchController } from './searchController.js';
+import { SearchController } from '/js/controllers/searchController.js';
+import { ContextMenuController } from '/js/controllers/ContextMenuController.js';
 
 export class WorkspaceController{
 
@@ -21,14 +22,15 @@ export class WorkspaceController{
         this.settingsService = new SettingsService();
         this._user = null;
 
-        this.iconsController = new IconsController();
-        this.emojiController = new EmojiController();
+        this.iconsController = new IconsController(document.getElementById("load-more"), document.querySelector('.new-note-icons'), 'select-new-note-icon');
+        this.emojiController = new EmojiController(document.getElementById("load-more"), document.querySelector('.new-note-emojis'), 'select-new-note-emoji');
         this.workspaceView = new WorkspaceView();
         this.settingsModel = new SettingsModel();
         this.settingsView = new SettingsView(this.workspaceView);
         this.categoryController = new CategoryController(this.workspaceView);
         this.noteController = new NoteController(this, this.workspaceView, this.iconsController, this.emojiController);
         this.searchController = new SearchController();
+        this.contextMenuController = new ContextMenuController(this.workspaceView, this, this.noteController);
         this.categories = new Map();
         this.notes = new Map();
 
@@ -315,7 +317,7 @@ export class WorkspaceController{
 
         if(favorites.length < 1) return;
 
-        console.log(favorites);
+        //console.log(favorites);
 
         favorites.forEach(note => {
 
@@ -688,13 +690,25 @@ export class WorkspaceController{
             "ShowSubMenu": (elOrigin, idTarget) => this.settingsView.showBtnSubMenu(idTarget),
             "returnTo": (elOrigin, elTarget) => this.checkState(elTarget),
             "createNote": (elOrigin, sheet, elTarget) => this.createNote(sheet, elTarget),
+            "renameNote": (elOrigin)=> this.contextMenuController.renameNote(),
+            "changeNoteIcon": (elOrigin)=> this.contextMenuController.newIconNote(),
+            "changeNoteBackground": (elOrigin)=> this.contextMenuController.newBackgroundNote(),
             "select-new-category": (elOrigin, typeTarget) => this.categoryController.changeBtnStyle(elOrigin),
             "createNewCategory": (elOrigin) => this.createNewCategory(elOrigin),
             "select-new-note-icon": (elOrigin, iconName, iconStyle) => this.noteController.changeNoteIcon(elOrigin, iconName, iconStyle),
             "select-new-note-emoji": (elOrigin, emoji) => this.noteController.changeNoteEmoji(elOrigin, emoji),
             "createNewNote": (elOrigin) => this.createNewNote(elOrigin),
-            "openNote": (noteId) => this.guideOpenNote(noteId),
-            "toggleIconsEmojis": (elOrigin) => this.workspaceView.toggleIconsEmojis(elOrigin)
+            "openNote": (elOrigin, noteId) => this.guideOpenNote(noteId),
+            "toggleIconsEmojis": (elOrigin) => this.workspaceView.toggleIconsEmojis(elOrigin),
+            "openContexMenu": (elOrigin, noteId) => this.contextMenuController.openContextMenu(elOrigin, noteId),
+            "cancelChangeNote": (elOrigin) => this.contextMenuController.calcelChange(),
+            "checkChangeNote": (elOrigin) => this.contextMenuController.checkChange(),
+            "change-note-choose-emoji": (elOrigin) => this.contextMenuController.chooseEmoji(elOrigin),
+            "change-note-choose-icon": (elOrigin) => this.contextMenuController.chooseIcon(elOrigin),
+            "changeNoteIconContextMenu": (elOrigin, iconName, iconStyle) => this.contextMenuController.setIcon(elOrigin, iconName, iconStyle),
+            "changeNoteEmojiContextMenu": (elOrigin, emoji) => this.contextMenuController.setEmoji(elOrigin, emoji),
+            "addNoteToFavorite": (elOrigin) => this.contextMenuController.addToFavorites(),
+            "deleteNote": (elOrigin)=> this.contextMenuController.openDeleteNote()
         };
 
         const wrapperHeader = document.querySelector('.wrapper-header');
@@ -713,9 +727,19 @@ export class WorkspaceController{
         const configsContent = document.querySelectorAll('.configs-content-list');
         const warnModal = document.querySelectorAll('.modal-buttons');
         const searchWrapper = document.querySelector('.wrapper-search-content');
+        const contextMenu = document.getElementById('context-menu');
+        const changeNoteListEmojiIcon = document.querySelector('.wrapper-change-icons-emoji-list');
 
+        changeNoteListEmojiIcon.addEventListener('click', e=>{
 
+            this.clickHandle(e, actions);
 
+        });
+        contextMenu.addEventListener('click', e=>{
+
+            this.clickHandle(e, actions);
+
+        });
         userMenuHeader.addEventListener('click', e=>{
 
             this.clickHandle(e, actions);
@@ -856,7 +880,7 @@ export class WorkspaceController{
 
             if(handle){
 
-                handle(noteId);
+                handle(el, noteId);
 
             }
 

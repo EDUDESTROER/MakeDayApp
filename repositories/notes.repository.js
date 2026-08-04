@@ -165,3 +165,105 @@ export async function searchContent(term, id){
     return rows;
 
 }
+export async function updateNoteName(userId, noteId, newTitle){
+
+    /*console.log('User: ', userId);
+    console.log('Note: ', noteId);
+    console.log('New note Title: ', newTitle);*/
+
+    const [rows] = await conn.execute(
+        `UPDATE notes
+        SET title = ? 
+        WHERE id = ? AND user_id = ?`,
+        [
+            newTitle,
+            noteId,
+            userId
+        ]
+    );
+
+    //console.log(rows);
+
+    if(rows.affectedRows > 0) return true;
+
+    return false;
+
+}
+export async function updateNoteIcon(userId, noteId, icon, emoji){ // problem in change emoji!
+
+    //console.log(icon);
+    //console.log(emoji);
+    if(icon === undefined) icon = '';
+
+    const [rows] = await conn.execute(
+        `UPDATE notes
+        SET icon = ?,
+            emoji = ? 
+        WHERE id = ? AND user_id = ?`,
+        [
+            icon,
+            emoji,
+            noteId,
+            userId
+        ]
+    );
+
+    //console.log(rows);
+
+    if(rows.affectedRows > 0) return true;
+
+    return false;
+
+}
+export async function updateNoteBackground(userId, noteId, image){
+
+    const [rows] = await conn.execute(
+        `UPDATE notes
+        SET image = ?
+        WHERE id = ? AND user_id = ?`,
+        [
+            image,
+            noteId,
+            userId
+        ]
+    );
+
+    if(rows.affectedRows > 0) return true;
+
+    return false;
+
+}
+export async function updateNoteFavorite(userId, noteId, favorite){
+
+    const [rows] = await conn.execute(
+        `UPDATE notes
+        SET is_favorite = ?
+        WHERE id = ? AND user_id = ?`,
+        [
+            favorite,
+            noteId,
+            userId
+        ]
+    );
+
+    if(rows.affectedRows > 0) return true;
+
+    return false;
+
+};
+export async function deleteNote(userId, noteId){
+
+    const [rows] = await conn.execute(
+        `DELETE FROM notes
+        WHERE id = ? AND user_id = ?`,
+        [
+            noteId,
+            userId
+        ]
+    );
+
+    if(rows.affectedRows > 0) return true;
+
+    return false;
+
+}

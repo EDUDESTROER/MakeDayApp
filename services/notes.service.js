@@ -1,7 +1,22 @@
 import notesSchema from '../schemas/notes.schema.js';
-import { createNewNote, getAllNote, updateNote } from '../repositories/notes.repository.js';
+import noteNameSchema from '../schemas/note.name.schema.js';
+import noteIconSchema from '../schemas/note.icon.schema.js';
+import backgroundChangeSchema from '../schemas/background.change.schema.js';
+import updateFavoriteSchema from '../schemas/update.favorite.schema.js';
+import deleteNoteSchema from '../schemas/delete.note.schema.js';
+import { validateLogin, checkUser} from './auth.service.js';
+import { createNewNote, 
+    getAllNote, 
+    updateNote, 
+    updateNoteName, 
+    updateNoteIcon,
+    updateNoteBackground,
+    updateNoteFavorite,
+    deleteNote
+} from '../repositories/notes.repository.js';
 import * as z from 'zod';
 import { sanitizeNote } from '../utils/sanitizeHtml.js';
+import { removeOldBackground } from '../utils/removeOldBackground.js';
 
 export async function createNoteService(userId, title, parentId, icon, emoji, image, content, favorite){
 
@@ -83,7 +98,7 @@ export async function updateNoteService(
         if(favorite == 0) favorite = false;
         if(favorite == 1) favorite = true;
 
-        //console.log('normalizedContent: ', normalizedContent);
+        //console.log('Content: ', content);
 
         /*console.log('To validated Data: ', {
             id,
@@ -139,6 +154,222 @@ export async function updateNoteService(
         throw new Error(error);
 
     }
+
+}
+export async function updateNameService(userId, id, newTitle){
+
+    try {
+
+        //console.log('alterate name to: ', newTitle, ' Of note: ', id);
+
+        const validation = noteNameSchema.safeParse({id, newTitle});
+
+        if(!validation.success){
+
+            const errors = z.flattenError(validation.error);
+                
+            const firstValue = Object.values(errors.fieldErrors)[0];
+                
+            throw new Error(firstValue || 'erro zod');
+
+        }
+
+        //console.log('Zod validation: ', validation.data);
+        
+        const {id:testedId, newTitle: testedNewTitle} = validation.data;
+
+        const result = await updateNoteName(userId, testedId, testedNewTitle);
+
+        //console.log(result);
+
+        if(result) return {id: testedId, title: testedNewTitle};
+
+        throw new Error('Unable to change note name -_-');
+
+        
+    } catch (error) {
+        
+        throw new Error(error);
+
+    }
+
+}
+export async function updateFavorite(userId, id, favorite){
+
+    try {
+
+        //console.log(id, ' to ', favorite);
+
+        const validation = updateFavoriteSchema.safeParse({id, favorite});
+
+        if(!validation.success){
+
+            const errors = z.flattenError(validation.error);
+                
+            const firstValue = Object.values(errors.fieldErrors)[0];
+                
+            throw new Error(firstValue || 'erro zod');
+
+        }
+
+        //console.log('Zod validation: ', validation.data);
+        
+        const {id:testedId, favorite: testedFavorite} = validation.data;
+
+        const result = await updateNoteFavorite(userId, testedId, testedFavorite);
+
+        //console.log(result);
+
+        if(result) return {id: testedId, favorite: testedFavorite};
+
+        throw new Error('Unable to change note favorite -_-');
+
+        
+    } catch (error) {
+        
+        throw new Error(error);
+
+    }
+
+}
+export async function updateBackgroundService(userId, noteId, image, oldImage){
+
+    try{
+
+        //console.log('old Image:', oldImage, 'new image: ', image);
+
+        //console.log(typeof oldImage)
+
+        if(oldImage === undefined || oldImage === 'undefined' || !oldImage) oldImage = '';
+
+        const validation = backgroundChangeSchema.safeParse({noteId, image, oldImage});
+
+        if(!validation.success){
+
+            const errors = z.flattenError(validation.error);
+                
+            const firstValue = Object.values(errors.fieldErrors)[0];
+
+            //console.log(firstValue);
+                
+            throw new Error(firstValue || 'erro zod');
+
+        }
+
+        const {noteId:testedId, image: testedimage, oldImage: testedOldImage} = validation.data;
+
+        const result = await updateNoteBackground(userId, testedId, testedimage);
+
+        //console.log(result);
+
+        if(testedOldImage) await removeOldBackground(testedOldImage);
+
+        if(result) return {id: testedId, image: testedimage};
+
+        throw new Error('Unable to change note icon -_-');
+
+    }catch(err){
+
+        throw new Error(err);
+
+    }
+
+}
+export async function deleteNoteService(userId, id, image, password, email){
+
+    try{
+
+        const validation = deleteNoteSchema.safeParse({id, image, password});
+        
+        const user = await checkUser(userId);
+
+        if(!validation.success){
+
+            const errors = z.flattenError(validation.error);
+                
+            const firstValue = Object.values(errors.fieldErrors)[0];
+
+            //console.log(firstValue);
+                
+            throw new Error(firstValue || 'erro zod');
+
+        }
+
+        const {id:testedId, image: testedimage, password: testedPassword} = validation.data;
+
+        const login = await validateLogin(user.email, testedPassword);
+
+        //console.log(login.id)
+
+        if(login.id){
+
+            const result = await deleteNote(userId, testedId);
+
+            //console.log(result);
+
+            if(testedimage) await removeOldBackground(testedimage);
+
+            if(result) return {id: testedId};
+
+        }
+
+        throw new Error('Unable to delete note -_-');
+
+    }catch(err){
+
+        //console.error(err);
+
+        throw new Error(err);
+
+    }
+
+}
+export async function updateIconService(userId, id, old, emoji, icon){
+
+    try {
+
+        if(old === icon) throw new Error('The new icon must be different from the current one.');
+        if(old === emoji) throw new Error('The new emoji must be different from the current one.');
+
+        //console.log(icon, emoji);
+
+        if(icon === undefined) icon = '';
+        if(emoji === undefined) emoji = '';
+
+        const validation = noteIconSchema.safeParse({id, icon, emoji});
+
+        if(!validation.success){
+
+            const errors = z.flattenError(validation.error);
+                
+            const firstValue = Object.values(errors.fieldErrors)[0];
+
+            //console.log(firstValue);
+                
+            throw new Error(firstValue || 'erro zod');
+
+        }
+
+        //console.log('Zod validation: ', validation.data);
+        
+        const {id:testedId, icon: testedIcon, emoji: testedEmoji} = validation.data;
+
+        const result = await updateNoteIcon(userId, testedId, testedIcon, testedEmoji);
+
+        //console.log(result);
+
+        if(result) return {id: testedId, icon: testedIcon, emoji: testedEmoji};
+
+        throw new Error('Unable to change note icon -_-');
+
+        
+    } catch (error) {
+        
+        throw new Error(error);
+
+    }
+
+    
 
 }
 export async function getUserNoteService(userId){

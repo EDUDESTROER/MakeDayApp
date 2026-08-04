@@ -1,12 +1,15 @@
-import { IconsView } from "../view/icons.view.js";
+import { IconsView } from "/js/view/icons.view.js";
+import iconsService from "/js/services/icons.service.js";
 
 export class IconsController{
 
-    constructor(){
+    constructor(loadBtn, container, action){
 
-        this.iconsView = new IconsView();
-        this.loadMoreBtn = document.getElementById("load-more");
-        this.allIcons = [];
+        //console.log(loadBtn, container);
+
+        this.iconsView = new IconsView(container, action);
+        this.iconsService = iconsService;
+        this.loadMoreBtn = loadBtn;
 
         this.searchTerm = '';
         this.visibleCount = 60;
@@ -25,7 +28,8 @@ export class IconsController{
 
     async init(){
 
-        await this.getIcons();
+        await this.iconsService.load();
+
         this.loadIcons();
         this.loadMoreBtn.addEventListener("click", () => {
             this.visibleCount += 30;
@@ -35,25 +39,11 @@ export class IconsController{
 
     }
 
-    async getIcons(){
-
-        if(this.allIcons?.length > 0) return;
-
-        const icons = await fetch("/icons/icons.json")
-            .then(res => res.json());
-
-        this.allIcons = [
-            ...icons.solid,
-            ...icons.regular
-        ];
-
-    }
-
     getFilteredIcons(){
 
-        if(!this.searchTerm) return this.allIcons;
+        if(!this.searchTerm) return this.iconsService.get();
 
-        return this.allIcons.filter(icon =>
+        return this.iconsService.get().filter(icon =>
             icon.name.toLowerCase().includes(this.searchTerm)
         );
 
@@ -73,10 +63,14 @@ export class IconsController{
 
         });
 
-        if(this.allIcons.length < this.visibleCount){
+        if(this.iconsService.get().length < this.visibleCount){
+
             this.iconsView.hiddenLoadMore(this.loadMoreBtn);
-        }else{
+
+        }else if(this.iconsService.get().length > this.visibleCount){
+
             this.iconsView.showLoadMore(this.loadMoreBtn);
+
         }
 
     }

@@ -42,6 +42,8 @@ export class NoteController{
 
         this.inputImage = document.querySelector('#new-note-image');
 
+        this.contextMenuEl = document.getElementById('all-notes-contextMenu');
+
         this.selectedIconBtn = '';
         this.selectedEmojiBtn = '';
         
@@ -210,6 +212,321 @@ export class NoteController{
         }
 
     }
+    async renameNote(id, newTitle){
+
+        try{
+
+            if(!newTitle){
+
+                throw new Error('Note name cannot be empty.');
+
+            }
+
+            //console.log('Change the name of: ', id,' To: ', newTitle);
+
+            const response = await fetch('/notes/new-name', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify({
+                    id,
+                    newTitle
+                }),
+            });
+
+            const updatedNote = await response.json();
+
+            //console.log('result: ', updatedNote);
+
+            if(updatedNote.id) this.updateTitle(updatedNote);
+
+            if(!response.ok || !updatedNote.id) throw new Error('Failed to update note');
+
+        }catch(err){
+
+            console.error(err);
+
+            alert('Make an error Log on NoteController!!!', err);
+
+        }
+
+    }
+    async changeIcon(id, old, emoji, icon){
+
+        //console.log('Change note: ', id, ' icon of ', old, ' to: ', icon, ' or: ', emoji);
+
+        try{
+
+            if(!id){
+
+                throw new Error('Note empty.');
+
+            }
+
+            //console.log('Change the name of: ', id,' To: ', newTitle);
+
+            const response = await fetch('/notes/new-icon', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify({
+                    id,
+                    old,
+                    emoji,
+                    icon
+                }),
+            });
+
+            const updatedNote = await response.json();
+
+            //console.log('result: ', updatedNote);
+            
+            if(updatedNote.id) this.updateIcon(updatedNote);
+
+            if(!response.ok || !updatedNote.id) throw new Error('Failed to update note');
+
+        }catch(err){
+
+            console.error(err);
+
+            alert('Make an error Log on NoteController!!!', err);
+
+        }
+
+
+    }
+
+    async changeBackground(id, file, oldImage){
+
+        try{
+
+            //console.log('Change background of: ', id, ' to ', file.name);
+
+            const formData = new FormData();
+
+            formData.append('id', id);
+            formData.append('image', file);
+            formData.append('oldImage', oldImage);
+
+            //console.log('Front => before post: ', [...formData.entries()]); //FormData is not a common object.
+
+            const response = await fetch('/notes/new-background', {
+                method: 'PATCH',
+                body: formData
+            });
+
+            const updatedNote = await response.json();
+
+            if(updatedNote.id) this.updateBackground(updatedNote);
+
+            if(!response.ok || !updatedNote.id) throw new Error(`Failed to update backgroun of ${id}`);
+
+        }catch(err){
+
+            //console.error(err);
+
+            alert('Make an error Log on NoteController!!!', err);
+
+        }
+
+    }
+
+    async deleteNote(id, image, password){
+
+        try{
+
+            if(!id){
+
+                throw new Error('Select a note first.');
+
+            }
+
+            console.log('deleting note: ', id);
+            console.log('deleting image: ', image);
+            console.log('deleting Password: ', password);
+
+            const response = await fetch('/notes', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify({
+                    id,
+                    image,
+                    password
+                }),
+            });
+
+            const result = await response.json();
+
+            //console.log('result: ', result);
+
+            if(result.id) this.deleteFromView(result);
+
+            if(!response.ok || !result.id) throw new Error('Failed to delete note');
+
+        }catch(err){
+
+            console.error(err);
+
+            alert('Make an error Log on NoteController!!!', err);
+
+        }
+
+    }
+
+    async changeNoteFavorites(id, favorite){
+
+        try{
+
+            if(!id){
+
+                throw new Error('Select a note first.');
+
+            }
+
+            /*if(favorite){
+                console.log('Adding note: ', id,' To favorites');
+            }else{
+                console.log('Removing note: ', id,' To favorites');
+            }*/
+
+            const response = await fetch('/notes/favorites', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify({
+                    id,
+                    favorite
+                }),
+            });
+
+            const updatedNote = await response.json();
+
+            //console.log('result: ', updatedNote);
+
+            if(updatedNote.id) this.updateFavorites(updatedNote);
+
+            if(!response.ok || !updatedNote.id) throw new Error('Failed to update note');
+
+        }catch(err){
+
+            console.error(err);
+
+            alert('Make an error Log on NoteController!!!', err);
+
+        }
+
+    }
+
+    updateFavorites(note){
+
+        const oldContent = this.workspaceController.getNoteById(note.id);
+
+        oldContent.favorite = note.favorite;
+
+        const newContent = {...oldContent};
+
+        this.workspaceController.notes.set(newContent.id, newContent);
+
+        this.noteView.clearFavorites();
+        
+        this.workspaceController.checkFavorites();  
+
+    }
+
+    deleteFromView(note){
+
+        this.workspaceController.notes.delete(note.id);
+
+        console.log(this.workspaceController.notes);
+
+        this.noteView.deleteFromViewNote(note.id);
+
+        if(this.state.id === note.id){
+
+            this.state = null;
+
+            this.workspaceController.openElement('#smart-dashboard');
+
+        }
+
+    }
+
+    updateBackground(note){
+
+        const oldContent = this.workspaceController.getNoteById(note.id);
+
+        oldContent.image = note.image;
+
+        const newContent = {...oldContent};
+
+        this.workspaceController.notes.set(newContent.id, newContent);
+
+        this.noteView.updateCategoriesCard(newContent.id, newContent.image);
+
+        if(this.state.id === newContent.id){
+
+            this.state = structuredClone(newContent);
+
+            this.noteView.setInAllNote(newContent.title, newContent.icon, newContent.emoji, newContent.image);
+
+        }
+
+    }
+
+
+    updateIcon(note){
+
+        const oldContent = this.workspaceController.getNoteById(note.id);
+
+        //console.log(oldContent);
+
+        oldContent.icon = note.icon;
+        oldContent.emoji = note.emoji;
+
+        const newContent = {...oldContent};
+
+        this.workspaceController.notes.set(newContent.id, newContent);
+
+        this.noteView.updateIconInCategories(newContent.id, newContent.icon, newContent.emoji);
+
+        if(this.state.id === newContent.id){
+
+            this.state = structuredClone(newContent);
+            this.noteView.setInAllNote(newContent.title, newContent.icon, newContent.emoji, newContent.image);
+
+        }
+
+    }
+
+    updateTitle(note){
+
+        const oldContent = this.workspaceController.getNoteById(note.id);
+
+        oldContent.title = note.title;
+
+        const newContent = {...oldContent};
+
+        //console.log(newContent);
+
+        this.workspaceController.notes.set(newContent.id, newContent);
+
+        this.noteView.updateNoteTitleInCategories(newContent.id, newContent.title);
+
+        if(this.state.id === newContent.id){
+
+            this.state = structuredClone(newContent);
+            this.noteView.setInAllNote(newContent.title, newContent.icon, newContent.emoji, newContent.image);
+
+        }
+
+        //console.log(this.state);
+
+    }
 
     render(note){
 
@@ -232,6 +549,8 @@ export class NoteController{
 
         /*console.log(note);
         console.log(this.workspaceController.notes.get(note.id));*/
+
+        this.contextMenuEl.dataset.noteId = note.id;
 
         this.state = structuredClone(note); 
 

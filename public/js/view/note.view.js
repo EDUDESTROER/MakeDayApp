@@ -238,6 +238,20 @@ export class NoteView{
 
     }
 
+    clearFavorites(){
+
+        const parentEl = document.getElementById('favorites-content');
+
+        parentEl.replaceChildren();
+
+        if(parentEl.children.length < 1){
+
+            this.hiddenFavoritesWrapper();
+
+        }
+
+    }
+
     showFavoritesWrapper(){
 
         const wrapper = document.getElementById('favorites-wrapper');
@@ -245,6 +259,16 @@ export class NoteView{
         wrapper.style.position = 'static';
 
         this.workspaceView.showEl(`#${wrapper.id}`);
+
+    }
+
+    hiddenFavoritesWrapper(){
+
+        const wrapper = document.getElementById('favorites-wrapper');
+
+        wrapper.style.position = 'absolute';
+
+        this.workspaceView.unShowEl(`#${wrapper.id}`);
 
     }
 
@@ -339,6 +363,116 @@ export class NoteView{
         }
 
         return i;
+
+    }
+
+    cleanElementChilds(el){
+
+        el.replaceChildren();
+
+    }
+
+    updateNoteTitleInCategories(id, title){
+
+        const notesEl = document.querySelectorAll(`[data-note-id="${id}"]`);
+
+        //console.log(notesEl);
+
+        notesEl.forEach(el=>{
+
+            const titleEl = el.querySelector('.list-text');
+            const cardEl = el.querySelector('.card-text');
+            const smartTitle = el.querySelector('.wrapper-smart-title');
+
+            /*console.log(titleEl);
+            console.log(cardEl);
+            console.log(smartTitle);*/
+
+            if(titleEl) titleEl.textContent = title;
+
+            if(cardEl) cardEl.textContent = title;
+
+            if(smartTitle) smartTitle.textContent = title;
+
+        });
+
+    }
+    updateIconInCategories(id, icon, emoji){
+
+        const notesEl = document.querySelectorAll(`[data-note-id="${id}"]`);
+
+        //console.log(notesEl);
+
+        notesEl.forEach(el=>{
+
+            const i = document.createElement('i');
+
+            if(icon){
+
+                i.className = icon;
+
+            }
+            if(emoji){
+
+                i.textContent = emoji;
+
+            }
+
+            const iconWrapper = el.querySelector('.basic-icon-list');
+            const smartIcon = el.querySelector('.wrapper-smart-icon');
+            const cardIcon = el.querySelector('.card-icon');
+
+            /*console.log(iconWrapper);
+            console.log(smartIcon);
+            console.log(cardIcon);*/
+
+            if(iconWrapper) {
+
+                iconWrapper.replaceChildren();
+                iconWrapper.appendChild(i);
+
+            }
+
+            if(smartIcon) {
+
+                smartIcon.replaceChildren();
+                smartIcon.appendChild(i);
+
+            }
+
+            if(cardIcon){
+
+                cardIcon.replaceChildren();
+                cardIcon.appendChild(i);
+
+            }
+
+        });
+
+    }
+    deleteFromViewNote(id){
+
+        const notesEl = document.querySelectorAll(`[data-note-id="${id}"]`);
+
+        notesEl.forEach(el=>{
+
+            el.parentNode.removeChild(el);
+
+        });
+
+    }
+
+    updateCategoriesCard(id, image){
+
+        const notesEl = document.querySelectorAll(`[data-note-id="${id}"]`);
+
+        notesEl.forEach(el=>{
+
+            const cardImage = el.querySelector('.card-background');
+
+            if(cardImage) cardImage.src = `uploads/attachments/${image}`;
+
+        });
 
     }
 
