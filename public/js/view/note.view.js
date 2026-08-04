@@ -450,6 +450,17 @@ export class NoteView{
         });
 
     }
+    deleteFromViewNote(id){
+
+        const notesEl = document.querySelectorAll(`[data-note-id="${id}"]`);
+
+        notesEl.forEach(el=>{
+
+            el.parentNode.removeChild(el);
+
+        });
+
+    }
 
     updateCategoriesCard(id, image){
 

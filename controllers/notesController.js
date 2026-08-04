@@ -6,7 +6,8 @@ import {
     updateNameService, 
     updateIconService,
     updateBackgroundService,
-    updateFavorite
+    updateFavorite,
+    deleteNoteService
 } from "../services/notes.service.js";
 
 export async function createNote(req, res){
@@ -124,6 +125,39 @@ export async function updateName(req, res){
 
     }
 
+
+}
+export async function deleteNote(req, res){
+
+    try{
+
+        const {id, image, password} = req.body;
+        const userId = req.session.user.id;
+
+        /*console.log('Start Delete note ||');
+        console.log('ID || ', id);
+        console.log('IMAGE || ', image);
+        console.log('PASSWORD || ', password);*/
+
+        const result = await deleteNoteService(
+            userId,
+            id,
+            image,
+            password
+        );
+
+        //console.log(result);
+
+        res.status(201).json(result);
+
+
+    }catch(err){
+
+        //console.error(err);
+
+        res.status(400).json({error: err.message});
+
+    }
 
 }
 export async function changeFavorite(req, res){

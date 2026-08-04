@@ -4,6 +4,8 @@ import { findAuthByEmail, findAuthByUsername, findAuthById } from '../repositori
 
 export async function validateLogin(email, password) {
     
+    //console.log(email);
+
     const user = email.includes('@')
          ? await findAuthByEmail(email)
          : await findAuthByUsername(email);

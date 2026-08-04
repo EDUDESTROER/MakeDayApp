@@ -3,13 +3,16 @@ import noteNameSchema from '../schemas/note.name.schema.js';
 import noteIconSchema from '../schemas/note.icon.schema.js';
 import backgroundChangeSchema from '../schemas/background.change.schema.js';
 import updateFavoriteSchema from '../schemas/update.favorite.schema.js';
+import deleteNoteSchema from '../schemas/delete.note.schema.js';
+import { validateLogin, checkUser} from './auth.service.js';
 import { createNewNote, 
     getAllNote, 
     updateNote, 
     updateNoteName, 
     updateNoteIcon,
     updateNoteBackground,
-    updateNoteFavorite
+    updateNoteFavorite,
+    deleteNote
 } from '../repositories/notes.repository.js';
 import * as z from 'zod';
 import { sanitizeNote } from '../utils/sanitizeHtml.js';
@@ -266,6 +269,55 @@ export async function updateBackgroundService(userId, noteId, image, oldImage){
         throw new Error('Unable to change note icon -_-');
 
     }catch(err){
+
+        throw new Error(err);
+
+    }
+
+}
+export async function deleteNoteService(userId, id, image, password, email){
+
+    try{
+
+        const validation = deleteNoteSchema.safeParse({id, image, password});
+        
+        const user = await checkUser(userId);
+
+        if(!validation.success){
+
+            const errors = z.flattenError(validation.error);
+                
+            const firstValue = Object.values(errors.fieldErrors)[0];
+
+            //console.log(firstValue);
+                
+            throw new Error(firstValue || 'erro zod');
+
+        }
+
+        const {id:testedId, image: testedimage, password: testedPassword} = validation.data;
+
+        const login = await validateLogin(user.email, testedPassword);
+
+        //console.log(login.id)
+
+        if(login.id){
+
+            const result = await deleteNote(userId, testedId);
+
+            //console.log(result);
+
+            if(testedimage) await removeOldBackground(testedimage);
+
+            if(result) return {id: testedId};
+
+        }
+
+        throw new Error('Unable to delete note -_-');
+
+    }catch(err){
+
+        //console.error(err);
 
         throw new Error(err);
 

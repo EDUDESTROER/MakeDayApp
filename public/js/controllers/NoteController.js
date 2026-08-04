@@ -333,9 +333,47 @@ export class NoteController{
 
     }
 
-    deleteNote(id, image, password){
+    async deleteNote(id, image, password){
 
-        console.log('deleting note: ', id);
+        try{
+
+            if(!id){
+
+                throw new Error('Select a note first.');
+
+            }
+
+            console.log('deleting note: ', id);
+            console.log('deleting image: ', image);
+            console.log('deleting Password: ', password);
+
+            const response = await fetch('/notes', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify({
+                    id,
+                    image,
+                    password
+                }),
+            });
+
+            const result = await response.json();
+
+            //console.log('result: ', result);
+
+            if(result.id) this.deleteFromView(result);
+
+            if(!response.ok || !result.id) throw new Error('Failed to delete note');
+
+        }catch(err){
+
+            console.error(err);
+
+            alert('Make an error Log on NoteController!!!', err);
+
+        }
 
     }
 
@@ -400,6 +438,24 @@ export class NoteController{
 
     }
 
+    deleteFromView(note){
+
+        this.workspaceController.notes.delete(note.id);
+
+        console.log(this.workspaceController.notes);
+
+        this.noteView.deleteFromViewNote(note.id);
+
+        if(this.state.id === note.id){
+
+            this.state = null;
+
+            this.workspaceController.openElement('#smart-dashboard');
+
+        }
+
+    }
+
     updateBackground(note){
 
         const oldContent = this.workspaceController.getNoteById(note.id);
@@ -412,7 +468,7 @@ export class NoteController{
 
         this.noteView.updateCategoriesCard(newContent.id, newContent.image);
 
-        if(this.state.id = newContent.id){
+        if(this.state.id === newContent.id){
 
             this.state = structuredClone(newContent);
 

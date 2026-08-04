@@ -124,7 +124,7 @@ export class ContextMenuController{
 
         this.state.type = 'delete';
 
-        console.log(this.state);
+        //console.log(this.state);
 
         this.contextMenuView.showDeleteNote(this.state.note.title);
 
@@ -157,7 +157,7 @@ export class ContextMenuController{
         setTimeout(()=>this.workspaceView.unShowEl('#context-menu'), 1); // I use this because startEvents() is called about a millisecond before unShowEl() is executed, so it doesn't work.
 
     }
-    calcelChange(){
+    cancelChange(){
 
         this.workspaceView.unShowEl('#modal-warn');
         this.workspaceView.unShowEl('#change-note-wrapper');
@@ -311,7 +311,7 @@ export class ContextMenuController{
 
         this.noteController.changeIcon(this.state.id, this.state.oldIcon, this.state.note.emoji, this.state.note.icon);
 
-        this.calcelChange();
+        this.cancelChange();
 
     }
 
@@ -329,7 +329,7 @@ export class ContextMenuController{
 
         this.noteController.changeBackground(this.state.id, file, this.state.note.image);
 
-        this.calcelChange();
+        this.cancelChange();
 
     }
 
@@ -346,7 +346,7 @@ export class ContextMenuController{
 
         }
 
-        this.noteController.deleteNote(this.state.note.id, this.state.note.image, password);
+        this.noteController.deleteNote(this.state.id, this.state.note.image, password);
 
         this.cancelChange();
 
@@ -371,7 +371,7 @@ export class ContextMenuController{
 
         this.noteController.renameNote(this.state.id, newTitle);
 
-        this.calcelChange();
+        this.cancelChange();
 
     }
 

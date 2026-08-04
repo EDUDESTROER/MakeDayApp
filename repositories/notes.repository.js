@@ -251,3 +251,19 @@ export async function updateNoteFavorite(userId, noteId, favorite){
     return false;
 
 };
+export async function deleteNote(userId, noteId){
+
+    const [rows] = await conn.execute(
+        `DELETE FROM notes
+        WHERE id = ? AND user_id = ?`,
+        [
+            noteId,
+            userId
+        ]
+    );
+
+    if(rows.affectedRows > 0) return true;
+
+    return false;
+
+}
